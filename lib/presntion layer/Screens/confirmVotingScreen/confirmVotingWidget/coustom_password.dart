@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:voting/Shared/Colors.dart';
 import 'package:voting/generated/l10n.dart';
 
 class CustomPassowrdText extends StatefulWidget {
@@ -30,11 +31,11 @@ class _CustomPassowrdTextState extends State<CustomPassowrdText> {
           hintText: S.of(context).password,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-                width: 1, color: Color.fromRGBO(199, 199, 199, 1)),
+            borderSide: BorderSide(width: 1, color: AppColors.mainColor),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
               color: Color(0xFF008753),
             ), // Color when focused
           ),
@@ -44,8 +45,10 @@ class _CustomPassowrdTextState extends State<CustomPassowrdText> {
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
-              icon:
-                  Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: AppColors.mainColor,
+              ),
               onPressed: () {
                 setState(() {
                   _obscureText = !_obscureText;
@@ -56,6 +59,5 @@ class _CustomPassowrdTextState extends State<CustomPassowrdText> {
         ),
       ),
     );
-    ;
   }
 }

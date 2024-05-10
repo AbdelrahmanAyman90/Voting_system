@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/first_screen.dart';
 import 'package:voting/Shared/Colors.dart';
+import 'package:voting/presntion%20layer/Screens/Splash/Custom_Splash_Widgets/custom_splash_body.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _img1 = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 900));
@@ -40,36 +40,9 @@ class _SplashScreenState extends State<SplashScreen>
     return AnimatedSplashScreen(
       splash: Center(
         child: SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height * 50 / 812,
-          child: Stack(
-            children: [
-              Positioned(
-                left: MediaQuery.of(context).size.width * 1 / 4,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                          begin: const Offset(4, 0), end: const Offset(0, 0))
-                      .animate(_img1),
-                  child: Image.asset('assets/images/Mask group (1).png',
-                      //height: MediaQuery.of(context).size.height * .8,
-                      width: MediaQuery.of(context).size.width * .2),
-                ),
-              ),
-              Positioned(
-                left: MediaQuery.of(context).size.width * 0.32,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(4, 0),
-                    end: const Offset(0, 0),
-                  ).animate(_img2),
-                  child: Image.asset('assets/images/Mask group.png',
-                      height: MediaQuery.of(context).size.height * .072,
-                      width: MediaQuery.of(context).size.width * .5),
-                ),
-              ),
-            ],
-          ),
-        ),
+            width: double.infinity,
+            //height: MediaQuery.of(context).size.height * 60 / 812,
+            child: CustomSplashBody(img1: _img1, img2: _img2)),
       ),
       backgroundColor: AppColors.mainColor,
       nextScreen: const OnboardingScreen1(),

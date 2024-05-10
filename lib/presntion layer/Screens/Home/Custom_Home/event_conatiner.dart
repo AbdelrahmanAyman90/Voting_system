@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/Colors.dart';
 import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
+import 'package:voting/presntion%20layer/Screens/Forms/application_form.dart';
 
-class event_container extends StatefulWidget {
-  const event_container({super.key});
+class EventContainer extends StatefulWidget {
+  final String img;
+  final String title;
+  final String time;
+  const EventContainer({
+    super.key,
+    required this.img,
+    required this.title,
+    required this.time,
+  });
 
   @override
-  State<event_container> createState() => _event_containerState();
+  State<EventContainer> createState() => _EventContainerState();
 }
 
-class _event_containerState extends State<event_container> {
+class _EventContainerState extends State<EventContainer> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           children: [
+            // SvgPicture.asset(widget.img,
+            //     width: MediaQuery.of(context).size.width * 50 / 375,
+            //     height: MediaQuery.of(context).size.height * 50 / 812),
+            // const SizedBox(
+            //   width: 10,
+            // ),
             Image(
-                image: const AssetImage(
-                  'assets/images/Ellipse 36.png',
-                ),
-                width: MediaQuery.of(context).size.width * 50 / 375,
-                height: MediaQuery.of(context).size.height * 50 / 812),
+                image: AssetImage(widget.img),
+                width: MediaQuery.of(context).size.width * 40 / 375,
+                height: MediaQuery.of(context).size.height * 40 / 812),
             const SizedBox(
               width: 10,
             ),
@@ -30,8 +44,8 @@ class _event_containerState extends State<event_container> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  S.of(context).NOMINATING_FOR_ELECTIONS,
-                  style: AppFonts.semiBoldText(fontSize: 12),
+                  widget.title,
+                  style: AppFonts.semiBoldText(context, 12, Colors.black),
                 ),
                 const SizedBox(
                   height: 4,
@@ -39,14 +53,17 @@ class _event_containerState extends State<event_container> {
                 Text(
                   S.of(context).Nationwide,
                   style: AppFonts.regularText(
-                      fontSize: 12, color: AppColors.secondaryTextColor),
+                      context, 12, AppColors.secondaryTextColor),
                 )
               ],
             )
           ],
         ),
-        const Spacer(),
-/////////////////////////////////////////  Second Row inside Event container ///////////////////////////////////////////////
+        //const Spacer(),
+        const SizedBox(
+          height: 20,
+        ),
+//////////  Second Row inside Event container
         Row(
           children: [
             Column(
@@ -63,9 +80,9 @@ class _event_containerState extends State<event_container> {
                       width: 4,
                     ),
                     Text(
-                      S.of(context).voting_end,
+                      widget.time,
                       style: AppFonts.regularText(
-                          fontSize: 12, color: AppColors.secondaryTextColor),
+                          context, 12, AppColors.secondaryTextColor),
                     )
                   ],
                 ),
@@ -83,36 +100,31 @@ class _event_containerState extends State<event_container> {
                       width: 4,
                     ),
                     Text(
-                      '${S.of(context).all_voter_number} ${S.of(context).votes_word}',
+                      S.of(context).all_voter_number,
                       style: AppFonts.regularText(
-                          fontSize: 12, color: AppColors.secondaryTextColor),
+                          context, 12, AppColors.secondaryTextColor),
                     )
                   ],
                 ),
               ],
             ),
             const Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: BorderSide(color: AppColors.mainColor),
-                  ),
-                ),
-                fixedSize: MaterialStateProperty.all<Size>(
-                  Size(MediaQuery.of(context).size.width * 102 / 375,
-                      MediaQuery.of(context).size.height * 32 / 812),
-                ),
-              ),
-              child: Text(
-                S.of(context).applay_button,
-                style: AppFonts.regularText(
-                    fontSize: 12, color: AppColors.mainColor),
-              ),
-            )
+            Button(
+                text: S.of(context).Apply,
+                color: Colors.white,
+                fontsize: 12,
+                width: 102,
+                height: 32,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) =>
+                          const ApplicationFormScreen(),
+                    ),
+                  );
+                },
+                textcolor: AppColors.mainColor)
           ],
         ),
       ],

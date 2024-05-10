@@ -5,20 +5,20 @@ import 'package:voting/Shared/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/presntion%20layer/view_model/layout_view_model/cubit/layout_cubit.dart';
 
-class row2_in_profile extends StatefulWidget {
+class Row2InProfile extends StatefulWidget {
   final IconData icon;
   final String text;
-  const row2_in_profile({
+  const Row2InProfile({
     super.key,
     required this.icon,
     required this.text,
   });
 
   @override
-  State<row2_in_profile> createState() => _row2_in_profileState();
+  State<Row2InProfile> createState() => _Row2InProfileState();
 }
 
-class _row2_in_profileState extends State<row2_in_profile> {
+class _Row2InProfileState extends State<Row2InProfile> {
   bool _isSwitched = isEnglish();
 
   @override
@@ -44,9 +44,7 @@ class _row2_in_profileState extends State<row2_in_profile> {
             ),
             Text(
               widget.text,
-              style: AppFonts.regularText(
-                fontSize: 12,
-              ),
+              style: AppFonts.regularText(context, 14, Colors.black),
             ),
             const Spacer(),
             Switch(

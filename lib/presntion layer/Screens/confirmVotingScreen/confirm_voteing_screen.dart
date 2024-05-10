@@ -8,6 +8,7 @@ class ConfirmVoteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0,
         toolbarHeight: 80,

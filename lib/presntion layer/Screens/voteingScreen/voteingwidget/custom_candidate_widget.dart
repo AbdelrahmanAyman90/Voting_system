@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 
 class ShowCandidate extends StatelessWidget {
@@ -13,8 +14,8 @@ class ShowCandidate extends StatelessWidget {
   Widget build(BuildContext context) {
     log("bbbb");
     return Container(
-      height: 110,
-      width: 360,
+      // height: 110,
+      // width: 360,
       decoration: BoxDecoration(
         color: AppColors.whitebackgroundcolor,
         borderRadius: BorderRadius.circular(8),
@@ -31,32 +32,30 @@ class ShowCandidate extends StatelessWidget {
           children: [
             Image.asset(
               "assets/images/Mask group candidate.png",
-              width: 94,
-              height: 94,
+              // width: 94,
+              // height: 94,
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      //todo api
-                      S.of(context).candidate_name,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      S.of(context).candidate_bio,
-                      style: TextStyle(
-                          color: AppColors.secondaryTextColor, fontSize: 12),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    //todo api
+                    S.of(context).candidate_name,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: isEnglish() ? 8 : 0),
+                  Text(
+                    S.of(context).candidate_bio,
+                    style: TextStyle(
+                        color: AppColors.secondaryTextColor, fontSize: 12),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
           ],

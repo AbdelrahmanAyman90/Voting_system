@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/responsive_text.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirmVotingWidget/coustom_password.dart';
@@ -36,7 +38,7 @@ wedgit fun
       children: [
         Text(
           S.of(context).enter_password,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          style: AppFonts.semiBoldText(context, 18, Colors.black),
         ),
         const SizedBox(height: 10),
         Text(

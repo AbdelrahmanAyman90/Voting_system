@@ -11,5 +11,5 @@ class AppColors {
   static Color tabBarColor = const Color(0xFFD7F8EB);
   static Color secondbackgroundcolor = const Color(0xFFF3FAF7);
   static Color whitebackgroundcolor = Colors.white;
-  static Color bordercolorgreen = Color.fromRGBO(0, 135, 83, 1);
+  static Color profilebackgroundcolor = const Color(0xFFDBEFE7);
 }

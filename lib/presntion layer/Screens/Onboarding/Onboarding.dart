@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:voting/presntion%20layer/Screens/Onboarding/first_screen.dart';
-import 'package:voting/presntion%20layer/Screens/Onboarding/fourth_screen.dart';
 
-import 'package:voting/presntion%20layer/Screens/Onboarding/second_screen.dart';
-import 'package:voting/presntion%20layer/Screens/Onboarding/thrird_screen.dart';
 import 'package:voting/Shared/Colors.dart';
 import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/first_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/fourth_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/second_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/thrird_screen.dart';
 
 class onboarding extends StatefulWidget {
   const onboarding({super.key});
@@ -99,8 +99,7 @@ class _onboardingState extends State<onboarding> {
                 ),
                 child: Text(
                   'Next',
-                  style: AppFonts.regularText(
-                      fontSize: 16, color: AppColors.mainColor),
+                  style: AppFonts.regularText(context, 16, AppColors.mainColor),
                 )),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.001,
@@ -117,7 +116,7 @@ class _onboardingState extends State<onboarding> {
               child: Text(
                 'Skip',
                 style: AppFonts.regularText(
-                    fontSize: 16, color: AppColors.secondaryTextColor),
+                    context, 16, AppColors.secondaryTextColor),
               ),
             ),
           ],

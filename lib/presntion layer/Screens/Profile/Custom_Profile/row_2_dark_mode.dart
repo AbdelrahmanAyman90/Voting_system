@@ -32,9 +32,7 @@ class _row2_in_profileState extends State<row2_in_profile_dark_mode> {
         ),
         Text(
           widget.text,
-          style: AppFonts.regularText(
-            fontSize: 12,
-          ),
+          style: AppFonts.regularText(context, 14, Colors.black),
         ),
         const Spacer(),
         Switch(
