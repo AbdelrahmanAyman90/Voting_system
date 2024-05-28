@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 // import 'package:share_plus/share_plus.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/help_screen.dart';
 
 class ProfileInfo extends StatelessWidget {

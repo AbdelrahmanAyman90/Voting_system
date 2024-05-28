@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_election_period.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_nomination_period.dart';

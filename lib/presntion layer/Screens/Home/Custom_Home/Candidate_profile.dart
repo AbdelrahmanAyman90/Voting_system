@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:voting/generated/l10n.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_profile.dart';
 
 class Candidates extends StatefulWidget {

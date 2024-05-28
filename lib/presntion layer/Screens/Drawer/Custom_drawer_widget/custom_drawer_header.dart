@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
   const CustomDrawerHeader({super.key});

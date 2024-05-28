@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/home_view.dart';
 import 'package:voting/presntion%20layer/Screens/Profile/profile_mobile_layout.dart';

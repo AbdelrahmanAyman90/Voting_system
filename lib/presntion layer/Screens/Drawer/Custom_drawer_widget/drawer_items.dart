@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/presntion%20layer/Screens/Drawer/Custom_drawer_widget/drawer_item_model.dart';
 
 class DrawerItem extends StatelessWidget {

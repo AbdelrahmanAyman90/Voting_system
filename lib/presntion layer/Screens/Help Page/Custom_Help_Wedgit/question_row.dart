@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 
 class QuestionRow extends StatelessWidget {
@@ -22,9 +22,11 @@ class QuestionRow extends StatelessWidget {
         SizedBox(
           width: isEnglish() ? 5 : 0,
         ),
-        Text(
-          ques,
-          style: AppFonts.semiBoldText(context, 14, Colors.black),
+        Expanded(
+          child: Text(
+            ques,
+            style: AppFonts.semiBoldText(context, 14, Colors.black),
+          ),
         ),
       ],
     );

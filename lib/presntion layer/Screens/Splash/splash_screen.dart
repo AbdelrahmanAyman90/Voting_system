@@ -2,7 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/first_screen.dart';
-import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/presntion%20layer/Screens/Splash/Custom_Splash_Widgets/custom_splash_body.dart';
 
 class SplashScreen extends StatefulWidget {

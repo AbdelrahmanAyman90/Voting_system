@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 
 class NewsContainer extends StatefulWidget {
@@ -14,16 +16,15 @@ class NewsContainer extends StatefulWidget {
 class _NewsContainerState extends State<NewsContainer> {
   @override
   Widget build(BuildContext context) {
+    log(widget.img);
     return Container(
       margin: EdgeInsets.only(
         right: isEnglish() ? 10 : 0,
         left: isEnglish() ? 0 : 10,
       ),
-      // height: MediaQuery.of(context).size.height * 154 / 812,
-      // width: MediaQuery.of(context).size.width * 273 / 375,
       decoration: BoxDecoration(
-          image:
-              DecorationImage(image: AssetImage(widget.img), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: NetworkImage(widget.img), fit: BoxFit.cover),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -33,13 +34,12 @@ class _NewsContainerState extends State<NewsContainer> {
             const Spacer(),
             SizedBox(
               width: 250,
-              //height: MediaQuery.of(context).size.width * 80 / 812,
               child: Text(
                 widget.title,
                 style: AppFonts.semiBoldText(
                   context,
-                  12,
-                  Colors.white,
+                  14,
+                  const Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
             ),

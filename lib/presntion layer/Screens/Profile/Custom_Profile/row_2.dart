@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
-import 'package:voting/presntion%20layer/view_model/layout_view_model/cubit/layout_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
 
 class Row2InProfile extends StatefulWidget {
   final IconData icon;

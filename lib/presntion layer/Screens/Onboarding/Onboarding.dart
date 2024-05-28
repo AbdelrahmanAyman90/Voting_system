@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/first_screen.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/fourth_screen.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/second_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/responsive_text.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';

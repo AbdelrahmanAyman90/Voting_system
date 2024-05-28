@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
-import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/Fonts.dart';
 
 class row2_in_profile_dark_mode extends StatefulWidget {
   final IconData icon;

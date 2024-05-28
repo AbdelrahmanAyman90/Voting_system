@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/const/Colors.dart';
 
 class CustomSplashBody extends StatelessWidget {
   const CustomSplashBody({super.key, required this.img1, required this.img2});

@@ -2,13 +2,15 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/data/repository/news/news_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 
 import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
-import 'package:voting/presntion%20layer/Screens/Splash/splash_screen.dart';
-import 'package:voting/presntion%20layer/view_model/layout_view_model/cubit/layout_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
 
 Future<void> main() async {
   debugInvertOversizedImages = true;
@@ -23,14 +25,18 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return const MaterialApp(
-    //     debugShowCheckedModeBanner: false, home: SplashScreen());
-
-    return BlocProvider(
-      create: (context) => LayoutCubit()..changeLanguage("initial"),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LayoutCubit>(
+          create: (context) => LayoutCubit()..changeLanguage("initial"),
+        ),
+        BlocProvider<NewsCubit>(
+            create: (context) =>
+                NewsCubit(NewsRepoImplemnt(ApiServes(dio: creatdio())))
+                  ..fetchNews()),
+      ],
       child: BlocBuilder<LayoutCubit, LayoutState>(
         builder: (context, state) {
           return MaterialApp(
@@ -45,8 +51,6 @@ class MyApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-            //theme: lightTheme,
-            //darkTheme: darkTheme,
             home: const HomeScreen(),
           );
         },
