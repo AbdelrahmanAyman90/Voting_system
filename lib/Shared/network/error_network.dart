@@ -12,10 +12,13 @@ class ServerFailuar extends Failure {
   ServerFailuar(super.errorMassage);
   factory ServerFailuar.fromDioError(DioException dioError) {
     switch (dioError.type) {
+      //all this is dio error type
       case DioExceptionType.connectionTimeout:
-        return ServerFailuar("Connection timeout occurred");
+        return ServerFailuar(
+            "Connection timeout occurred"); //!الرساله دي هتروح للاب والي بدوره هتروح الريبو والي هتبعتها لل  كيبت  الي هيبعتها لل الشاشه
       case DioExceptionType.sendTimeout:
-        return ServerFailuar("Send timeout occurred");
+        return ServerFailuar(
+            "Send timeout occurred"); //!كاني هنا استدعيت الكون الفاضي الي هو في الاول
       case DioExceptionType.receiveTimeout:
         return ServerFailuar("Receive timeout occurred");
       case DioExceptionType.badCertificate:

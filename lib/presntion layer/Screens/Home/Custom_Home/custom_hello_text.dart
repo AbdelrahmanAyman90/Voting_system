@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/Notification_Form_Body.dart';
 
@@ -32,7 +34,10 @@ class CustomHelloText extends StatelessWidget {
             );
           },
           icon: Icon(Icons.notifications_outlined,
-              size: 24, color: AppColors.secondaryTextColor),
+              size: 24,
+              color: isCandidate(idUser)
+                  ? Colors.amber
+                  : AppColors.secondaryTextColor),
         ),
       ],
     );

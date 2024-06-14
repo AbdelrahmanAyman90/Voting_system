@@ -14,7 +14,7 @@ class HelpScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<QustionCubit>(context);
-    cubit.fetchQustion(); //! call fun to fitch qustion
+    cubit.fetchQustion(); //! call function to fitch qustion
     log("هنا");
     log(cubit.qustionList.length.toString());
     return BlocBuilder<QustionCubit, QustionState>(

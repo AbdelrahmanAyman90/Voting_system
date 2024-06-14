@@ -650,6 +650,26 @@ class S {
     );
   }
 
+  /// `Add the election campaign`
+  String get add_Campign_Candidates {
+    return Intl.message(
+      'Add the election campaign',
+      name: 'add_Campign_Candidates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selection of candidates`
+  String get choose_Candidate {
+    return Intl.message(
+      'Selection of candidates',
+      name: 'choose_Candidate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Nationwide`
   String get Nationwide {
     return Intl.message(
@@ -1155,6 +1175,16 @@ class S {
     return Intl.message(
       'Help',
       name: 'help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `teeest`
+  String get change_test {
+    return Intl.message(
+      'teeest',
+      name: 'change_test',
       desc: '',
       args: [],
     );

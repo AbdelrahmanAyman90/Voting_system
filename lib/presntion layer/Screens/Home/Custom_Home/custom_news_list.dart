@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Trending_news.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/news_container.dart';
 import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';

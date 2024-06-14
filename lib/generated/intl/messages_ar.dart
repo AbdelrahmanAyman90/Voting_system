@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Ok": MessageLookupByLibrary.simpleMessage("تم"),
         "Submit": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "Yes": MessageLookupByLibrary.simpleMessage("نعم"),
+        "add_Campign_Candidates": MessageLookupByLibrary.simpleMessage(
+            "اضافه الحمله الاعلانيه للمرشحين"),
         "age_desc": MessageLookupByLibrary.simpleMessage("٥٠"),
         "age_title": MessageLookupByLibrary.simpleMessage("العمر :"),
         "all_voter_number": MessageLookupByLibrary.simpleMessage(" ٣٥,٥٥٦,٨٥٠"),
@@ -52,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidate_word": MessageLookupByLibrary.simpleMessage("المرشحون"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغير كلمة المرور"),
+        "change_test": MessageLookupByLibrary.simpleMessage("نشوفها"),
+        "choose_Candidate":
+            MessageLookupByLibrary.simpleMessage("اختيار المرشحين"),
         "confirm_voting_button": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الليلى"),
         "data_news": MessageLookupByLibrary.simpleMessage("٣٠ سبتمبر ٢٠٢٤"),

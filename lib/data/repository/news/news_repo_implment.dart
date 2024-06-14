@@ -1,5 +1,6 @@
-import 'dart:developer';
+//! هنا الداتا موجوده
 
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:voting/Shared/network/api_service.dart';
@@ -8,9 +9,10 @@ import 'package:voting/data/models/news_model/news_model.dart';
 
 import 'package:voting/data/repository/news/news_repo.dart';
 
+//! هي دي المسئوله عن انها تعمل الطلب للباك ايند ودي الي بستعيها في الكيوبت وهي دي الي بترجع الداتا
 class NewsRepoImplemnt extends NewsRepo {
   final ApiServes apiServes;
-  NewsRepoImplemnt(this.apiServes);
+  NewsRepoImplemnt({required this.apiServes});
   @override
   Future<Either<Failure, List<NewsModel>>> fetchNews() async {
     try {
@@ -19,7 +21,7 @@ class NewsRepoImplemnt extends NewsRepo {
 //do requst
       var data = await apiServes.get(endPoint: endpoint);
 //do parsing
-      List<NewsModel> newsList = [];
+      List<NewsModel> newsList = []; //! data come from backend
       for (var i in data['data']['news']) {
         newsList.add(NewsModel.fromJson(i));
       }

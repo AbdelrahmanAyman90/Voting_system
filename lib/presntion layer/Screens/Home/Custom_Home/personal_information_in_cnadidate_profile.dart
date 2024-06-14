@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/data/models/candidate/candidate_campaign_model.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/candidates_list_widget.dart';
 
 class PersonalInfoInCandidateProfile extends StatelessWidget {
-  const PersonalInfoInCandidateProfile({super.key});
-
+  const PersonalInfoInCandidateProfile(
+      {super.key, required this.candidateData});
+  final Candidate? candidateData;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +37,7 @@ class PersonalInfoInCandidateProfile extends StatelessWidget {
             ),
             PersonalInfo(
                 title: S.of(context).titel_name,
-                desc: S.of(context).candidate_name,
+                desc: candidateData!.name,
                 width: 42),
             const SizedBox(
               height: 16,
@@ -49,7 +51,7 @@ class PersonalInfoInCandidateProfile extends StatelessWidget {
             ),
             PersonalInfo(
               title: S.of(context).education_title,
-              desc: S.of(context).education_desc,
+              desc: candidateData!.education,
               width: isEnglish() ? 16 : 40,
             ),
             const SizedBox(
@@ -57,7 +59,7 @@ class PersonalInfoInCandidateProfile extends StatelessWidget {
             ),
             PersonalInfo(
               title: S.of(context).job_title,
-              desc: S.of(context).job_desc,
+              desc: candidateData!.job,
               width: isEnglish() ? 55 : 38,
             ),
             const SizedBox(

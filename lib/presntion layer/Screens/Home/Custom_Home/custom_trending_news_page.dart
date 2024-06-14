@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
-import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/trending_news_page_content.dart';
 
 class CustomTrendingNews extends StatelessWidget {

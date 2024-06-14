@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "Submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "Yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "add_Campign_Candidates":
+            MessageLookupByLibrary.simpleMessage("Add the election campaign"),
         "age_desc": MessageLookupByLibrary.simpleMessage("50"),
         "age_title": MessageLookupByLibrary.simpleMessage("AGE :"),
         "all_voter_number": MessageLookupByLibrary.simpleMessage("35,853,967"),
@@ -52,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "candidate_word": MessageLookupByLibrary.simpleMessage("Candidates"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "change_test": MessageLookupByLibrary.simpleMessage("teeest"),
+        "choose_Candidate":
+            MessageLookupByLibrary.simpleMessage("Selection of candidates"),
         "confirm_voting_button":
             MessageLookupByLibrary.simpleMessage("Confirm Vote"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
