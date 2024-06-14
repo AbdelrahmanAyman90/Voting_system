@@ -1,17 +1,27 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Candidate_profile.dart';
+import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
 class CandidateList extends StatefulWidget {
   final String img;
   final String name;
   final String bio;
-
+  final String candidateId;
+  final String UserCandate;
   const CandidateList(
-      {super.key, required this.img, required this.bio, required this.name});
+      {super.key,
+      required this.UserCandate,
+      required this.img,
+      required this.bio,
+      required this.name,
+      required this.candidateId});
 
   @override
   State<CandidateList> createState() => _CandidateListState();
@@ -23,15 +33,18 @@ class _CandidateListState extends State<CandidateList> {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image(
-                image: AssetImage(
-              widget.img,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: CachedNetworkImage(
+                imageUrl: widget.img,
+                fit: BoxFit.fill,
+                width: 130,
+                height: 120,
+                errorWidget: (context, url, error) =>
+                    Icon(Icons.error), // Show error icon
+              ),
             )),
-          ),
-        ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.only(
@@ -67,12 +80,18 @@ class _CandidateListState extends State<CandidateList> {
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
                       child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            await context
+                                .read<GetCandidateInfoCubit>()
+                                .getSingleCandidateinfo(
+                                    idCandidate: widget.candidateId);
                             Navigator.push(
                               context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    const Candidates(),
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => Candidates(
+                                  candidateId: widget.UserCandate,
+                                  candidateName: widget.name,
+                                ),
                               ),
                             );
                           },
@@ -94,9 +113,9 @@ class _CandidateListState extends State<CandidateList> {
 }
 
 class PersonalInfo extends StatelessWidget {
-  final String title;
-  final String desc;
-  final double width;
+  final String? title;
+  final String? desc;
+  final double? width;
   const PersonalInfo(
       {super.key,
       required this.title,
@@ -108,7 +127,7 @@ class PersonalInfo extends StatelessWidget {
     return Row(
       children: [
         Text(
-          title,
+          title!,
           style: AppFonts.semiBoldText(
               context, isEnglish() ? 12 : 14, AppColors.navigationBarColor),
         ),
@@ -116,7 +135,7 @@ class PersonalInfo extends StatelessWidget {
           width: width,
         ),
         Text(
-          desc,
+          desc!,
           style: AppFonts.regularText(
               context, isEnglish() ? 12 : 14, AppColors.secondaryTextColor),
         )
@@ -133,6 +152,7 @@ class BioAndGoals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       // width: MediaQuery.of(context).size.width * 335 / 375,
       // height: MediaQuery.of(context).size.height * 248 / 812,
       decoration: BoxDecoration(
@@ -155,6 +175,49 @@ class BioAndGoals extends StatelessWidget {
               desc,
               style: AppFonts.regularText(
                   context, 14, AppColors.secondaryTextColor),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AdditinalLink extends StatelessWidget {
+  final String title;
+  final String link;
+  AdditinalLink({super.key, required this.title, required this.link});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      // width: MediaQuery.of(context).size.width * 335 / 375,
+      // height: MediaQuery.of(context).size.height * 248 / 812,
+      decoration: BoxDecoration(
+          color: AppColors.backgroundColor,
+          borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: AppFonts.boldText(
+                  context, isEnglish() ? 12 : 14, AppColors.mainColor),
+            ),
+            const SizedBox(
+              height: 23,
+            ),
+            GestureDetector(
+              onTap: () async {
+                await launchUrl(Uri.parse(link));
+              },
+              child: Text(
+                link,
+                style: AppFonts.regularText(context, 14, Colors.blue),
+              ),
             ),
           ],
         ),

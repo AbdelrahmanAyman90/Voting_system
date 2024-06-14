@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
@@ -16,7 +14,6 @@ class NewsContainer extends StatefulWidget {
 class _NewsContainerState extends State<NewsContainer> {
   @override
   Widget build(BuildContext context) {
-    log(widget.img);
     return Container(
       margin: EdgeInsets.only(
         right: isEnglish() ? 10 : 0,

@@ -9,23 +9,27 @@ class QustionCubit extends Cubit<QustionState> {
   QustionCubit(this.qustionRepo) : super(QustionInitial());
   QustionRepoImplemntion qustionRepo;
   List<QustionModel> qustionList = [];
-
+//do requst and return data
   fetchQustion() async {
     emit(QustionLooding());
 
     try {
       var result = await qustionRepo.fetchQustion();
-      result.fold((l) {
-        emit(QustionFail(l.errorMassage));
-      }, (r) {
-        getListQustion(r);
-        emit(QustionSuccess());
-      });
+      result.fold(
+        (l) {
+          emit(QustionFail(l.errorMassage));
+        },
+        (r) {
+          getListQustion(r);
+          emit(QustionSuccess());
+        },
+      );
     } on Exception catch (e) {
       emit(QustionFail(e.toString()));
     }
   }
 
+//function to store list that return from api(fetchqustion)
   getListQustion(List<QustionModel> qustionListenterfun) {
     qustionList.clear();
     qustionList.addAll(qustionListenterfun);

@@ -1,24 +1,29 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/shard_container.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/submitted_successfully.dart';
+import 'package:voting/presntion%20layer/view_model/add_campiagn_viewmodel/cubit/add_campiagn_cubit.dart';
 
-class UploadFormBody extends StatefulWidget {
-  const UploadFormBody({super.key});
+class AddCampaignWidget extends StatefulWidget {
+  const AddCampaignWidget({super.key});
 
   @override
-  State<UploadFormBody> createState() => _UploadFormBodyState();
+  State<AddCampaignWidget> createState() => _AddCampaignWidgetState();
 }
 
-class _UploadFormBodyState extends State<UploadFormBody> {
-  TextEditingController textAreaController1 = TextEditingController();
-  TextEditingController textAreaController2 = TextEditingController();
-  TextEditingController inputLinkController = TextEditingController();
+//! الصفحه الي بيرفع فيها الحمله
+class _AddCampaignWidgetState extends State<AddCampaignWidget> {
+  TextEditingController textAreaControllerBio = TextEditingController();
+  TextEditingController textAreaControllerGoals = TextEditingController();
+  TextEditingController? inputLinkController = TextEditingController();
   final keyform = GlobalKey<FormState>();
 
   PlatformFile? _selectedFile;
@@ -40,23 +45,23 @@ class _UploadFormBodyState extends State<UploadFormBody> {
     });
   }
 
-  void submitForm() {
-    if (_isFormValid) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) =>
-              const SubmittedSuccessfullyScreen(),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please upload your vedio.'),
-        ),
-      );
-    }
-  }
+  // void submitForm() {
+  //   if (_isFormValid) {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute<void>(
+  //         builder: (BuildContext context) =>
+  //             const SubmittedSuccessfullyScreen(),
+  //       ),
+  //     );
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('Please upload your vedio.'),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +79,6 @@ class _UploadFormBodyState extends State<UploadFormBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/MP4 Image.svg',
-                    width: 60,
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -89,23 +90,17 @@ class _UploadFormBodyState extends State<UploadFormBody> {
                   const SizedBox(
                     height: 30,
                   ),
-                  UploadBtn(
-                      selectedFile: _selectedFile,
-                      textBtn: S.of(context).upload_your_video,
-                      onFileSelected: handleFileUpload,
-                      onValidationChanged: validateForm),
+                  UploadBtnVideo(
+                    selectedFile: _selectedFile,
+                    textBtn: S.of(context).upload_your_video,
+                    onFileSelected: handleFileUpload,
+                    onValidationChanged: validateForm,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
                     controller: inputLinkController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return '*require';
-                      } else {
-                        return null;
-                      }
-                    },
                     decoration: InputDecoration(
                       hintText: S.of(context).video_link,
                       hintStyle: AppFonts.regularText(
@@ -118,33 +113,143 @@ class _UploadFormBodyState extends State<UploadFormBody> {
                     height: 10,
                   ),
                   TextArea(
-                      controller: textAreaController1, text: S.of(context).bio),
+                      controller: textAreaControllerBio,
+                      text: S.of(context).bio),
                   const SizedBox(
                     height: 10,
                   ),
                   TextArea(
-                      controller: textAreaController2,
+                      controller: textAreaControllerGoals,
                       text: S.of(context).goals),
                   const SizedBox(
                     height: 50,
                   ),
-                  Button(
+                  BlocListener<AddCampiagnCubit, AddCampiagnState>(
+                    listener: (context, state) {
+                      if (state is AddCampiagnLooding) {
+                        context.loaderOverlay.show(
+                          widgetBuilder: (progress) {
+                            return MyAppStuts.myLooding();
+                          },
+                        );
+                      } else if (state is AddCampiagnFail) {
+                        context.loaderOverlay.hide();
+                        MyAppStuts.showSnackBar(context, state.errorMassage);
+                      } else {
+                        //todo navigat for alert that wait for aprrov
+                        context.loaderOverlay.hide();
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                const SubmittedSuccessfullyScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    child: Button(
                       text: S.of(context).Submit,
                       color: AppColors.mainColor,
                       fontsize: 20,
                       width: 265,
                       height: 45,
-                      onPressed: () {
-                        if (keyform.currentState!.validate()) {
-                          return submitForm();
+                      onPressed: () async {
+                        if (keyform.currentState!.validate() && _isFormValid) {
+                          await context.read<AddCampiagnCubit>().addCampiagn(
+                              bio: textAreaControllerBio.text,
+                              goals: textAreaControllerGoals.text,
+                              video: _selectedFile,
+                              link: inputLinkController?.text);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Please upload your vedio.'),
+                            ),
+                          );
                         }
                       },
-                      textcolor: Colors.white),
+                      textcolor: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UploadBtnVideo extends StatefulWidget {
+  final String textBtn;
+  final void Function(PlatformFile?) onFileSelected;
+  final void Function(bool) onValidationChanged;
+  final PlatformFile? selectedFile;
+
+  const UploadBtnVideo(
+      {super.key,
+      required this.textBtn,
+      required this.onFileSelected,
+      required this.onValidationChanged,
+      required this.selectedFile});
+
+  @override
+  State<UploadBtnVideo> createState() => _UploadBtnVideoState();
+}
+
+class _UploadBtnVideoState extends State<UploadBtnVideo> {
+  // String? selectedFileName;
+
+  PlatformFile? file;
+
+  void _openFilePicker() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.video);
+
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        file = result.files.first;
+
+        widget.onFileSelected(file);
+        widget.onValidationChanged(true);
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 50 / 812,
+        decoration: BoxDecoration(
+            color: AppColors.backgroundColor,
+            borderRadius: BorderRadius.circular(10)),
+        child: TextButton(
+            onPressed: () {
+              _openFilePicker();
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      file != null ? file!.name : widget.textBtn,
+                      style: AppFonts.regularText(
+                          context, 12, AppColors.secondaryTextColor),
+                    ),
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    Icons.file_upload_outlined,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            )),
       ),
     );
   }

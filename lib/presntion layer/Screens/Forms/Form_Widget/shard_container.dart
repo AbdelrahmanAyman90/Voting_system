@@ -1,9 +1,12 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/generated/l10n.dart';
+import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
 
+//!the custom widget with upload button
 class ContainerContent extends StatefulWidget {
   final String ques;
   final String text;
@@ -125,6 +128,7 @@ class _ContainerContentState extends State<ContainerContent> {
   }
 }
 
+//!upload button
 class UploadBtn extends StatefulWidget {
   final String textBtn;
   final void Function(PlatformFile?) onFileSelected;
@@ -148,11 +152,14 @@ class _UploadBtnState extends State<UploadBtn> {
   PlatformFile? file;
 
   void _openFilePicker() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowMultiple: false, type: FileType.image);
 
-    if (result != null) {
+    if (result != null && result.files.isNotEmpty) {
       setState(() {
         file = result.files.first;
+        //! this for to gather all file and send to api
+        context.read<FormCandidateCubit>().sortedImage(file);
         widget.onFileSelected(file);
         widget.onValidationChanged(true);
       });

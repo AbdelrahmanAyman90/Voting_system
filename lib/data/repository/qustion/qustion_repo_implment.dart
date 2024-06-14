@@ -25,14 +25,15 @@ class QustionRepoImplemntion extends QustionRepo {
 //cheack
       log("======");
       log(qustionList.length.toString());
-      return right(qustionList);
+      return right(qustionList); //! return
     } on Exception catch (e) {
       if (e is DioException) {
         // log(e.toString());
-        return left(ServerFailuar.fromDioError(e)); //! return
+        return left(ServerFailuar.fromDioError(
+            e)); //! return the error massage that wiil be go to cubit
       } else {
         // log(e.toString());
-        return left(ServerFailuar(e.toString())); //! return
+        return left(ServerFailuar(e.toString())); //! return the error massage
       }
     }
   }

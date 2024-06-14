@@ -6,6 +6,7 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/upload_form.dart';
 import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
 
+//!صفحه بتاعت انه يظهرله رساله انه اتقبل
 class NotificationFormBody extends StatelessWidget {
   const NotificationFormBody({super.key});
 
@@ -59,7 +60,7 @@ class NotificationFormBody extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const UploadFormScreen(),
+                  builder: (BuildContext context) => const AddCampaignScreen(),
                 ),
               );
             },

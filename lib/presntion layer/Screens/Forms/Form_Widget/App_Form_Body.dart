@@ -1,10 +1,16 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/shard_container.dart';
-import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
+import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
 
 class AppFormBody extends StatefulWidget {
   const AppFormBody({super.key});
@@ -21,7 +27,7 @@ class _AppFormBodyState extends State<AppFormBody> {
   PlatformFile? _selectedFile5;
   PlatformFile? _selectedFile6;
   PlatformFile? _selectedFile7;
-  PlatformFile? _selectedFile8;
+  //PlatformFile? _selectedFile8;
 
   bool _isFormValid = false;
 
@@ -87,23 +93,42 @@ class _AppFormBodyState extends State<AppFormBody> {
                 const SizedBox(
                   height: 15,
                 ),
-                UploadBtn(
-                  selectedFile: _selectedFile8,
-                  textBtn: S.of(context).upload_personal_photo,
-                  onFileSelected: _handleFileUpload8,
-                  onValidationChanged: _validateForm,
-                ),
+                // UploadBtn(
+                //   selectedFile: _selectedFile8,
+                //   textBtn: S.of(context).upload_personal_photo,
+                //   onFileSelected: _handleFileUpload8,
+                //   onValidationChanged: _validateForm,
+                // ),
                 const SizedBox(
                   height: 30,
                 ),
-                Button(
+                BlocListener<FormCandidateCubit, FormCandidateState>(
+                  listener: (context, state) {
+                    if (state is FormCandidateLoodin) {
+                      context.loaderOverlay.show(
+                        widgetBuilder: (progress) {
+                          return MyAppStuts.myLooding();
+                        },
+                      );
+                    } else if (state is FormCandidateFail) {
+                      context.loaderOverlay.hide();
+                      MyAppStuts.showSnackBar(context, state.errorMassage);
+                    } else {
+                      //todo navigat for alert that wait for aprrov
+                      context.loaderOverlay.hide();
+                      print("yess");
+                    }
+                  },
+                  child: Button(
                     text: S.of(context).Submit,
                     color: AppColors.mainColor,
                     fontsize: 20,
                     width: 265,
                     height: 45,
                     onPressed: _submitForm,
-                    textcolor: Colors.white),
+                    textcolor: Colors.white,
+                  ),
+                ),
               ],
             ),
           ),
@@ -154,39 +179,52 @@ class _AppFormBodyState extends State<AppFormBody> {
     });
   }
 
-  void _handleFileUpload8(PlatformFile? file) {
-    setState(() {
-      _selectedFile8 = file;
-    });
-  }
+  // void _handleFileUpload8(PlatformFile? file) {
+  //   setState(() {
+  //     _selectedFile8 = file;
+  //   });
+  // }
 
   void _validateForm(bool isValid) {
-    setState(() {
-      if (_selectedFile1 != null &&
-          _selectedFile2 != null &&
-          _selectedFile3 != null &&
-          _selectedFile4 != null &&
-          _selectedFile5 != null &&
-          _selectedFile6 != null &&
-          _selectedFile7 != null &&
-          _selectedFile8 != null) _isFormValid = isValid;
-    });
+    setState(
+      () {
+        if (_selectedFile1 != null &&
+            _selectedFile2 != null &&
+            _selectedFile3 != null &&
+            _selectedFile4 != null &&
+            _selectedFile5 != null &&
+            _selectedFile6 != null &&
+            _selectedFile7 != null) _isFormValid = isValid;
+      },
+    );
   }
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_isFormValid) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => const HomeScreen(),
-        ),
-      );
+      context.read<FormCandidateCubit>().addCandidate(
+            name: "test1 candidate",
+            job: "doc",
+            education: "no",
+          );
+      // List<MultipartFile> c = await uploadImageToApi(
+      //     [_selectedFile1!, _selectedFile2!, _selectedFile3!]);
+      // print("===========");
+      // print(c[1].filename);
+      // print("===========");
+
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute<void>(
+      //     builder: (BuildContext context) => const HomeScreen(),
+      //   ),
+      // );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please upload all files!'),
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     content: Text('Please upload all files!'),
+      //   ),
+      // );
+      MyAppStuts.showSnackBar(context, 'Please upload all files!');
     }
   }
 }
