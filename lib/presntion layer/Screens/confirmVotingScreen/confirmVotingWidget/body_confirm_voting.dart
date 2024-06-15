@@ -10,7 +10,7 @@ import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/cus
 class ConfirmVotingBody extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   ConfirmVotingBody({super.key});
-
+  TextEditingController ConfirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -47,7 +47,18 @@ wedgit fun
         const SizedBox(height: 18),
         Form(
           key: _formKey,
-          child: const CustomPassowrdText(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: CustomPassowrdText(
+              hintText: S.of(context).password,
+              controller: ConfirmPassword,
+              validator: (value) {
+                if (ConfirmPassword.text.isEmpty) {
+                  return S.of(context).passord_error;
+                }
+              },
+            ),
+          ),
         ),
       ],
     );

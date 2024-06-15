@@ -38,7 +38,7 @@ widget function
           padding: const EdgeInsets.only(top: 15),
           child: Text(
             S.of(context).results,
-            style: AppFonts.boldText(context, 24, AppColors.mainColor),
+            style: AppFonts.boldText(context, 28, AppColors.mainColor),
           )),
     );
   }

@@ -1,45 +1,104 @@
+// import 'package:flutter/material.dart';
+// import 'package:voting/Shared/Colors.dart';
+
+// class CustomSplashBody extends StatelessWidget {
+//   const CustomSplashBody({super.key, required this.img1, required this.img2});
+//   final AnimationController img1;
+//   final AnimationController img2;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: AppColors.mainColor,
+//       body: Stack(
+//         children: [
+//           Positioned(
+//             left: MediaQuery.of(context).size.width * 0.2,
+//             child: SlideTransition(
+//               position: Tween<Offset>(
+//                       begin: const Offset(4, 0), end: const Offset(0, 0))
+//                   .animate(img1),
+//               child: Image.asset('assets/images/Mask group (1).png',
+//                   //height: MediaQuery.of(context).size.height * .8,
+//                   width: MediaQuery.of(context).size.width * .2),
+//             ),
+//           ),
+//           Positioned(
+//             left: MediaQuery.of(context).size.width * 0.26,
+//             child: SlideTransition(
+//               position: Tween<Offset>(
+//                 begin: const Offset(4, 0),
+//                 end: const Offset(0, 0),
+//               ).animate(img2),
+//               child: SizedBox(
+//                 height: 55,
+//                 child: Image.asset('assets/images/Mask group.png',
+//                     //height: MediaQuery.of(context).size.height * .085,
+//                     width: MediaQuery.of(context).size.width * .58),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/Onboarding.dart';
 
-class CustomSplashBody extends StatelessWidget {
-  const CustomSplashBody({super.key, required this.img1, required this.img2});
-  final AnimationController img1;
-  final AnimationController img2;
+class CustomSplashBody extends StatefulWidget {
+  const CustomSplashBody({super.key});
+
+  @override
+  State<CustomSplashBody> createState() => _CustomSplashBodyState();
+}
+
+class _CustomSplashBodyState extends State<CustomSplashBody> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.mainColor,
-      body: Stack(
-        children: [
-          Positioned(
-            left: MediaQuery.of(context).size.width * 0.2,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                      begin: const Offset(4, 0), end: const Offset(0, 0))
-                  .animate(img1),
-              child: Image.asset('assets/images/Mask group (1).png',
-                  //height: MediaQuery.of(context).size.height * .8,
-                  width: MediaQuery.of(context).size.width * .2),
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 60),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 200,
+                ),
+                Container(
+                  width: 180,
+                  height: 150,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/App Logo.png'),
+                          fit: BoxFit.cover),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
+                const Spacer(),
+                Text(
+                  'iDemocracy',
+                  style:
+                      AppFonts.semiBoldText(context, 16, AppColors.mainColor),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            left: MediaQuery.of(context).size.width * 0.26,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(4, 0),
-                end: const Offset(0, 0),
-              ).animate(img2),
-              child: SizedBox(
-                height: 55,
-                child: Image.asset('assets/images/Mask group.png',
-                    //height: MediaQuery.of(context).size.height * .085,
-                    width: MediaQuery.of(context).size.width * .58),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

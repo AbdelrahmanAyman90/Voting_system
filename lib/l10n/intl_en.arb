@@ -29,7 +29,7 @@
     "candidate_bio": "Egyptian lawyer and founder of lorem ipsum lorem ipsum.",
     "enter_password": "Enter Password",
     "hint_password": "Please input your Password to confirm your vote",
-    "password": "password",
+    "password": "Password",
     "confirm_voting_button": "Confirm Vote",
     "cancel_button": "Cancel",
     "elesctions": "Elesctions",
@@ -110,5 +110,9 @@
     "lets_go":"Let’s Get Started",
     "change_password": "Change Password",
     "help": "Help",
-    "ans_ques1_in_help":"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum"
+    "ans_ques1_in_help":"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum",
+    "national_id": "national iD",
+    "confirm_pass":"Confirm password",
+    "helppp": "Help"
+
 }

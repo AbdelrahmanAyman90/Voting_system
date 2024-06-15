@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/Colors.dart';
+import 'package:voting/Shared/Fonts.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/voting_body_nomination.dart';
 
@@ -37,11 +38,7 @@ widget function
         padding: const EdgeInsets.only(top: 15),
         child: Text(
           S.of(context).elesctions,
-          style: TextStyle(
-            fontSize: 28,
-            color: AppColors.mainColor,
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppFonts.boldText(context, 28, AppColors.mainColor),
         ),
       ),
     );

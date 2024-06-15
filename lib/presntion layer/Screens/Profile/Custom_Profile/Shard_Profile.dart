@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
 // import 'package:share_plus/share_plus.dart';
 import 'package:voting/Shared/Colors.dart';
 import 'package:voting/Shared/Fonts.dart';
+import 'package:voting/presntion%20layer/Api/cubit/user_cubit.dart';
+import 'package:voting/presntion%20layer/Screens/Change%20Password/change_password_screen.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/help_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/login_screen.dart';
 
 class ProfileInfo extends StatelessWidget {
   final String title;
@@ -115,7 +119,17 @@ class ProfileInfoButton extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(child: RowInProfile(icon: icon2, text: text2)),
+            GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) =>
+                          const ChangePasswordScreen(),
+                    ),
+                  );
+                },
+                child: RowInProfile(icon: icon2, text: text2)),
             const SizedBox(
               height: 16,
             ),
@@ -129,7 +143,16 @@ class ProfileInfoButton extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(child: RowInProfile(icon: icon4, text: text4)),
+            GestureDetector(
+                onTap: () {
+                  context.read<UserCubit>().logOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const LoginScreen()),
+                  );
+                },
+                child: RowInProfile(icon: icon4, text: text4)),
           ],
         ),
       ),

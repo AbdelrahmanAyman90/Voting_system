@@ -18,7 +18,7 @@ class ResultMobileLayoutBody extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.only(top: 15),
           child: Text(S.of(context).result,
-              style: AppFonts.boldText(context, 24, AppColors.mainColor)),
+              style: AppFonts.boldText(context, 28, AppColors.mainColor)),
         ),
       ),
       body: const RusltBody(),
