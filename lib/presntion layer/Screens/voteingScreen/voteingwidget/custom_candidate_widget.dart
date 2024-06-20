@@ -1,18 +1,24 @@
-import 'dart:developer';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
-import 'package:voting/generated/l10n.dart';
 
 class ShowCandidate extends StatelessWidget {
   final bool isSelected; // Property to indicate selection status
-
-  const ShowCandidate({Key? key, required this.isSelected}) : super(key: key);
+  final String name;
+  final String image;
+  final String bio;
+  const ShowCandidate(
+      {Key? key,
+      required this.isSelected,
+      required this.name,
+      required this.image,
+      required this.bio})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    log("bbbb");
     return Container(
       // height: 110,
       // width: 360,
@@ -27,15 +33,30 @@ class ShowCandidate extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         child: Row(
           children: [
-            Image.asset(
-              "assets/images/Mask group candidate.png",
-              // width: 94,
-              // height: 94,
+            Container(
+              width: 120,
+              height: 70,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(imagePath + image),
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
-            const SizedBox(width: 8),
+            //!تعديلات السويدي المتاخره
+            // CachedNetworkImage(
+            //   imageUrl: imagePath + image,
+            //   fit: BoxFit.fill,
+            //   width: 130,
+            //   height: 120,
+            //   errorWidget: (context, url, error) =>
+            //       Icon(Icons.error), // Show error icon
+            // ),
+
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -43,13 +64,13 @@ class ShowCandidate extends StatelessWidget {
                 children: [
                   Text(
                     //todo api
-                    S.of(context).candidate_name,
+                    name,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: isEnglish() ? 8 : 0),
                   Text(
-                    S.of(context).candidate_bio,
+                    bio,
                     style: TextStyle(
                         color: AppColors.secondaryTextColor, fontSize: 12),
                     maxLines: 2,

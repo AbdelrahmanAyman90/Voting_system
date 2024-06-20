@@ -1,13 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 
 class CustomResultCndidate extends StatelessWidget {
   const CustomResultCndidate(
-      {super.key, required this.color, required this.standing});
+      {super.key,
+      required this.color,
+      required this.standing,
+      required this.count,
+      required this.image,
+      required this.name});
   final bool color;
   final int standing;
+  final String name;
+  final int count;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,14 +33,29 @@ class CustomResultCndidate extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
         child: Row(
           children: [
-            Image.asset(
-              "assets/images/Mask group candidate.png",
-              // width: 94,
-              // height: 94,
+            Container(
+              width: 120,
+              height: 80,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(imagePath + image),
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
+            //!تعديلات السويدي
+            // CachedNetworkImage(
+            //   imageUrl: imagePath + image,
+            //   fit: BoxFit.fill,
+            //   width: 130,
+            //   height: 120,
+            //   errorWidget: (context, url, error) =>
+            //       Icon(Icons.error), // Show error icon
+            // ),
             const SizedBox(width: 8),
             Expanded(
               child: Column(
@@ -37,27 +63,31 @@ class CustomResultCndidate extends StatelessWidget {
                 children: [
                   Text(
                     // todo api
-                    S.of(context).candidate_name,
+                    name,
                     style: AppFonts.semiBoldText(context, 16, Colors.black),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3),
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
                             Text(
-                              '${S.of(context).votes_word} :',
+                              '${S.of(context).votes_word}: ',
                               style: AppFonts.regularText(
                                   context, 14, AppColors.secondaryTextColor),
                             ),
                             Text(
-                                // todo api
-                                S.of(context).candiadate_number_voter,
-                                style: AppFonts.semiBoldText(
-                                    context, 14, AppColors.mainColor))
+                              // todo api
+                              isEnglish()
+                                  ? '${count}'
+                                  : "${convertEnglishNumberToArabicNumber(count.toString())}",
+                              //'${count}',
+                              style: AppFonts.semiBoldText(
+                                  context, 14, AppColors.mainColor),
+                            )
                           ],
                         ),
                         SizedBox(

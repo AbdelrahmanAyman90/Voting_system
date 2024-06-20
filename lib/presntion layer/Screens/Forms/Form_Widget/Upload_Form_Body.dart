@@ -139,11 +139,11 @@ class _AddCampaignWidgetState extends State<AddCampaignWidget> {
                         //todo navigat for alert that wait for aprrov
                         context.loaderOverlay.hide();
 
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) =>
-                                const SubmittedSuccessfullyScreen(),
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => SuccsesAlert(
+                            message: "تمت اضافه الحمله بنجاح",
                           ),
                         );
                       }

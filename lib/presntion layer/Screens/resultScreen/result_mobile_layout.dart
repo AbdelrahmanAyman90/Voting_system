@@ -14,14 +14,14 @@ class ResultMobileLayoutBody extends StatelessWidget {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0,
-        toolbarHeight: 80,
+        toolbarHeight: 60,
         title: Padding(
           padding: const EdgeInsets.only(top: 15),
           child: Text(S.of(context).result,
               style: AppFonts.boldText(context, 24, AppColors.mainColor)),
         ),
       ),
-      body: const RusltBody(),
+      body: RusltBody(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/generated/l10n.dart';
 
 class CustomPassowrdText extends StatefulWidget {
@@ -22,6 +23,8 @@ class _CustomPassowrdTextState extends State<CustomPassowrdText> {
         validator: (value) {
           if (ConfirmPassword.text.isEmpty) {
             return S.of(context).passord_error;
+          } else if (ConfirmPassword.text != currentPassword) {
+            return "كلمه السر غير صحيحه";
           }
         },
         obscureText: _obscureText,

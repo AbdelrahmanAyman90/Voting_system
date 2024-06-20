@@ -19,7 +19,7 @@ class CustomCandidatePageInElection extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                 child: Container(
                   // width: MediaQuery.of(context).size.width * 335 / 375,
                   // height: MediaQuery.of(context).size.height * 122 / 812,

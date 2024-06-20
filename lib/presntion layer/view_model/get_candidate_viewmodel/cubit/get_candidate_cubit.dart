@@ -12,6 +12,8 @@ class GetCandidateCubit extends Cubit<GetCandidateState> {
   GetCandidateCubit(this.candidateRepo) : super(GetCandidateInitial());
   CandidateRepoImplemnt candidateRepo;
   Campaign? compiagnData;
+  List<CandidateModel> allCandidateList = [];
+
   getAllCandidate() async {
     emit(GetCandidateLooding());
     try {
@@ -19,11 +21,17 @@ class GetCandidateCubit extends Cubit<GetCandidateState> {
       result.fold((l) {
         emit(GetCandidateFail(l.errorMassage));
       }, (r) {
+        setCandataedata(r);
         emit(GetCandidateSuccess(r));
       });
     } on Exception catch (e) {
       emit(GetCandidateFail(e.toString()));
     }
+  }
+
+  setCandataedata(List<CandidateModel> candataeData) {
+    allCandidateList.clear();
+    allCandidateList.addAll(candataeData);
   }
 }
 

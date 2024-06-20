@@ -12,14 +12,17 @@ class AnswerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       decoration: BoxDecoration(
         color: AppColors.profilebackgroundcolor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Text(
-        answer,
-        style: AppFonts.regularText(context, 14, Colors.black),
+      child: Center(
+        child: Text(
+          answer,
+          style: AppFonts.regularText(context, 14, Colors.black),
+        ),
       ),
     );
   }

@@ -33,24 +33,35 @@ class _CandidateListState extends State<CandidateList> {
     return Row(
       children: [
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: widget.img,
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Container(
+            width: 120,
+            height: 70,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(widget.img),
                 fit: BoxFit.fill,
-                width: 130,
-                height: 120,
-                errorWidget: (context, url, error) =>
-                    Icon(Icons.error), // Show error icon
               ),
-            )),
+            ),
+          ),
+          //!تعديلات السويدي
+          // child: ClipRRect(
+          //   borderRadius: BorderRadius.circular(8),
+          //   child: CachedNetworkImage(
+          //     imageUrl: widget.img,
+          //     fit: BoxFit.fill,
+          //     width: 130,
+          //     height: 120,
+          //     errorWidget: (context, url, error) =>
+          //         Icon(Icons.error), // Show error icon
+          //   ),
+          // ),
+        ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.only(
               top: isEnglish() ? 0 : 10,
-              left: isEnglish() ? 10 : 0,
-              right: isEnglish() ? 0 : 10,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,27 +90,29 @@ class _CandidateListState extends State<CandidateList> {
                       alignment: isEnglish()
                           ? Alignment.centerRight
                           : Alignment.centerLeft,
+                      //todo هنحول انه يدوس على كله
                       child: TextButton(
-                          onPressed: () async {
-                            await context
-                                .read<GetCandidateInfoCubit>()
-                                .getSingleCandidateinfo(
-                                    idCandidate: widget.candidateId);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) => Candidates(
-                                  candidateId: widget.UserCandate,
-                                  candidateName: widget.name,
-                                ),
+                        onPressed: () async {
+                          await context
+                              .read<GetCandidateInfoCubit>()
+                              .getSingleCandidateinfo(
+                                  idCandidate: widget.candidateId);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => Candidates(
+                                candidateId: widget.UserCandate,
+                                candidateName: widget.name,
                               ),
-                            );
-                          },
-                          child: Text(
-                            S.of(context).read_more,
-                            style: AppFonts.boldText(
-                                context, 12, AppColors.secondaryTextColor),
-                          )),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          S.of(context).read_more,
+                          style: AppFonts.boldText(
+                              context, 12, AppColors.secondaryTextColor),
+                        ),
+                      ),
                     ),
                   ),
                 ),

@@ -27,7 +27,11 @@ class _AppFormBodyState extends State<AppFormBody> {
   PlatformFile? _selectedFile5;
   PlatformFile? _selectedFile6;
   PlatformFile? _selectedFile7;
+  TextEditingController textAreaControllername = TextEditingController();
+  TextEditingController textAreaControllerjob = TextEditingController();
+  TextEditingController textAreaControllereducation = TextEditingController();
   //PlatformFile? _selectedFile8;
+  final keyform = GlobalKey<FormState>();
 
   bool _isFormValid = false;
 
@@ -45,6 +49,44 @@ class _AppFormBodyState extends State<AppFormBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Form(
+                  key: keyform,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        TextArea(
+                            controller: textAreaControllername,
+                            text: "ادخل اسمك "),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextArea(
+                            controller: textAreaControllerjob,
+                            text: "ادخل الوظيفه"),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextArea(
+                            controller: textAreaControllereducation,
+                            text: "ادخل المستوى التعليمي"),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 10,
+                ),
                 ContainerContent(
                   onFileSelected: _handleFileUpload1,
                   onValidationChanged: _validateForm,
@@ -116,7 +158,14 @@ class _AppFormBodyState extends State<AppFormBody> {
                     } else {
                       //todo navigat for alert that wait for aprrov
                       context.loaderOverlay.hide();
-                      print("yess");
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) => SuccsesAlert(
+                          message:
+                              "تم تسجيل طلبك بنجاح برجاء الانتظار حتى موعدد اعلان المرشحين",
+                        ),
+                      );
                     }
                   },
                   child: Button(
@@ -200,12 +249,20 @@ class _AppFormBodyState extends State<AppFormBody> {
   }
 
   Future<void> _submitForm() async {
-    if (_isFormValid) {
+    if (_isFormValid && keyform.currentState!.validate()) {
       context.read<FormCandidateCubit>().addCandidate(
-            name: "test1 candidate",
-            job: "doc",
-            education: "no",
+            name: textAreaControllername.text,
+            job: textAreaControllerjob.text,
+            education: textAreaControllereducation.text,
           );
+      // showDialog(
+      //   barrierDismissible: false,
+      //   context: context,
+      //   builder: (context) => SuccsesAlert(
+      //     message:
+      //         "تم تسجيل طلبك بنجاح برجاء الانتظار حتى موعدد اعلان المرشحين",
+      //   ),
+      // );
       // List<MultipartFile> c = await uploadImageToApi(
       //     [_selectedFile1!, _selectedFile2!, _selectedFile3!]);
       // print("===========");
