@@ -4,29 +4,28 @@ import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/generated/l10n.dart';
 
 class CustomPassowrdText extends StatefulWidget {
-  const CustomPassowrdText({super.key});
-
+  final String hintText;
+  final String? Function(String?) validator;
+  final TextEditingController controller;
+  const CustomPassowrdText(
+      {super.key,
+      required this.hintText,
+      required this.validator,
+      required this.controller});
   @override
   State<CustomPassowrdText> createState() => _CustomPassowrdTextState();
 }
 
 class _CustomPassowrdTextState extends State<CustomPassowrdText> {
   bool _obscureText = true;
-  TextEditingController ConfirmPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: TextFormField(
-        controller: ConfirmPassword,
-        validator: (value) {
-          if (ConfirmPassword.text.isEmpty) {
-            return S.of(context).passord_error;
-          } else if (ConfirmPassword.text != currentPassword) {
-            return "كلمه السر غير صحيحه";
-          }
-        },
+        controller: widget.controller,
+        validator: widget.validator,
         obscureText: _obscureText,
         decoration: InputDecoration(
           contentPadding:

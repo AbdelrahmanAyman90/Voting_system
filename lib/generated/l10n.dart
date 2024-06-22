@@ -1190,6 +1190,16 @@ class S {
     );
   }
 
+  /// `should choose candidate`
+  String get error_to_should_choose_candatae_in_voting_screen {
+    return Intl.message(
+      'should choose candidate',
+      name: 'error_to_should_choose_candatae_in_voting_screen',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum`
   String get ans_ques1_in_help {
     return Intl.message(

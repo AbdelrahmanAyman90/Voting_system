@@ -34,10 +34,7 @@ class CustomHelloText extends StatelessWidget {
             );
           },
           icon: Icon(Icons.notifications_outlined,
-              size: 24,
-              color: isCandidate(idUser)
-                  ? Colors.amber
-                  : AppColors.secondaryTextColor),
+              size: 24, color: AppColors.secondaryTextColor),
         ),
       ],
     );

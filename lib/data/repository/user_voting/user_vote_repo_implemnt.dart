@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 import 'package:voting/data/repository/user_voting/user_vote_repo.dart';
@@ -14,7 +15,7 @@ class UserVotingRepoImplemntion extends UserVotingRepo {
   Future<Either<Failure, String>> userVoting(
       {required String candadateId, required String confirmPassword}) async {
     try {
-      String endpoint = "election";
+      String endpoint = EndPoints.election;
       //header
       Map<String, dynamic> headerRequest = {
         'authorization': "bearer ${token}",

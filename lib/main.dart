@@ -10,6 +10,7 @@ import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart
 import 'package:voting/data/repository/news/news_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
@@ -17,9 +18,7 @@ import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cu
 
 Future<void> main() async {
   // debugInvertOversizedImages = true; //يعكس الصوره الي حجمها كبير
-  WidgetsFlutterBinding
-      .ensureInitialized(); //مش هتنفذ حاجه غير لما الي تحتك يكمل الاول
-
+  WidgetsFlutterBinding.ensureInitialized();
   await CashNetwork.cashInitialization(); //اول ما يفتح  التطبيق هيستدعيها علطول
 
   runApp(DevicePreview(
@@ -56,19 +55,20 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<LayoutCubit, LayoutState>(
           builder: (context, state) {
             return MaterialApp(
-              builder: DevicePreview.appBuilder,
-              debugShowCheckedModeBanner: false,
-              locale: Locale(isEnglish() ? 'en' : 'ar'),
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-              home: const HomeScreen(),
-            );
+                builder: DevicePreview.appBuilder,
+                debugShowCheckedModeBanner: false,
+                locale: Locale(isEnglish() ? 'en' : 'ar'),
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+                home: RegisterScreen()
+                // const HomeScreen(),
+                );
           },
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shareWidget/global_widget.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Candidate_profile.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
@@ -30,39 +31,53 @@ class CandidateList extends StatefulWidget {
 class _CandidateListState extends State<CandidateList> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          child: Container(
-            width: 120,
-            height: 70,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(widget.img),
-                fit: BoxFit.fill,
-              ),
+    return GestureDetector(
+      onTap: () async {
+        await context
+            .read<GetCandidateInfoCubit>()
+            .getSingleCandidateinfo(idCandidate: widget.candidateId);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => Candidates(
+              candidateId: widget.UserCandate,
+              candidateName: widget.name,
             ),
           ),
-          //!تعديلات السويدي
-          // child: ClipRRect(
-          //   borderRadius: BorderRadius.circular(8),
-          //   child: CachedNetworkImage(
-          //     imageUrl: widget.img,
-          //     fit: BoxFit.fill,
-          //     width: 130,
-          //     height: 120,
-          //     errorWidget: (context, url, error) =>
-          //         Icon(Icons.error), // Show error icon
-          //   ),
-          // ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: isEnglish() ? 0 : 10,
-            ),
+        );
+      },
+      child: Row(
+        children: [
+          //! image
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: imageContainer(widget.img),
+            // Container(
+            //   width: 120,
+            //   height: 70,
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     image: DecorationImage(
+            //       image: CachedNetworkImageProvider(widget.img),
+            //       fit: BoxFit.fill,
+            //     ),
+            //   ),
+            // ),
+            //!تعديلات السويدي
+            // child: ClipRRect(
+            //   borderRadius: BorderRadius.circular(8),
+            //   child: CachedNetworkImage(
+            //     imageUrl: widget.img,
+            //     fit: BoxFit.fill,
+            //     width: 130,
+            //     height: 120,
+            //     errorWidget: (context, url, error) =>
+            //         Icon(Icons.error), // Show error icon
+            //   ),
+            // ),
+          ),
+          Expanded(
+            //! name and job
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -82,49 +97,23 @@ class _CandidateListState extends State<CandidateList> {
                       12,
                       AppColors.secondaryTextColor),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: isEnglish() ? 0 : 10),
-                  child: SizedBox(
-                    //height: 30,
-                    child: Align(
-                      alignment: isEnglish()
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      //todo هنحول انه يدوس على كله
-                      child: TextButton(
-                        onPressed: () async {
-                          await context
-                              .read<GetCandidateInfoCubit>()
-                              .getSingleCandidateinfo(
-                                  idCandidate: widget.candidateId);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => Candidates(
-                                candidateId: widget.UserCandate,
-                                candidateName: widget.name,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          S.of(context).read_more,
-                          style: AppFonts.boldText(
-                              context, 12, AppColors.secondaryTextColor),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
-        )
-      ],
+//!arrow
+          const Icon(
+            //todo english here
+            Icons.keyboard_arrow_left,
+            size: 30,
+            color: Color(0xFF008753),
+          ),
+        ],
+      ),
     );
   }
 }
 
+//! profile here
 class PersonalInfo extends StatelessWidget {
   final String? title;
   final String? desc;
@@ -156,6 +145,7 @@ class PersonalInfo extends StatelessWidget {
     );
   }
 }
+//! profile here
 
 class BioAndGoals extends StatelessWidget {
   final String title;
@@ -195,6 +185,7 @@ class BioAndGoals extends StatelessWidget {
     );
   }
 }
+//! profile here
 
 class AdditinalLink extends StatelessWidget {
   final String title;

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 
@@ -37,7 +38,8 @@ class FormCandidateRepoImplemntion extends FormCandidateRepo {
       multipartFiles.add(multipartFile);
     }
     try {
-      String endpoint = "candidate";
+      //endpoint
+      String endpoint = EndPoints.Candidate;
       //header
       Map<String, dynamic> headerRequest = {
         'authorization': "bearer ${token}",
@@ -47,9 +49,9 @@ class FormCandidateRepoImplemntion extends FormCandidateRepo {
       FormData formData = FormData.fromMap({
         'images': multipartFiles,
       });
-      formData.fields.add(MapEntry('name', 'test3 candidate'));
-      formData.fields.add(MapEntry('job', 'swimmer'));
-      formData.fields.add(MapEntry('education', 'tech'));
+      formData.fields.add(MapEntry('name', name));
+      formData.fields.add(MapEntry('job', job));
+      formData.fields.add(MapEntry('education', education));
 
 //do requst
       var data = await apiServes.post(

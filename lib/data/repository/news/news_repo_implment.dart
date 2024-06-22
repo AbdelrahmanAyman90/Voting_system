@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 import 'package:voting/data/models/news_model/news_model.dart';
@@ -16,7 +17,7 @@ class NewsRepoImplemnt extends NewsRepo {
   @override
   Future<Either<Failure, List<NewsModel>>> fetchNews() async {
     try {
-      String endpoint = "news";
+      String endpoint = EndPoints.news;
 
 //do requst
       var data = await apiServes.get(endPoint: endpoint);

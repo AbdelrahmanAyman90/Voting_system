@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 import 'package:voting/data/models/qustion_model/qustion_model.dart';
@@ -13,7 +14,7 @@ class QustionRepoImplemntion extends QustionRepo {
   ApiServes apiServes;
   Future<Either<Failure, List<QustionModel>>> fetchQustion() async {
     try {
-      String endpoint = "question";
+      String endpoint = EndPoints.question;
 
 //do requst
       var data = await apiServes.get(endPoint: endpoint);

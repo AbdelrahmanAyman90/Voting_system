@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("الغه الانجليزيه"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("ادخل كلمة المرور"),
+        "error_to_should_choose_candatae_in_voting_screen":
+            MessageLookupByLibrary.simpleMessage("يجب اختيار مرشح"),
         "event_word": MessageLookupByLibrary.simpleMessage("الاحداث"),
         "full_name_personal":
             MessageLookupByLibrary.simpleMessage("محمد احمد مصطفى عبد الله"),

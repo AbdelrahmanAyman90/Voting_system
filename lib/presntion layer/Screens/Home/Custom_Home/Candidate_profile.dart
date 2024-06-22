@@ -42,6 +42,7 @@ class _CandidatesState extends State<Candidates> {
         ),
         centerTitle: true,
       ),
+      //! check if user is that the candidate
       body: CustomCandidatesProfile(
         isRealCandidate: widget.candidateId == idUser ? true : false,
         isAddCampiagn: isAddCampiagnValue,

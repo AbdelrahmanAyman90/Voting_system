@@ -29,14 +29,6 @@ class _VotingBodyState extends State<VotingBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   S.of(context).presidential_elections,
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w600,
-                //     fontSize: 18,
-                //     color: AppColors.mainColor,
-                //   ),
-                // ),
                 const SizedBox(height: 12),
                 //hint
                 Text(
@@ -74,6 +66,7 @@ widget function
     });
   }
 
+//! build candidate contaner
   Widget _buildCandidates(
     BuildContext context,
   ) {
@@ -111,6 +104,7 @@ widget function
     );
   }
 
+//! build Confirm voting button
   Widget _buildVotingButton(BuildContext context) {
     return Positioned(
       bottom: 5,
@@ -120,7 +114,11 @@ widget function
         child: ButtonWidget(
           onPressed: () {
             _selectedIndex == -1
-                ? MyAppStuts.showSnackBar(context, "يجب اخيار مرشح")
+                ? MyAppStuts.showSnackBar(
+                    context,
+                    S
+                        .of(context)
+                        .error_to_should_choose_candatae_in_voting_screen)
                 : Navigator.push(
                     context,
                     MaterialPageRoute(

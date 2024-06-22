@@ -19,6 +19,8 @@ class ConfirmVotingBody extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   ConfirmVotingBody({super.key, required this.candataeDataSelected});
   CandidateModel candataeDataSelected;
+  TextEditingController ConfirmPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -63,7 +65,17 @@ wedgit fun
         const SizedBox(height: 18),
         Form(
           key: _formKey,
-          child: const CustomPassowrdText(),
+          child: CustomPassowrdText(
+            controller: ConfirmPassword,
+            hintText: 'ادخل كلمه المرور',
+            validator: (value) {
+              if (ConfirmPassword.text.isEmpty) {
+                return S.of(context).passord_error;
+              } else if (ConfirmPassword.text != currentPassword) {
+                return "كلمه السر غير صحيحه";
+              }
+            },
+          ),
         ),
       ],
     );
@@ -75,7 +87,6 @@ wedgit fun
       listener: (context, state) {
         if (state is UserVoteSuccsess) {
           context.loaderOverlay.hide();
-          isVoted = true;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

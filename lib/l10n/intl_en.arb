@@ -113,5 +113,6 @@
     "change_password": "Change Password",
     "help": "Help",
     "change_test": "teeest",
+    "error_to_should_choose_candatae_in_voting_screen": "should choose candidate",
     "ans_ques1_in_help": "lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum"
 }

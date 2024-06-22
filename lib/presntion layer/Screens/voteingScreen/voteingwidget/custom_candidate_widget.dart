@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shareWidget/global_widget.dart';
 
 class ShowCandidate extends StatelessWidget {
   final bool isSelected; // Property to indicate selection status
@@ -36,17 +37,18 @@ class ShowCandidate extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         child: Row(
           children: [
-            Container(
-              width: 120,
-              height: 70,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(imagePath + image),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
+            imageContainer(imagePath + image),
+            // Container(
+            //   width: 120,
+            //   height: 70,
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     image: DecorationImage(
+            //       image: CachedNetworkImageProvider(imagePath + image),
+            //       fit: BoxFit.fill,
+            //     ),
+            //   ),
+            // ),
             //!تعديلات السويدي المتاخره
             // CachedNetworkImage(
             //   imageUrl: imagePath + image,

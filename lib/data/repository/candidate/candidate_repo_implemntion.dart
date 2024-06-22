@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
@@ -18,7 +19,7 @@ class CandidateRepoImplemnt extends candidateRepo {
   @override
   Future<Either<Failure, List<CandidateModel>>> fetchAllCandidate() async {
     try {
-      String endpoint = "candidate/approved";
+      String endpoint = EndPoints.candidateApproved;
 //header
       Map<String, dynamic> headerRequest = {
         'authorization': "bearer ${token}",
@@ -31,9 +32,9 @@ class CandidateRepoImplemnt extends candidateRepo {
       for (var i in data['data']['candidates']) {
         candidateList.add(CandidateModel.fromJson(i));
       }
-      for (var i in candidateList) {
-        idApprovCandidate.add(i.user!);
-      }
+      // for (var i in candidateList) {
+      //   idApprovCandidate.add(i.user!);
+      // }
 //cheack
       log(candidateList.length.toString());
       return right(candidateList);
@@ -52,7 +53,7 @@ class CandidateRepoImplemnt extends candidateRepo {
   Future<Either<Failure, CandidateCampaignModel>> fetchsingelCandidate(
       String id) async {
     try {
-      String endpoint = "candidate/approved/$id";
+      String endpoint = "${EndPoints.SingleCandidateApproved}/$id";
 //header
       Map<String, dynamic> headerRequest = {
         'authorization': "bearer ${token}",

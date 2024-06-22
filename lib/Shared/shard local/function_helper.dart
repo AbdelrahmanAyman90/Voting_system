@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
@@ -11,10 +13,6 @@ bool isEnglish() {
   }
 }
 
-bool isCandidate(String idUser) {
-  return idApprovCandidate.contains(idUser);
-}
-
 bool isAddCampiagnValue = false;
 String convertEnglishNumberToArabicNumber(String input) {
   const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -26,6 +24,29 @@ String convertEnglishNumberToArabicNumber(String input) {
 
   return input;
 }
+
+// Method to convert String to PlatformFile
+Future<PlatformFile> convertToPlatformFile(String filePath) async {
+  File file = File(filePath);
+
+  // Read file bytes
+  final bytes = await file.readAsBytes();
+
+  // Create PlatformFile instance
+  PlatformFile platformFile = PlatformFile(
+    name: file.uri.pathSegments.last, // Get file name
+    path: filePath,
+    bytes: bytes,
+    size: bytes.length,
+  );
+
+  return platformFile;
+}
+// bool isCandidate(String idUser) {
+//   return idApprovCandidate.contains(idUser);
+// }
+
+
 
 // //return list of MultipartFile that can upload to api
 // Future<List<MultipartFile>> uploadImageToApi(List<PlatformFile?> fiels) async {

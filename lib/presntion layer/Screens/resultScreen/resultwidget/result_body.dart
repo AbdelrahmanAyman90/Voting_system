@@ -49,6 +49,7 @@ class _RusltBodyState extends State<RusltBody> {
 
   @override
   void dispose() {
+    log("websocket is cancel");
     channel?.sink.close();
     super.dispose();
   }
