@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Profile/Custom_Profile/Shard_Profile.dart';
 import 'package:voting/presntion%20layer/Screens/Profile/Custom_Profile/custom_container_settimgs.dart';
 import 'package:voting/presntion%20layer/Screens/Profile/Custom_Profile/custom_profile_header.dart';
+import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class ProfileMobileLayoutBody extends StatefulWidget {
   const ProfileMobileLayoutBody({super.key});
@@ -16,14 +19,19 @@ class ProfileMobileLayoutBody extends StatefulWidget {
 class _ProfileMobileLayoutBodyState extends State<ProfileMobileLayoutBody> {
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<UserAuthorizationCubit>(context);
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              const Padding(
-                  padding: EdgeInsets.all(20), child: CustomProfileHeader()),
+              Padding(
+                  padding: EdgeInsets.all(20),
+                  child: CustomProfileHeader(
+                    name: cubit.userData!.data!.user!.name!,
+                  )),
               isEnglish()
                   ? const SizedBox(
                       height: 10,
@@ -35,13 +43,13 @@ class _ProfileMobileLayoutBodyState extends State<ProfileMobileLayoutBody> {
                 title: S.of(context).personal_details,
                 icon1: Icons.perm_identity_rounded,
                 //todo api
-                text1: S.of(context).full_name_personal,
+                text1: cubit.userData!.data!.user!.name!,
                 icon2: Icons.assignment_ind_outlined,
                 //todo api
-                text2: S.of(context).id,
+                text2: cubit.userData!.data!.user!.nationalId!,
                 icon3: Icons.calendar_month_outlined,
                 //todo api
-                text3: S.of(context).date,
+                text3: cubit.userData!.data!.user!.address!,
               ),
               const SizedBox(
                 height: 16,

@@ -39,6 +39,25 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
     userData = data;
   }
 
+  userLogin({
+    required String nationalId,
+    required String password,
+  }) async {
+    emit(UserAuthorizationRegisterLooding());
+    try {
+      var result = await userRepoRegister.loginUser(
+          nationalId: nationalId, password: password);
+      result.fold((l) {
+        emit(UserAuthorizationRegisterFail(l.errorMassage));
+      }, (r) {
+        setUserData(r);
+        emit(UserAuthorizationRegisterSucsses());
+      });
+    } on Exception catch (e) {
+      emit(UserAuthorizationRegisterFail(e.toString()));
+    }
+  }
+
   @override
   void onChange(Change<UserAuthorizationState> change) {
     print(change);

@@ -30,7 +30,7 @@ class _CustomPassowrdTextState extends State<CustomPassowrdText> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          hintText: S.of(context).password,
+          hintText: widget.hintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(width: 1, color: AppColors.mainColor),

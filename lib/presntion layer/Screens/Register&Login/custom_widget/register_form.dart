@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
@@ -48,14 +49,14 @@ class _RegisterFormState extends State<RegisterForm> {
     });
   }
 
-  String? validatePasswordMatch(String password, String confirmPassword) {
-    if (confirmPassword.isEmpty) {
-      return 'Confirm password is required.';
-    } else if (password != confirmPassword) {
-      return 'Passwords do not match.';
-    }
-    return null; // Passwords match
-  }
+  // String? validatePasswordMatch(String password, String confirmPassword) {
+  //   if (confirmPassword.isEmpty) {
+  //     return 'Confirm password is required.';
+  //   } else if (password != confirmPassword) {
+  //     return 'Passwords do not match.';
+  //   }
+  //   return null; // Passwords match
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class _RegisterFormState extends State<RegisterForm> {
               height: 10,
             ),
             CustomPassowrdText(
-              hintText: S.of(context).password,
+              hintText: "password",
               controller: password,
               validator: (value) {
                 if (password.text.isEmpty) {
@@ -101,8 +102,17 @@ class _RegisterFormState extends State<RegisterForm> {
             CustomPassowrdText(
               hintText: "Confirm password",
               controller: confirmPasswordController,
-              validator: (value) =>
-                  validatePasswordMatch(password.text, value!),
+              validator: (value) {
+                if (password.text.isNotEmpty) {
+                  if (value != password.text) {
+                    return "not matches password";
+                  } else {
+                    return null;
+                  }
+                } else {
+                  return "Confirm password is required";
+                }
+              },
             ),
             const SizedBox(
               height: 70,

@@ -17,19 +17,14 @@ class TakePhoto extends StatelessWidget {
   PlatformFile? selectedNationalIdImage;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserAuthorizationCubit(
-          UserAuthorizationepoImplemntion(
-              apiServes: ApiServes(dio: creatdio()))),
-      child: SafeArea(
-          child: Scaffold(
-        body: SingleChildScrollView(
-            child: TakePhotoBody(
-          nationalId: nationalId,
-          password: password,
-          selectedNationalIdImage: selectedNationalIdImage,
-        )),
+    return SafeArea(
+        child: Scaffold(
+      body: SingleChildScrollView(
+          child: TakePhotoBody(
+        nationalId: nationalId,
+        password: password,
+        selectedNationalIdImage: selectedNationalIdImage,
       )),
-    );
+    ));
   }
 }

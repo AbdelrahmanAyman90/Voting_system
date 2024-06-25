@@ -13,3 +13,12 @@ final class UserAuthorizationRegisterFail extends UserAuthorizationState {
   final String errorMassage;
   UserAuthorizationRegisterFail(this.errorMassage);
 }
+
+final class UserAuthorizationLoginLooding extends UserAuthorizationState {}
+
+final class UserAuthorizationLoginSucsses extends UserAuthorizationState {}
+
+final class UserAuthorizationLoginFail extends UserAuthorizationState {
+  final String errorMassage;
+  UserAuthorizationLoginFail(this.errorMassage);
+}

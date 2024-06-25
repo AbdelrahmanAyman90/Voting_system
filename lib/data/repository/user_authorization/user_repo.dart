@@ -10,4 +10,8 @@ abstract class UserAuthorizationRepo {
     required String nationalId,
     required String password,
   });
+  Future<Either<Failure, UserModel>> loginUser({
+    required String nationalId,
+    required String password,
+  });
 }
