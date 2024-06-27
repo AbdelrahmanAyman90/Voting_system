@@ -36,6 +36,7 @@ class CandidateRepoImplemnt extends candidateRepo {
       //   idApprovCandidate.add(i.user!);
       // }
 //cheack
+      log("ggggggggggg");
       log(candidateList.length.toString());
       return right(candidateList);
     } on Exception catch (e) {
@@ -66,10 +67,12 @@ class CandidateRepoImplemnt extends candidateRepo {
       CandidateCampaignModel candidateInfo =
           CandidateCampaignModel.fromJson(data);
 //cheack
-
-      candidateInfo.data!.campaign == null
-          ? isAddCampiagnValue = false
-          : isAddCampiagnValue = true;
+      if (candidateInfo.data?.campaign != null) {
+        log("ليست نل");
+        log(candidateInfo.data!.campaign.toString());
+      } else {
+        log("نل");
+      }
       return right(candidateInfo);
     } on Exception catch (e) {
       if (e is DioException) {

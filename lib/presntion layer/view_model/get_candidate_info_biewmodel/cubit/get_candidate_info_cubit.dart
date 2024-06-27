@@ -10,6 +10,7 @@ part 'get_candidate_info_state.dart';
 class GetCandidateInfoCubit extends Cubit<GetCandidateInfoState> {
   GetCandidateInfoCubit(this.candidateRepo) : super(GetCandidateInfoInitial());
   CandidateRepoImplemnt candidateRepo;
+  bool? isAddCam;
   getSingleCandidateinfo({required String idCandidate}) async {
     emit(GetSingleCandidateLooding());
     try {
@@ -17,11 +18,22 @@ class GetCandidateInfoCubit extends Cubit<GetCandidateInfoState> {
       result.fold((l) {
         emit(GetSingleCandidateFail(l.errorMassage));
       }, (r) async {
+        sortIsAddCampOrNot(r);
         emit(GetSingleCandidateSuccess(r));
       });
     } on Exception catch (e) {
       emit(GetSingleCandidateFail(e.toString()));
     }
+  }
+
+  sortIsAddCampOrNot(camp) {
+    if (camp.data?.campaign != null) {
+      isAddCam = true;
+    } else {
+      isAddCam = false;
+    }
+    log("{{{{{{{{{}}}}}}}}}");
+    log(isAddCam.toString());
   }
 
   @override

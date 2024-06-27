@@ -1,14 +1,17 @@
 class CandidateCampaignModel {
+  String? status;
   Data? data;
 
-  CandidateCampaignModel({this.data});
+  CandidateCampaignModel({this.status, this.data});
 
   CandidateCampaignModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
     data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -50,9 +53,16 @@ class Candidate {
   String? education;
   String? job;
   String? image;
+  int? age;
 
   Candidate(
-      {this.sId, this.user, this.name, this.education, this.job, this.image});
+      {this.sId,
+      this.user,
+      this.name,
+      this.education,
+      this.job,
+      this.image,
+      this.age});
 
   Candidate.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -61,6 +71,7 @@ class Candidate {
     education = json['education'];
     job = json['job'];
     image = json['image'];
+    age = json['age'];
   }
 
   Map<String, dynamic> toJson() {
@@ -71,6 +82,7 @@ class Candidate {
     data['education'] = this.education;
     data['job'] = this.job;
     data['image'] = this.image;
+    data['age'] = this.age;
     return data;
   }
 }
@@ -111,7 +123,6 @@ class Campaign {
     data['bio'] = this.bio;
     data['goals'] = this.goals;
     data['__v'] = this.iV;
-    data['link'] = this.link;
     return data;
   }
 }

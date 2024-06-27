@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -13,34 +14,38 @@ import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_vot
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
 class Candidates extends StatefulWidget {
-  const Candidates(
-      {super.key,
-      required this.candidateUserId,
-      required this.candidateName,
-      required this.selectCandidate,
-      required this.cndidateSId});
+  const Candidates({
+    super.key,
+    required this.candidateUserId,
+    required this.candidateName,
+    required this.selectCandidate,
+    required this.cndidateSId,
+  });
+
   final String candidateUserId;
   final String candidateName;
   final String cndidateSId;
   final int selectCandidate;
+
   @override
   State<Candidates> createState() => _CandidatesState();
 }
 
 class _CandidatesState extends State<Candidates> {
-  // late VideoPlayerController _controller;
-  // late Future<void> _initializeVideoPlayerFuture;
+  bool _isLoading = true;
+
   @override
   void initState() {
-    _fetchCandidateInfo();
     super.initState();
-  }
 
-//! do requst
-  Future<void> _fetchCandidateInfo() async {
-    await context
-        .read<GetCandidateInfoCubit>()
-        .getSingleCandidateinfo(idCandidate: widget.cndidateSId);
+    Timer(Duration(seconds: 2), () async {
+      await context
+          .read<GetCandidateInfoCubit>()
+          .getSingleCandidateinfo(idCandidate: widget.cndidateSId);
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   @override
@@ -96,11 +101,17 @@ class _CandidatesState extends State<Candidates> {
         ),
         centerTitle: true,
       ),
-      //! check if user is that the candidate
-      body: CustomCandidatesProfile(
-        isRealCandidate: widget.candidateUserId == idUser ? true : false,
-        isAddCampiagn: isAddCampiagnValue,
-      ),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                color: AppColors.mainColor,
+              ),
+            )
+          : CustomCandidatesProfile(
+              isRealCandidate: widget.candidateUserId == idUser,
+              isAddCampiagn:
+                  context.read<GetCandidateInfoCubit>().isAddCam ?? false,
+            ),
     );
   }
 }
