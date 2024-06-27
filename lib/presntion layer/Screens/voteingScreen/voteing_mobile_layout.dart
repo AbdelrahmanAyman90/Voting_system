@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
+import 'package:voting/presntion%20layer/Screens/not_start_screen/not_start_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/voting_body.dart';
 
 //! todo more refactor
@@ -19,7 +21,9 @@ class _VoteingMobileLayoutBodyState extends State<VoteingMobileLayoutBody> {
     return Scaffold(
       appBar: _buildAppBar(context),
       //isvoted
-      body: const VotingBody(),
+      body: eventCases("elections") == "not start"
+          ? const NotStart()
+          : const VotingBody(),
     );
   }
 

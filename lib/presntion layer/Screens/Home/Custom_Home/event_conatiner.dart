@@ -9,12 +9,15 @@ class EventContainer extends StatefulWidget {
   final String img;
   final String title;
   final String time;
-  const EventContainer({
-    super.key,
-    required this.img,
-    required this.title,
-    required this.time,
-  });
+  final String cases;
+  final void Function() onPressed;
+  const EventContainer(
+      {super.key,
+      required this.onPressed,
+      required this.img,
+      required this.title,
+      required this.time,
+      required this.cases});
 
   @override
   State<EventContainer> createState() => _EventContainerState();
@@ -27,12 +30,6 @@ class _EventContainerState extends State<EventContainer> {
       children: [
         Row(
           children: [
-            // SvgPicture.asset(widget.img,
-            //     width: MediaQuery.of(context).size.width * 50 / 375,
-            //     height: MediaQuery.of(context).size.height * 50 / 812),
-            // const SizedBox(
-            //   width: 10,
-            // ),
             Image(
                 image: AssetImage(widget.img),
                 width: MediaQuery.of(context).size.width * 40 / 375,
@@ -61,71 +58,71 @@ class _EventContainerState extends State<EventContainer> {
         ),
         //const Spacer(),
         const SizedBox(
-          height: 20,
+          height: 5,
         ),
 //////////  Second Row inside Event container
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      color: AppColors.secondaryTextColor,
-                      size: 16,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      widget.time,
-                      style: AppFonts.regularText(
-                          context, 12, AppColors.secondaryTextColor),
+        Padding(
+          padding: const EdgeInsets.only(right: 18),
+          child: Row(
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.access_time,
+                    color: AppColors.secondaryTextColor,
+                    size: 18,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  widget.cases == "end"
+                      ? Center(
+                          child: Text(
+                            "انتهت الفتره",
+                            style:
+                                AppFonts.regularText(context, 18, Colors.red),
+                          ),
+                        )
+                      : widget.cases == "not start"
+                          ? Text(
+                              "لم تبدا بعد",
+                              style: AppFonts.regularText(
+                                  context, 18, Colors.amber),
+                            )
+                          : Text(
+                              "ستنتهي بعد ${widget.time}",
+                              style: AppFonts.regularText(
+                                  context, 18, AppColors.secondaryTextColor),
+                            )
+                ],
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              const Spacer(),
+              widget.cases == "end"
+                  ? SizedBox(
+                      height: 36,
                     )
-                  ],
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.assignment_turned_in_outlined,
-                      color: AppColors.secondaryTextColor,
-                      size: 16,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      S.of(context).all_voter_number,
-                      style: AppFonts.regularText(
-                          context, 12, AppColors.secondaryTextColor),
+                  : Button(
+                      text: S.of(context).Apply,
+                      color: widget.cases == "not start"
+                          ? Colors.white
+                          : AppColors.mainColor,
+                      fontsize: 16,
+                      width: 102,
+                      height: 32,
+                      onPressed: widget.cases == "not start"
+                          ? () {
+                              null;
+                            }
+                          : widget.onPressed,
+                      textcolor: widget.cases == "not start"
+                          ? AppColors.mainColor
+                          : Colors.white,
                     )
-                  ],
-                ),
-              ],
-            ),
-            const Spacer(),
-            Button(
-                text: S.of(context).Apply,
-                color: Colors.white,
-                fontsize: 12,
-                width: 102,
-                height: 32,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) =>
-                          const ApplicationFormScreen(),
-                    ),
-                  );
-                },
-                textcolor: AppColors.mainColor)
-          ],
+            ],
+          ),
         ),
       ],
     );

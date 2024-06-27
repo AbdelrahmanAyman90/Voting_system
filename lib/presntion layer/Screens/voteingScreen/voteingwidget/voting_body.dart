@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
@@ -47,7 +48,9 @@ class _VotingBodyState extends State<VotingBody> {
             ),
           ),
         ),
-        _buildVotingButton(context),
+        eventCases("elections") == "now"
+            ? _buildVotingButton(context)
+            : SizedBox()
       ],
     );
   }

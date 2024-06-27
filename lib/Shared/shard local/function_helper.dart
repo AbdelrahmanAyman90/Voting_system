@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -46,17 +47,48 @@ Future<PlatformFile> convertToPlatformFile(String filePath) async {
 //   return idApprovCandidate.contains(idUser);
 // }
 
-
-
-// //return list of MultipartFile that can upload to api
-// Future<List<MultipartFile>> uploadImageToApi(List<PlatformFile?> fiels) async {
-//   List<MultipartFile> fileList = [];
-//   for (var i in fiels) {
-//     MultipartFile file = await MultipartFile.fromFile(
-//       i!.path!,
-//       filename: i.name,
-//     );
-//     fileList.add((file));
-//   }
-//   return fileList;
-// }
+String? eventCases(String event) {
+  DateTime now = DateTime.now();
+  //event nomination
+  DateTime startTime = DateTime(2024, 6, 25, 5, 0); // June 26, 2024 at 5:00 AM
+  DateTime endTime = DateTime(2024, 6, 25, 18, 0); //June 26, 2024 at 6:00 PM
+//event candidates
+  DateTime startTimecandidates =
+      DateTime(2024, 6, 27, 5, 0); // June 26, 2024 at 5:00 AM
+  DateTime endTimecandidates =
+      DateTime(2024, 6, 27, 18, 0); //June 26, 2024 at 6:00 PM
+// event elections
+  DateTime startTimeelections =
+      DateTime(2024, 6, 28, 5, 0); // June 26, 2024 at 5:00 AM
+  DateTime endTimeelections = DateTime(2024, 6, 28, 18, 0);
+  log(now.toString()); //June 26, 2024 at 6:00 PM
+  if (event == "nomination") {
+    if (now.isAfter(startTime) && now.isBefore(endTime)) {
+      return "now";
+    } else if (now.isBefore(startTime)) {
+      return "not start";
+    } else {
+      return "end";
+    }
+  } else if (event == "candidates") {
+    if (now.isAfter(startTimecandidates) && now.isBefore(endTimecandidates)) {
+      return "now";
+    } else if (now.isBefore(startTimecandidates)) {
+      return "not start";
+    } else {
+      return "end";
+    }
+  } else if (event == "elections") {
+    log("خش");
+    if (now.isAfter(startTimeelections) && now.isBefore(endTimeelections)) {
+      return "now";
+    } else if (now.isBefore(startTimeelections)) {
+      return "not start";
+    } else {
+      return "end";
+    }
+  } else {
+    log("خخخخ");
+    return null;
+  }
+}

@@ -7,15 +7,22 @@ import 'package:voting/presntion%20layer/Screens/resultScreen/result_mobile_layo
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteing_mobile_layout.dart';
 
 class BottomNavgiationBarWidget extends StatefulWidget {
-  const BottomNavgiationBarWidget({super.key});
-
+  const BottomNavgiationBarWidget({super.key, required this.select});
+  final int? select;
   @override
   State<BottomNavgiationBarWidget> createState() =>
       _BottomNavgiationBarWidgetState();
 }
 
 class _BottomNavgiationBarWidgetState extends State<BottomNavgiationBarWidget> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.select ?? 0;
+  }
+
   static final List<Widget> itemsClicked = <Widget>[
     const HomeView(),
     const VoteingMobileLayoutBody(),

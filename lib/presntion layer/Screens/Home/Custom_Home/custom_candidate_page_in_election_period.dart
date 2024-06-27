@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
@@ -31,9 +33,10 @@ class CustomCandidatePageInElection extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: CandidateList(
                         img: imagePath + state.allCandidate[index].image!,
+                        selectCandidate: index,
                         name: state.allCandidate[index].name!,
                         bio: state.allCandidate[index].job!,
-                        candidateId: state.allCandidate[index].sId!,
+                        candidateSId: state.allCandidate[index].sId!,
                         UserCandate: state.allCandidate[index].user!,
                       )),
                 ),

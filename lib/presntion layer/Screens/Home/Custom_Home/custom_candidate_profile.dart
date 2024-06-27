@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/upload_form.dart';
@@ -88,27 +89,29 @@ class CustomCandidatesProfile extends StatelessWidget {
                                 : SizedBox(),
                           ],
                         )
-                      : buildImage(isAddCampiagn, isRealCandidate) ==
-                              "show data"
-                          ? ButtonWidget(
-                              word: "اضف الحمله",
-                              color: AppColors.mainColor,
-                              textcolor: Colors.white,
-                              //!Add campiagn
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddCampaignScreen()),
-                                );
-                              },
-                            )
-                          : Center(
-                              child: Text(
-                              "لم يضف الحمله حتى الان",
-                              style: TextStyle(fontSize: 28),
-                            )),
+                      : eventCases("candidates") == "now"
+                          ? buildImage(isAddCampiagn, isRealCandidate) ==
+                                  "show data"
+                              ? ButtonWidget(
+                                  word: "اضف الحمله",
+                                  color: AppColors.mainColor,
+                                  textcolor: Colors.white,
+                                  //!Add campiagn
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddCampaignScreen()),
+                                    );
+                                  },
+                                )
+                              : const Center(
+                                  child: Text(
+                                  "لم يضف الحمله حتى الان",
+                                  style: TextStyle(fontSize: 28),
+                                ))
+                          : SizedBox(),
                 ],
               ),
             ),

@@ -14,15 +14,18 @@ class CandidateList extends StatefulWidget {
   final String img;
   final String name;
   final String bio;
-  final String candidateId;
+  final String candidateSId;
   final String UserCandate;
+  final int selectCandidate;
+
   const CandidateList(
       {super.key,
+      required this.selectCandidate,
       required this.UserCandate,
       required this.img,
       required this.bio,
       required this.name,
-      required this.candidateId});
+      required this.candidateSId});
 
   @override
   State<CandidateList> createState() => _CandidateListState();
@@ -33,15 +36,14 @@ class _CandidateListState extends State<CandidateList> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await context
-            .read<GetCandidateInfoCubit>()
-            .getSingleCandidateinfo(idCandidate: widget.candidateId);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) => Candidates(
-              candidateId: widget.UserCandate,
+              cndidateSId: widget.candidateSId,
+              candidateUserId: widget.UserCandate,
               candidateName: widget.name,
+              selectCandidate: widget.selectCandidate,
             ),
           ),
         );
