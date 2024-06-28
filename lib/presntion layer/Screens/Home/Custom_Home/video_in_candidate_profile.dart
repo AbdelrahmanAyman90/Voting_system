@@ -17,6 +17,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     super.initState();
     flickManager = FlickManager(
+      autoPlay: false,
       videoPlayerController: VideoPlayerController.networkUrl(
         Uri.parse(imagePath + widget.pathViedio),
       ),

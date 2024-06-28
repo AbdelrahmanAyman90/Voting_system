@@ -78,86 +78,9 @@ class _RusltBodyState extends State<RusltBody> {
               } else if (snapshot.hasData) {
                 final data = jsonDecode(snapshot.data as String);
                 final results = data['results'] as List;
-                return Container(
-                  color: AppColors.secondbackgroundcolor,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //total voting
-                            Column(
-                              children: [
-                                Text(
-                                  S.of(context).total_vote,
-                                  style: AppFonts.regularText(context, 14,
-                                      AppColors.secondaryTextColor),
-                                ),
-                                Text(
-                                  // todo api
-                                  isEnglish()
-                                      ? '${data['totalCount']}'
-                                      : "${convertEnglishNumberToArabicNumber(data['totalCount'].toString())}",
-
-                                  style: AppFonts.semiBoldText(
-                                    context,
-                                    16,
-                                    AppColors.mainColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            //voting end
-                            Text(
-                              // todo api
-                              S.of(context).voting_end,
-                              style: AppFonts.regularText(
-                                  context, 14, AppColors.secondaryTextColor),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        //all voter
-
-                        const SizedBox(height: 10),
-                        // todo list candidate
-                        Expanded(
-                          child: ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return index == 0
-                                  ? CustomResultCndidate(
-                                      count: results[index]['count'],
-                                      name: results[index]['candidate']['name'],
-                                      image: results[index]['candidate']
-                                          ['image'],
-                                      color: true,
-                                      standing: index + 1,
-                                    )
-                                  : CustomResultCndidate(
-                                      count: results[index]['count'],
-                                      name: results[index]['candidate']['name'],
-                                      image: results[index]['candidate']
-                                          ['image'],
-                                      color: false,
-                                      standing: index + 1,
-                                    );
-                            },
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 8),
-                            itemCount: results.length,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return BodyWhenDataCame(
+                  results: results,
+                  totalCount: data['totalCount'],
                 );
               } else {
                 return Center(
@@ -165,5 +88,102 @@ class _RusltBodyState extends State<RusltBody> {
                 );
               }
             });
+  }
+}
+
+/*
+
+
+
+
+
+
+
+
+*/
+class BodyWhenDataCame extends StatelessWidget {
+  const BodyWhenDataCame(
+      {super.key, required this.results, required this.totalCount});
+  final results;
+  final int totalCount;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.secondbackgroundcolor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //total voting
+                Column(
+                  children: [
+                    Text(
+                      S.of(context).total_vote,
+                      style: AppFonts.regularText(
+                          context, 14, AppColors.secondaryTextColor),
+                    ),
+                    Text(
+                      // todo api
+                      isEnglish()
+                          ? '$totalCount'
+                          : "${convertEnglishNumberToArabicNumber(totalCount.toString())}",
+
+                      style: AppFonts.semiBoldText(
+                        context,
+                        16,
+                        AppColors.mainColor,
+                      ),
+                    ),
+                  ],
+                ),
+                //voting end
+                Text(
+                  // todo api
+                  S.of(context).voting_end,
+                  style: AppFonts.regularText(
+                      context, 14, AppColors.secondaryTextColor),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            //all voter
+
+            const SizedBox(height: 10),
+            // todo list candidate
+            Expanded(
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return index == 0
+                      ? CustomResultCndidate(
+                          count: results[index]['count'],
+                          name: results[index]['candidate']['name'],
+                          image: results[index]['candidate']['image'],
+                          color: true,
+                          standing: index + 1,
+                        )
+                      : CustomResultCndidate(
+                          count: results[index]['count'],
+                          name: results[index]['candidate']['name'],
+                          image: results[index]['candidate']['image'],
+                          color: false,
+                          standing: index + 1,
+                        );
+                },
+                separatorBuilder: (context, index) => const SizedBox(height: 8),
+                itemCount: results.length,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

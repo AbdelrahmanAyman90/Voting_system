@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,6 +12,7 @@ import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart
 import 'package:voting/data/repository/news/news_repo_implment.dart';
 import 'package:voting/data/repository/user_authorization/user_repo_implement.dart';
 import 'package:voting/generated/l10n.dart';
+import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
@@ -26,15 +26,9 @@ Future<void> main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); //مش هتنفذ حاجه غسر لما الي تحتك يكمل الاول
   await CashNetwork.cashInitialization(); //اول ما يفتح  التطبيق هيستدعيها علطول
-  token = CashNetwork.GetFromCash(key: 'token');
-  currentPassword = CashNetwork.GetFromCash(key: 'password');
-  idUser = CashNetwork.GetFromCash(key: 'idUser');
-  log("Token--> ${token}");
-  log("Password--> ${currentPassword}");
-  log("iduser-->${idUser}");
-  runApp(DevicePreview(
-    builder: (context) => const MyApp(),
-  ));
+  await prepareDate();
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -49,20 +43,21 @@ class MyApp extends StatelessWidget {
             create: (context) => LayoutCubit()..changeLanguage("initial"),
           ),
           BlocProvider<UserAuthorizationCubit>(
-            create: (context) => UserAuthorizationCubit(
-                UserAuthorizationepoImplemntion(
-                    apiServes: ApiServes(dio: creatdio()))),
-          ),
-          BlocProvider<NewsCubit>(
-            create: (context) => NewsCubit(
+              create: (context) => UserAuthorizationCubit(
+                  UserAuthorizationepoImplemntion(
+                      apiServes: ApiServes(dio: creatdio())))),
+          BlocProvider<PrepareAppCubit>(
+            create: (context) => PrepareAppCubit(
                 NewsRepoImplemnt(apiServes: ApiServes(dio: creatdio())))
-              ..fetchNews(),
+              ..fetchNews()
+              ..isVoted(),
           ),
           BlocProvider<GetCandidateCubit>(
             create: (context) => GetCandidateCubit(
                 CandidateRepoImplemnt(apiServes: ApiServes(dio: creatdio())))
               ..getAllCandidate(),
           ),
+          //! can remove
           BlocProvider<GetCandidateInfoCubit>(
             create: (context) => GetCandidateInfoCubit(
                 CandidateRepoImplemnt(apiServes: ApiServes(dio: creatdio()))),
@@ -71,20 +66,20 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<LayoutCubit, LayoutState>(
           builder: (context, state) {
             return MaterialApp(
-                builder: DevicePreview.appBuilder,
-                debugShowCheckedModeBanner: false,
-                locale: Locale(isEnglish() ? 'en' : 'ar'),
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-                home: RegisterScreen()
-                // const HomeScreen(),
-                );
+              debugShowCheckedModeBanner: false,
+              locale: Locale(isEnglish() ? 'en' : 'ar'),
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+              home: token != null && token != ""
+                  ? HomeScreen()
+                  : RegisterScreen(),
+            );
           },
         ),
       ),

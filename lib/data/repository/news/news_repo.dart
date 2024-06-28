@@ -5,4 +5,5 @@ import 'package:voting/data/models/news_model/news_model.dart';
 
 abstract class NewsRepo {
   Future<Either<Failure, List<NewsModel>>> fetchNews();
+  Future<Either<Failure, bool>> isUserVote();
 }

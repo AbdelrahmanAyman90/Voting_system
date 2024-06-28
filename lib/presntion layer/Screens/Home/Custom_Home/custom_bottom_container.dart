@@ -7,10 +7,8 @@ class CustomBottomContainer extends StatefulWidget {
   const CustomBottomContainer({
     super.key,
     required this.controller,
-    required this.date,
   });
   final TabController controller;
-  final String? date;
 
   @override
   State<CustomBottomContainer> createState() => _CustomBottomContainerState();
@@ -29,7 +27,8 @@ class _CustomBottomContainerState extends State<CustomBottomContainer> {
           ),
           Expanded(
               child: CustomTabBarBage(
-                  controller: widget.controller, date: widget.date)),
+            controller: widget.controller,
+          )),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,8 @@ class CustomCandidatesProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetCandidateInfoCubit, GetCandidateInfoState>(
       builder: (context, state) {
+        log("----------");
+        log(isAddCampiagn.toString());
         if (state is GetSingleCandidateSuccess) {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,

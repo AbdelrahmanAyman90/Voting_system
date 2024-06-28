@@ -39,7 +39,7 @@ class RegisterBody extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute<void>(
+                      MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const LoginScreen()));
                 },

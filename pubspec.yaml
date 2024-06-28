@@ -56,6 +56,8 @@ dependencies:
   url_launcher: ^6.3.0
   web_socket_channel: ^2.4.0
   mnc_identifier_face: ^1.0.2
+  scroll_to_hide: ^2.1.0
+  restart_app: ^1.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

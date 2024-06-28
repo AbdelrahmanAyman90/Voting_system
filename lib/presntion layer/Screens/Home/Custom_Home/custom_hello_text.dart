@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/Notification_Form_Body.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
@@ -10,11 +11,9 @@ class CustomHelloText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<UserAuthorizationCubit>(context);
-
     return Row(
       children: [
-        Text(cubit.userData!.data!.user!.name!,
+        Text(userName!,
             style: AppFonts.semiBoldText(
               context,
               24,

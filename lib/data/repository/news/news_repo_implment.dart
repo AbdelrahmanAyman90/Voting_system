@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
@@ -29,6 +30,27 @@ class NewsRepoImplemnt extends NewsRepo {
 //cheack
       log(newsList.length.toString());
       return right(newsList);
+    } on Exception catch (e) {
+      if (e is DioException) {
+        // log(e.toString());
+        return left(ServerFailuar.fromDioError(e)); //! return
+      } else {
+        // log(e.toString());
+        return left(ServerFailuar(e.toString())); //! return
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isUserVote() async {
+    String endpoint = EndPoints.checkIsVoted;
+    Map<String, dynamic> headerRequest = {
+      'authorization': "bearer ${token}",
+    };
+    try {
+      var data =
+          await apiServes.get(endPoint: endpoint, headerRequst: headerRequest);
+      return right(data["data"]["voted"]);
     } on Exception catch (e) {
       if (e is DioException) {
         // log(e.toString());

@@ -8,6 +8,8 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_voteing_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/custom_candidate_widget.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class VotingBody extends StatefulWidget {
   const VotingBody({super.key});
@@ -48,7 +50,8 @@ class _VotingBodyState extends State<VotingBody> {
             ),
           ),
         ),
-        eventCases("elections") == "now"
+        eventCases("elections") == "now" &&
+                context.read<PrepareAppCubit>().isUserVoted == false
             ? _buildVotingButton(context)
             : SizedBox()
       ],

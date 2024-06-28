@@ -5,6 +5,7 @@ import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/generated/l10n.dart';
 
 import 'package:voting/Shared/shareWidget/button.dart';
+import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/bottom_navgiation_bar.dart';
 import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
 
 class ThankesToVoteScreen extends StatelessWidget {
@@ -44,11 +45,12 @@ class ThankesToVoteScreen extends StatelessWidget {
               ),
               ButtonWidget(
                 onPressed: () {
-                  //todo
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const BottomNavgiationBarWidget(
+                                select: 2,
+                              )),
+                      (Route<dynamic> route) => false);
                 },
                 word: S.of(context).thankes_voting_button,
                 color: AppColors.mainColor,

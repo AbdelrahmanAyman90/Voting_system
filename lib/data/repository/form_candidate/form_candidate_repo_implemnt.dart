@@ -8,6 +8,7 @@ import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
+import 'package:voting/Shared/shard%20local/cash_helper.dart';
 
 import 'package:voting/data/repository/form_candidate/form_candidate_repo.dart';
 import 'package:http_parser/http_parser.dart';
@@ -56,7 +57,7 @@ class FormCandidateRepoImplemntion extends FormCandidateRepo {
 //do requst
       var data = await apiServes.post(
           endpoint: endpoint, data: formData, headerRequst: headerRequest);
-
+      CashNetwork.InsertToCash(key: 'isCandidatSelf', value: "true");
       return right(data['message']);
     } on Exception catch (e) {
       if (e is DioException) {

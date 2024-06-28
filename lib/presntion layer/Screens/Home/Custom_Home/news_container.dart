@@ -36,7 +36,15 @@ class _NewsContainerState extends State<NewsContainer> {
                 style: AppFonts.semiBoldText(
                   context,
                   14,
-                  const Color.fromARGB(255, 0, 0, 0),
+                  Color.fromARGB(255, 255, 255, 255),
+                ).copyWith(
+                  shadows: [
+                    Shadow(
+                      offset: Offset(2.0, 2.0),
+                      blurRadius: .5,
+                      color: Color.fromARGB(218, 0, 0, 0),
+                    ),
+                  ],
                 ),
               ),
             ),

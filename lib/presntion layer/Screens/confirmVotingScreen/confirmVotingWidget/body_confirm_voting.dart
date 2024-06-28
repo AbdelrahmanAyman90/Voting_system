@@ -5,6 +5,7 @@ import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/responsive_text.dart';
+import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/data/models/candidate/candidate_model.dart';
@@ -13,6 +14,8 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirmVotingWidget/coustom_password.dart';
 import 'package:voting/presntion%20layer/Screens/thankesVotingScreen/thanks_voting_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/custom_candidate_widget.dart';
+import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_vote_viewmodel/cubit/user_vote_cubit.dart';
 
 class ConfirmVotingBody extends StatelessWidget {
@@ -71,9 +74,10 @@ wedgit fun
             validator: (value) {
               if (ConfirmPassword.text.isEmpty) {
                 return S.of(context).passord_error;
-              } else if (ConfirmPassword.text != currentPassword) {
-                return "كلمه السر غير صحيحه";
               }
+              //  else if (ConfirmPassword.text != currentPassword) {
+              //   return "كلمه السر غير صحيحه";
+              // }
             },
           ),
         ),
@@ -84,9 +88,12 @@ wedgit fun
 //todo
   Widget _buildConfirmButton(BuildContext context) {
     return BlocConsumer<UserVoteCubit, UserVoteState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is UserVoteSuccsess) {
           context.loaderOverlay.hide();
+
+          context.read<PrepareAppCubit>().isUserVoted = true;
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -112,7 +119,7 @@ wedgit fun
                 //todo cubit succsess and isvoted true
                 await context.read<UserVoteCubit>().UserVoting(
                     candadateId: candataeDataSelected.sId,
-                    confirmPassword: currentPassword);
+                    confirmPassword: ConfirmPassword.text);
               }
             },
             word: S.of(context).confirm_voting_button,

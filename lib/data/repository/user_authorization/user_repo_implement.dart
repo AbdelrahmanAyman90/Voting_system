@@ -55,16 +55,6 @@ class UserAuthorizationepoImplemntion extends UserAuthorizationRepo {
       var data = await apiServes.post(endpoint: endpoint, data: formData);
 //!do parse
       UserModel userData = UserModel.fromJson(data);
-      log(userData.data!.token.toString());
-      log(userData.data!.user!.sId.toString());
-      log(password);
-      // token = userData.data!.token;
-      // idUser = userData.data!.user!.sId;
-      // currentPassword = password;
-      //!do insert in cach
-      CashNetwork.InsertToCash(key: 'token', value: userData.data!.token);
-      CashNetwork.InsertToCash(key: 'idUser', value: userData.data!.user!.sId!);
-      CashNetwork.InsertToCash(key: 'password', value: password);
 
       return right(userData);
     } on Exception catch (e) {
@@ -96,16 +86,7 @@ class UserAuthorizationepoImplemntion extends UserAuthorizationRepo {
       var data = await apiServes.post(endpoint: endpoint, data: bodyRequst);
 //!do parse
       UserModel userData = UserModel.fromJson(data);
-      log(userData.data!.token.toString());
-      log(userData.data!.user!.sId.toString());
-      log(password);
-      // token = userData.data!.token;
-      // idUser = userData.data!.user!.sId;
-      // currentPassword = password;
-      //!do inser in cach
-      CashNetwork.InsertToCash(key: 'token', value: userData.data!.token);
-      CashNetwork.InsertToCash(key: 'idUser', value: userData.data!.user!.sId!);
-      CashNetwork.InsertToCash(key: 'password', value: password);
+
       return right(userData);
     } on Exception catch (e) {
       if (e is DioException) {

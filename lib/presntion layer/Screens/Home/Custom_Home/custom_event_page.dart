@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/application_form.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/bottom_navgiation_bar.dart';
@@ -34,15 +36,20 @@ class _CustomEventPageState extends State<CustomEventPage>
                     title: S.of(context).NOMINATING_FOR_ELECTIONS,
                     time: "8",
                     cases: eventCases("nomination")!,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const ApplicationFormScreen(),
-                        ),
-                      );
-                    },
+                    onPressed: isCandidateSelf == true
+                        ? () {
+                            MyAppStuts.showSnackBar(
+                                context, "لقد رشحت نفسك من هذا الهاتف من قبل ");
+                          }
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) =>
+                                    const ApplicationFormScreen(),
+                              ),
+                            );
+                          },
                   ),
                 ),
               ),

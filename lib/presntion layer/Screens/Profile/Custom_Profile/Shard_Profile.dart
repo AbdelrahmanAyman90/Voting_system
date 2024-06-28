@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:share_plus/share_plus.dart';
 // import 'package:share_plus/share_plus.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/help_screen.dart';
+import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class ProfileInfo extends StatelessWidget {
   final String title;
@@ -129,7 +134,11 @@ class ProfileInfoButton extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(child: RowInProfile(icon: icon4, text: text4)),
+            GestureDetector(
+                onTap: () {
+                  _showLogoutDialog(context);
+                },
+                child: RowInProfile(icon: icon4, text: text4)),
           ],
         ),
       ),
@@ -167,4 +176,31 @@ class RowInProfile extends StatelessWidget {
       ],
     );
   }
+}
+
+void _showLogoutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('تسجيل الخروج '),
+        content: Text('هل انت متاكد من تسجيل الخروج سوف تفقد كل معلوماتك ؟'),
+        actions: <Widget>[
+          TextButton(
+            child: Text('الغاء'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Dismiss the dialog
+            },
+          ),
+          TextButton(
+            child: Text('خروج'),
+            onPressed: () async {
+              await context.read<UserAuthorizationCubit>().logout();
+              Restart.restartApp();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

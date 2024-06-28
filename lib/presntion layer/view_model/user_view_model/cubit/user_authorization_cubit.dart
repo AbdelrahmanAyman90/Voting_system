@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/data/models/user_model/user_model.dart';
 import 'package:voting/data/repository/user_authorization/user_repo_implement.dart';
 
@@ -10,7 +14,7 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
   UserAuthorizationCubit(this.userRepoRegister)
       : super(UserAuthorizationInitial());
   UserAuthorizationepoImplemntion userRepoRegister;
-  UserModel? userData;
+
   //
   userRegister(
       {required String nationalId,
@@ -26,8 +30,8 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
           password: password);
       result.fold((l) {
         emit(UserAuthorizationRegisterFail(l.errorMassage));
-      }, (r) {
-        setUserData(r);
+      }, (r) async {
+        await setUserData(r, password);
         emit(UserAuthorizationRegisterSucsses());
       });
     } on Exception catch (e) {
@@ -35,8 +39,19 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
     }
   }
 
-  setUserData(UserModel data) {
-    userData = data;
+  setUserData(UserModel r, password) async {
+    CashNetwork.InsertToCash(key: 'token', value: r.data!.token);
+    CashNetwork.InsertToCash(key: 'idUser', value: r.data!.user!.sId!);
+    CashNetwork.InsertToCash(key: 'password', value: password);
+    CashNetwork.InsertToCash(key: 'name', value: r.data!.user!.name!);
+    CashNetwork.InsertToCash(
+        key: 'national_id', value: r.data!.user!.nationalId!);
+    CashNetwork.InsertToCash(key: 'address', value: r.data!.user!.address!);
+    token = r.data!.token;
+    idUser = r.data!.user!.sId;
+    userName = r.data!.user!.name!;
+    userAddress = r.data!.user!.address!;
+    userNationalId = r.data!.user!.nationalId!;
   }
 
   userLogin({
@@ -49,13 +64,18 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
           nationalId: nationalId, password: password);
       result.fold((l) {
         emit(UserAuthorizationRegisterFail(l.errorMassage));
-      }, (r) {
-        setUserData(r);
+      }, (r) async {
+        await setUserData(r, password);
+
         emit(UserAuthorizationRegisterSucsses());
       });
     } on Exception catch (e) {
       emit(UserAuthorizationRegisterFail(e.toString()));
     }
+  }
+
+  logout() {
+    CashNetwork.clearData();
   }
 
   @override

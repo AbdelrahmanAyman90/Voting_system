@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/src/platform_file.dart';
@@ -25,7 +27,8 @@ class AddCampiagnRepoImplemntion extends AddCampiagnRepo {
       filename: video.name,
       contentType: MediaType.parse(mimeType),
     );
-
+    log("تاكد");
+    log(link.toString());
     try {
       String endpoint = EndPoints.comaign;
       //header
@@ -37,9 +40,10 @@ class AddCampiagnRepoImplemntion extends AddCampiagnRepo {
       FormData formData = FormData.fromMap({
         'video': multipartFile,
       });
+
       formData.fields.add(MapEntry('bio', bio));
       formData.fields.add(MapEntry('goals', goals));
-      link != null ? formData.fields.add(MapEntry('kink', link)) : null;
+      link != null ? formData.fields.add(MapEntry('link', link)) : null;
 
 //do requst
       var data = await apiServes.post(

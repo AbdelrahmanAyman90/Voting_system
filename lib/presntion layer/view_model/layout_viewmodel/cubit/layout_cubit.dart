@@ -8,7 +8,6 @@ part 'layout_state.dart';
 
 class LayoutCubit extends Cubit<LayoutState> {
   LayoutCubit() : super(LayoutInitial());
-
   String? currentLanguage;
   void changeLanguage(String languagestate) {
     emit(LayoutLooding());

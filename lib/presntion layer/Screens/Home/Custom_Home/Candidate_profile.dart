@@ -33,19 +33,29 @@ class Candidates extends StatefulWidget {
 
 class _CandidatesState extends State<Candidates> {
   bool _isLoading = true;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 2), () async {
+    _timer = Timer(Duration(seconds: 2), () async {
+      if (!mounted) return;
       await context
           .read<GetCandidateInfoCubit>()
           .getSingleCandidateinfo(idCandidate: widget.cndidateSId);
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Profile/Custom_Profile/Shard_Profile.dart';
@@ -19,8 +20,6 @@ class ProfileMobileLayoutBody extends StatefulWidget {
 class _ProfileMobileLayoutBodyState extends State<ProfileMobileLayoutBody> {
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<UserAuthorizationCubit>(context);
-
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -30,7 +29,7 @@ class _ProfileMobileLayoutBodyState extends State<ProfileMobileLayoutBody> {
               Padding(
                   padding: EdgeInsets.all(20),
                   child: CustomProfileHeader(
-                    name: cubit.userData!.data!.user!.name!,
+                    name: userName!,
                   )),
               isEnglish()
                   ? const SizedBox(
@@ -40,17 +39,16 @@ class _ProfileMobileLayoutBodyState extends State<ProfileMobileLayoutBody> {
                       height: 0,
                     ),
               ProfileInfo(
-                title: S.of(context).personal_details,
-                icon1: Icons.perm_identity_rounded,
-                //todo api
-                text1: cubit.userData!.data!.user!.name!,
-                icon2: Icons.assignment_ind_outlined,
-                //todo api
-                text2: cubit.userData!.data!.user!.nationalId!,
-                icon3: Icons.calendar_month_outlined,
-                //todo api
-                text3: cubit.userData!.data!.user!.address!,
-              ),
+                  title: S.of(context).personal_details,
+                  icon1: Icons.perm_identity_rounded,
+                  //todo api
+                  text1: userName!,
+                  icon2: Icons.assignment_ind_outlined,
+                  //todo api
+                  text2: userNationalId!,
+                  icon3: Icons.calendar_month_outlined,
+                  //todo api
+                  text3: userAddress!),
               const SizedBox(
                 height: 16,
               ),

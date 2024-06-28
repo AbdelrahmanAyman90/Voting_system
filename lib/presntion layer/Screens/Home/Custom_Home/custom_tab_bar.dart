@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_election_period.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_nomination_period.dart';
@@ -43,10 +44,8 @@ class _CustomTabBarState extends State<CustomTabBar> {
 }
 
 class CustomTabBarBage extends StatefulWidget {
-  const CustomTabBarBage(
-      {super.key, required this.controller, required this.date});
+  const CustomTabBarBage({super.key, required this.controller});
   final TabController controller;
-  final String? date;
 
   @override
   State<CustomTabBarBage> createState() => _CustomTabBarBageState();
@@ -59,9 +58,11 @@ class _CustomTabBarBageState extends State<CustomTabBarBage> {
       controller: widget.controller,
       children: [
         const CustomEventPage(),
-        widget.date == '40'
-            ? const CustomCandidatesPageInNomination()
-            : const CustomCandidatePageInElection(),
+        eventCases("candidates") == "now" ||
+                eventCases("elections") == "now" ||
+                eventCases("elections") == "end"
+            ? const CustomCandidatePageInElection()
+            : const CustomCandidatesPageInNomination(),
       ],
     );
   }

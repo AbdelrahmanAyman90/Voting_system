@@ -4,8 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Colors.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
@@ -27,6 +30,8 @@ class _AppFormBodyState extends State<AppFormBody> {
   PlatformFile? _selectedFile5;
   PlatformFile? _selectedFile6;
   PlatformFile? _selectedFile7;
+  PlatformFile? _selectedFile8;
+
   TextEditingController textAreaControllername = TextEditingController();
   TextEditingController textAreaControllerjob = TextEditingController();
   TextEditingController textAreaControllereducation = TextEditingController();
@@ -79,7 +84,6 @@ class _AppFormBodyState extends State<AppFormBody> {
                     ),
                   ),
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
@@ -135,12 +139,12 @@ class _AppFormBodyState extends State<AppFormBody> {
                 const SizedBox(
                   height: 15,
                 ),
-                // UploadBtn(
-                //   selectedFile: _selectedFile8,
-                //   textBtn: S.of(context).upload_personal_photo,
-                //   onFileSelected: _handleFileUpload8,
-                //   onValidationChanged: _validateForm,
-                // ),
+                UploadBtn(
+                  selectedFile: _selectedFile8,
+                  textBtn: S.of(context).upload_personal_photo,
+                  onFileSelected: _handleFileUpload8,
+                  onValidationChanged: _validateForm,
+                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -158,6 +162,8 @@ class _AppFormBodyState extends State<AppFormBody> {
                     } else {
                       //todo navigat for alert that wait for aprrov
                       context.loaderOverlay.hide();
+
+                      isCandidateSelf = true;
                       showDialog(
                         barrierDismissible: false,
                         context: context,
@@ -228,11 +234,11 @@ class _AppFormBodyState extends State<AppFormBody> {
     });
   }
 
-  // void _handleFileUpload8(PlatformFile? file) {
-  //   setState(() {
-  //     _selectedFile8 = file;
-  //   });
-  // }
+  void _handleFileUpload8(PlatformFile? file) {
+    setState(() {
+      _selectedFile8 = file;
+    });
+  }
 
   void _validateForm(bool isValid) {
     setState(
@@ -243,7 +249,8 @@ class _AppFormBodyState extends State<AppFormBody> {
             _selectedFile4 != null &&
             _selectedFile5 != null &&
             _selectedFile6 != null &&
-            _selectedFile7 != null) _isFormValid = isValid;
+            _selectedFile7 != null &&
+            _selectedFile8 != null) _isFormValid = isValid;
       },
     );
   }

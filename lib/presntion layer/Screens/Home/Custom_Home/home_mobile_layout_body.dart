@@ -13,8 +13,6 @@ class _HomeMobileLayoutBodyState extends State<HomeMobileLayoutBody>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
 
-  final String _date = '50';
-
   @override
   void initState() {
     super.initState();
@@ -35,7 +33,6 @@ class _HomeMobileLayoutBodyState extends State<HomeMobileLayoutBody>
         Expanded(
           flex: 3,
           child: CustomBottomContainer(
-            date: _date,
             controller: _controller,
           ),
         ),

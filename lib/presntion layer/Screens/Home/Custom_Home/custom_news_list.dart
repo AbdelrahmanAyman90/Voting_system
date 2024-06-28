@@ -11,7 +11,7 @@ class CustomNewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsCubit, NewsState>(
+    return BlocBuilder<PrepareAppCubit, PrepareAppState>(
       builder: (context, state) {
         return state is NewsSuccess
             ? ListView.builder(

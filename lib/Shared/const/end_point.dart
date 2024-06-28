@@ -14,6 +14,7 @@ class EndPoints {
   static String question = "question";
 
   static String election = "election";
+  static String checkIsVoted = "election/voted";
 }
 
 class ApiKeys {

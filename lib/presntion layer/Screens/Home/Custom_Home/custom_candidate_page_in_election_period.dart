@@ -30,15 +30,16 @@ class CustomCandidatePageInElection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: CandidateList(
-                        img: imagePath + state.allCandidate[index].image!,
-                        selectCandidate: index,
-                        name: state.allCandidate[index].name!,
-                        bio: state.allCandidate[index].job!,
-                        candidateSId: state.allCandidate[index].sId!,
-                        UserCandate: state.allCandidate[index].user!,
-                      )),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: CandidateList(
+                      img: imagePath + state.allCandidate[index].image!,
+                      selectCandidate: index,
+                      name: state.allCandidate[index].name!,
+                      bio: state.allCandidate[index].job!,
+                      candidateSId: state.allCandidate[index].sId!,
+                      UserCandate: state.allCandidate[index].user!,
+                    ),
+                  ),
                 ),
               );
             },

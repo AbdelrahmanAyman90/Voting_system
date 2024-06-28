@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/data/repository/user_voting/user_vote_repo_implemnt.dart';
 
 part 'user_vote_state.dart';
@@ -21,7 +22,8 @@ class UserVoteCubit extends Cubit<UserVoteState> {
           candadateId: candadateId, confirmPassword: confirmPassword);
       result.fold((l) {
         emit(UserVoteFail(l.errorMassage));
-      }, (r) {
+      }, (r) async {
+        await CashNetwork.InsertToCash(key: "user_vote", value: "true");
         emit(UserVoteSuccsess());
       });
     } on Exception catch (e) {
