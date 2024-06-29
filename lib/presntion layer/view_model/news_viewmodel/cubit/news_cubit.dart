@@ -10,14 +10,14 @@ import 'package:voting/data/repository/news/news_repo_implment.dart';
 part 'news_state.dart';
 
 class PrepareAppCubit extends Cubit<PrepareAppState> {
-  PrepareAppCubit(this.newsRepo) : super(NewsInitial());
-  NewsRepoImplemnt newsRepo;
+  PrepareAppCubit(this.prepareApp) : super(NewsInitial());
+  PreparAppImplemnt prepareApp;
   bool? isUserVoted;
 
   fetchNews() async {
     emit(NewsLooding());
     try {
-      var result = await newsRepo.fetchNews();
+      var result = await prepareApp.fetchNews();
       result.fold((l) {
         emit(NewsFail(l.errorMassage));
       }, (r) {
@@ -33,7 +33,7 @@ class PrepareAppCubit extends Cubit<PrepareAppState> {
     log("------->${token}");
     if (votedCase == "") {
       try {
-        var result = await newsRepo.isUserVote();
+        var result = await prepareApp.isUserVote();
         result.fold(
           (l) {
             log("message");

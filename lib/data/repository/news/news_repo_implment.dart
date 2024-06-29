@@ -12,9 +12,9 @@ import 'package:voting/data/models/news_model/news_model.dart';
 import 'package:voting/data/repository/news/news_repo.dart';
 
 //! هي دي المسئوله عن انها تعمل الطلب للباك ايند ودي الي بستعيها في الكيوبت وهي دي الي بترجع الداتا
-class NewsRepoImplemnt extends NewsRepo {
+class PreparAppImplemnt extends PreparApp {
   final ApiServes apiServes;
-  NewsRepoImplemnt({required this.apiServes});
+  PreparAppImplemnt({required this.apiServes});
   @override
   Future<Either<Failure, List<NewsModel>>> fetchNews() async {
     try {

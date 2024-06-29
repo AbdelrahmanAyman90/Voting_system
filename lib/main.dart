@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
                       apiServes: ApiServes(dio: creatdio())))),
           BlocProvider<PrepareAppCubit>(
             create: (context) => PrepareAppCubit(
-                NewsRepoImplemnt(apiServes: ApiServes(dio: creatdio())))
+                PreparAppImplemnt(apiServes: ApiServes(dio: creatdio())))
               ..fetchNews()
               ..isVoted(),
           ),

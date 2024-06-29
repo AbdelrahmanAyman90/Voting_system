@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_bottom_container.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_top_container.dart';
@@ -27,6 +29,8 @@ class _HomeMobileLayoutBodyState extends State<HomeMobileLayoutBody>
 
   @override
   Widget build(BuildContext context) {
+    log("hgi,,,,,,,,");
+
     return Column(
       children: [
         const Expanded(flex: 2, child: CustomTopContainer()),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
@@ -22,6 +24,7 @@ class _CustomEventPageState extends State<CustomEventPage>
     return SingleChildScrollView(
       child: Column(
         children: [
+          //!first event
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: IntrinsicHeight(
@@ -39,7 +42,7 @@ class _CustomEventPageState extends State<CustomEventPage>
                     onPressed: isCandidateSelf == true
                         ? () {
                             MyAppStuts.showSnackBar(
-                                context, "لقد رشحت نفسك من هذا الهاتف من قبل ");
+                                context, "لقد رشحت نفسك من  قبل ");
                           }
                         : () {
                             Navigator.push(
@@ -55,6 +58,7 @@ class _CustomEventPageState extends State<CustomEventPage>
               ),
             ),
           ),
+          //! second event
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: IntrinsicHeight(
@@ -75,6 +79,7 @@ class _CustomEventPageState extends State<CustomEventPage>
               ),
             ),
           ),
+          //!third event
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: IntrinsicHeight(

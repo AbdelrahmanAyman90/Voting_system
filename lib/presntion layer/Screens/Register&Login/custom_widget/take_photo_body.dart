@@ -126,6 +126,8 @@ class _TakePhotoBodyState extends State<TakePhotoBody>
                               personalImage:
                                   await convertToPlatformFile(holdStillImage));
                         }
+                      } else {
+                        Navigator.pop(context);
                       }
                     },
                     child: ScaleTransition(
