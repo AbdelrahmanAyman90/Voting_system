@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
@@ -23,6 +25,8 @@ class _VotingBodyState extends State<VotingBody> {
 
   @override
   Widget build(BuildContext context) {
+    log("+++++++++++++++++++++++++++");
+    log(context.read<PrepareAppCubit>().isUserVoted.toString());
     return Stack(
       children: [
         Container(

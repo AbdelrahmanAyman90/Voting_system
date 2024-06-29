@@ -51,16 +51,16 @@ String? eventCases(String event) {
   DateTime now = DateTime.now();
   //event nomination
   DateTime startTime = DateTime(2024, 6, 27, 5, 0); // June 26, 2024 at 5:00 AM
-  DateTime endTime = DateTime(2024, 6, 28, 24, 0); //June 26, 2024 at 6:00 PM
+  DateTime endTime = DateTime(2024, 6, 27, 24, 0); //June 26, 2024 at 6:00 PM
 //event candidates
   DateTime startTimecandidates =
-      DateTime(2024, 5, 27, 5, 0); // June 26, 2024 at 5:00 AM
+      DateTime(2024, 6, 27, 5, 0); // June 26, 2024 at 5:00 AM
   DateTime endTimecandidates =
-      DateTime(2024, 5, 28, 24, 0); //June 26, 2024 at 6:00 PM
+      DateTime(2024, 6, 27, 24, 0); //June 26, 2024 at 6:00 PM
 // event elections
   DateTime startTimeelections =
       DateTime(2024, 6, 27, 5, 0); // June 26, 2024 at 5:00 AM
-  DateTime endTimeelections = DateTime(2024, 6, 28, 18, 0);
+  DateTime endTimeelections = DateTime(2024, 6, 30, 18, 0);
   log(now.toString()); //June 26, 2024 at 6:00 PM
   if (event == "nomination") {
     if (now.isAfter(startTime) && now.isBefore(endTime)) {
@@ -94,14 +94,16 @@ String? eventCases(String event) {
 }
 
 Future<void> prepareDate() async {
-  token =await CashNetwork.GetFromCash(key: 'token');
-  idUser =await CashNetwork.GetFromCash(key: 'idUser');
-  userName =await CashNetwork.GetFromCash(key: 'name');
+  token = await CashNetwork.GetFromCash(key: 'token');
+  idUser = await CashNetwork.GetFromCash(key: 'idUser');
+  userName = await CashNetwork.GetFromCash(key: 'name');
 
-  userNationalId =await CashNetwork.GetFromCash(key: 'national_id');
+  userNationalId = await CashNetwork.GetFromCash(key: 'national_id');
 
-  userAddress =await CashNetwork.GetFromCash(key: 'address');
+  userAddress = await CashNetwork.GetFromCash(key: 'address');
 
   isCandidateSelf =
-     await CashNetwork.GetFromCash(key: 'isCandidatSelf') == "true" ? true : false;
+      await CashNetwork.GetFromCash(key: 'isCandidatSelf') == "true"
+          ? true
+          : false;
 }
