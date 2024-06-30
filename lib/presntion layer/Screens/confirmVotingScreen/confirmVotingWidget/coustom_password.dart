@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/generated/l10n.dart';
 
 class CustomPassowrdText extends StatefulWidget {
   final String hintText;

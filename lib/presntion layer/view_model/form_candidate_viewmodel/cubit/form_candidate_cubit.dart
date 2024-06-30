@@ -13,7 +13,7 @@ class FormCandidateCubit extends Cubit<FormCandidateState> {
 
   FormCandidateRepoImplemntion formCandidateRepo;
 
-  List<PlatformFile?> selectedImages = List.generate(7, (_) => null);
+  List<PlatformFile?> selectedImages = List.generate(8, (_) => null);
 
   addCandidate({required name, required job, required education}) async {
     emit(FormCandidateLoodin());
@@ -30,8 +30,8 @@ class FormCandidateCubit extends Cubit<FormCandidateState> {
     }
   }
 
-  sortedImage(value) {
-    selectedImages.add(value);
+  sortedImage(value, {required int index}) {
+    selectedImages[index] = value;
   }
 
   @override

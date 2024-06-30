@@ -15,6 +15,8 @@ class EndPoints {
 
   static String election = "election";
   static String checkIsVoted = "election/voted";
+  static String event = "event";
+  static String nomation = "candidate/nominated";
 }
 
 class ApiKeys {

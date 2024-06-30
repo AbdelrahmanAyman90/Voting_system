@@ -58,6 +58,8 @@ dependencies:
   mnc_identifier_face: ^1.0.2
   scroll_to_hide: ^2.1.0
   restart_app: ^1.2.1
+  timezone: ^0.9.3
+  shimmer: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

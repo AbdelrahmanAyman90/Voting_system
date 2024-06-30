@@ -29,8 +29,6 @@ class _HomeMobileLayoutBodyState extends State<HomeMobileLayoutBody>
 
   @override
   Widget build(BuildContext context) {
-    log("hgi,,,,,,,,");
-
     return Column(
       children: [
         const Expanded(flex: 2, child: CustomTopContainer()),

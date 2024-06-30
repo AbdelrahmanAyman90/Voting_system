@@ -11,6 +11,7 @@ import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_profile.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_voteing_screen.dart';
+import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
 class Candidates extends StatefulWidget {
@@ -82,7 +83,7 @@ class _CandidatesState extends State<Candidates> {
               widget.candidateName,
               style: AppFonts.boldText(context, 16, AppColors.mainColor),
             ),
-            eventCases("elections") == "now"
+            context.read<EventCubit>().eventCases("elections") == "now"
                 ? TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: AppColors.mainColor,

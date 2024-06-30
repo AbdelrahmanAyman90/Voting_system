@@ -14,7 +14,7 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirmVotingWidget/coustom_password.dart';
 import 'package:voting/presntion%20layer/Screens/thankesVotingScreen/thanks_voting_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/custom_candidate_widget.dart';
-import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_vote_viewmodel/cubit/user_vote_cubit.dart';
 

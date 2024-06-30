@@ -7,5 +7,3 @@ String? idUser;
 //String? currentPassword;  //currentPassword = CashNetwork.GetFromCash(key: 'password');
 
 String linkWebSocket = 'wss://graduation-project-yok6.onrender.com';
-bool? isCandidateSelf;
-bool? isVoted;

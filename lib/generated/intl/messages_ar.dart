@@ -25,15 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "Apply": MessageLookupByLibrary.simpleMessage("تقديم"),
         "Form": MessageLookupByLibrary.simpleMessage("التسجيل كمرشح"),
         "NOMINATING_FOR_ELECTIONS":
-            MessageLookupByLibrary.simpleMessage("الترشح للانتخابات الرئاسية "),
+            MessageLookupByLibrary.simpleMessage("الترشح للانتخابات "),
         "Nationwide":
             MessageLookupByLibrary.simpleMessage("جمهورية مصر العربية"),
         "No": MessageLookupByLibrary.simpleMessage("لا"),
         "Ok": MessageLookupByLibrary.simpleMessage("تم"),
         "Submit": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "Yes": MessageLookupByLibrary.simpleMessage("نعم"),
-        "add_Campign_Candidates": MessageLookupByLibrary.simpleMessage(
-            "اضافه الحمله الاعلانيه للمرشحين"),
+        "add_Campign_Candidates":
+            MessageLookupByLibrary.simpleMessage("اعلان المرشحين"),
         "age_desc": MessageLookupByLibrary.simpleMessage("٥٠"),
         "age_title": MessageLookupByLibrary.simpleMessage("العمر :"),
         "all_voter_number": MessageLookupByLibrary.simpleMessage(" ٣٥,٥٥٦,٨٥٠"),
@@ -65,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("جامعة قناة السويس"),
         "education_title": MessageLookupByLibrary.simpleMessage("التعليم :"),
         "election_start": MessageLookupByLibrary.simpleMessage(
-            "ستبدأ الانتخابات خلال ٣٠ يوم .سيتم ارسال اشعار لك عندما تبدأ الانتخابات."),
+            "ستبدا الانتخابات قريبا الرجاء متابعه الاحداث حتى تتمكن من معرفه الوقت بالتحديد"),
         "elesctions": MessageLookupByLibrary.simpleMessage("الانتخابات"),
         "english": MessageLookupByLibrary.simpleMessage("الغه الانجليزيه"),
         "enter_password":

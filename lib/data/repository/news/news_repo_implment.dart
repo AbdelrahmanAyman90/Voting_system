@@ -61,4 +61,24 @@ class PreparAppImplemnt extends PreparApp {
       }
     }
   }
+
+  Future<Either<Failure, bool>> isUserCandidateSelf() async {
+    String endpoint = EndPoints.nomation;
+    Map<String, dynamic> headerRequest = {
+      'authorization': "bearer ${token}",
+    };
+    try {
+      var data =
+          await apiServes.get(endPoint: endpoint, headerRequst: headerRequest);
+      return right(data["data"]["candidate"]);
+    } on Exception catch (e) {
+      if (e is DioException) {
+        // log(e.toString());
+        return left(ServerFailuar.fromDioError(e)); //! return
+      } else {
+        // log(e.toString());
+        return left(ServerFailuar(e.toString())); //! return
+      }
+    }
+  }
 }

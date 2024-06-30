@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/upload_form.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/candidates_list_widget.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/personal_information_in_cnadidate_profile.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/video_in_candidate_profile.dart';
+import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
 class CustomCandidatesProfile extends StatelessWidget {
@@ -93,7 +93,8 @@ class CustomCandidatesProfile extends StatelessWidget {
                                 : SizedBox(),
                           ],
                         )
-                      : eventCases("candidates") == "now"
+                      : context.read<EventCubit>().eventCases("candidates") ==
+                              "now"
                           ? buildImage(isAddCampiagn, isRealCandidate) ==
                                   "show data"
                               ? ButtonWidget(

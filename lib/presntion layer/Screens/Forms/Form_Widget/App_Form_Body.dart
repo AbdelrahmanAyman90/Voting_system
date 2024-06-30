@@ -14,6 +14,7 @@ import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/shard_container.dart';
 import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
 
 class AppFormBody extends StatefulWidget {
   const AppFormBody({super.key});
@@ -92,36 +93,42 @@ class _AppFormBodyState extends State<AppFormBody> {
                   height: 10,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 0,
                   onFileSelected: _handleFileUpload1,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques1,
                   text: S.of(context).upload_ques1,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 2,
                   onFileSelected: _handleFileUpload2,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques2,
                   text: S.of(context).upload_ques2,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 3,
                   onFileSelected: _handleFileUpload3,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques3,
                   text: S.of(context).upload_ques3,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 4,
                   onFileSelected: _handleFileUpload4,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques4,
                   text: S.of(context).upload_ques4,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 1,
                   onFileSelected: _handleFileUpload5,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques5,
                   text: S.of(context).upload_ques5,
                 ),
                 ContainerContent(
+                  indexForSoretImage: 5,
                   onFileSelected: _handleFileUpload6,
                   onValidationChanged: _validateForm,
                   ques: S.of(context).ques6,
@@ -131,6 +138,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                   height: 15,
                 ),
                 UploadBtn(
+                  indexForSoretImage: 6,
                   selectedFile: _selectedFile7,
                   onFileSelected: _handleFileUpload7,
                   onValidationChanged: _validateForm,
@@ -140,6 +148,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                   height: 15,
                 ),
                 UploadBtn(
+                  indexForSoretImage: 7,
                   selectedFile: _selectedFile8,
                   textBtn: S.of(context).upload_personal_photo,
                   onFileSelected: _handleFileUpload8,
@@ -163,7 +172,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                       //todo navigat for alert that wait for aprrov
                       context.loaderOverlay.hide();
 
-                      isCandidateSelf = true;
+                      context.read<PrepareAppCubit>().isUserVoted = true;
                       showDialog(
                         barrierDismissible: false,
                         context: context,

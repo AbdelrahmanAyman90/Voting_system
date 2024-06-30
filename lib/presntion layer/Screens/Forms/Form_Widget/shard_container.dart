@@ -10,11 +10,13 @@ import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cub
 class ContainerContent extends StatefulWidget {
   final String ques;
   final String text;
+  final int indexForSoretImage;
 
   final void Function(PlatformFile?) onFileSelected;
   final void Function(bool) onValidationChanged;
   const ContainerContent({
     super.key,
+    required this.indexForSoretImage,
     required this.ques,
     required this.text,
     required this.onFileSelected,
@@ -115,6 +117,7 @@ class _ContainerContentState extends State<ContainerContent> {
           height: 10,
         ),
         UploadBtn(
+            indexForSoretImage: widget.indexForSoretImage,
             selectedFile: selectedFile,
             textBtn: widget.text,
             onFileSelected: _handleFileUpload,
@@ -134,9 +137,10 @@ class UploadBtn extends StatefulWidget {
   final void Function(PlatformFile?) onFileSelected;
   final void Function(bool) onValidationChanged;
   final PlatformFile? selectedFile;
-
+  final int indexForSoretImage;
   const UploadBtn(
       {super.key,
+      required this.indexForSoretImage,
       required this.textBtn,
       required this.onFileSelected,
       required this.onValidationChanged,
@@ -159,7 +163,9 @@ class _UploadBtnState extends State<UploadBtn> {
       setState(() {
         file = result.files.first;
         //! this for to gather all file and send to api
-        context.read<FormCandidateCubit>().sortedImage(file);
+        context
+            .read<FormCandidateCubit>()
+            .sortedImage(file, index: widget.indexForSoretImage);
         widget.onFileSelected(file);
         widget.onValidationChanged(true);
       });

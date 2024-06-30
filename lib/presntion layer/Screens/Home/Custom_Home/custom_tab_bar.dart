@@ -1,12 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
-import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_election_period.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_nomination_period.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_event_page.dart';
+import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key, required this.controller});
@@ -56,16 +56,43 @@ class CustomTabBarBage extends StatefulWidget {
 class _CustomTabBarBageState extends State<CustomTabBarBage> {
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      controller: widget.controller,
-      children: [
-        const CustomEventPage(),
-        eventCases("candidates") == "now" ||
-                eventCases("elections") == "now" ||
-                eventCases("elections") == "end"
-            ? const CustomCandidatePageInElection()
-            : const CustomCandidatesPageInNomination(),
-      ],
+    return BlocBuilder<EventCubit, EventState>(
+      builder: (context, state) {
+        if (state is EventSuccses) {
+          return TabBarView(
+            controller: widget.controller,
+            children: [
+              CustomEventPage(
+                eventDate: state.event,
+              ),
+              context.read<EventCubit>().eventCases("candidates") == "now" ||
+                      context.read<EventCubit>().eventCases("elections") ==
+                          "now" ||
+                      context.read<EventCubit>().eventCases("elections") ==
+                          "end"
+                  ? const CustomCandidatePageInElection()
+                  : const CustomCandidatesPageInNomination(),
+            ],
+          );
+        } else if (state is EventFail) {
+          return Center(
+            child: Text(
+              state.errorMassage,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+          );
+        } else if (state is EventLooding || state is EventInitial) {
+          return ListView.builder(
+            itemBuilder: (context, index) => buildShammerWidget(),
+            itemCount: 3,
+          );
+        } else {
+          return ListView.builder(
+            itemBuilder: (context, index) => buildShammerWidget(),
+            itemCount: 3,
+          );
+        }
+      },
     );
   }
 }

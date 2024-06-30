@@ -1,4 +1,4 @@
-part of 'news_cubit.dart';
+part of 'prepare_cubit.dart';
 
 @immutable
 sealed class PrepareAppState {}
@@ -16,3 +16,7 @@ final class NewsFail extends PrepareAppState {
   String errorMassage;
   NewsFail(this.errorMassage);
 }
+
+final class IsVotedFail extends PrepareAppState {}
+
+final class CandidateSelfFail extends PrepareAppState {}

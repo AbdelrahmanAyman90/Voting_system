@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,15 +7,17 @@ import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart';
+import 'package:voting/data/repository/event/event_repo_implemnt.dart';
 import 'package:voting/data/repository/news/news_repo_implment.dart';
 import 'package:voting/data/repository/user_authorization/user_repo_implement.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
+import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 Future<void> main() async {
@@ -25,6 +25,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding
       .ensureInitialized(); //مش هتنفذ حاجه غسر لما الي تحتك يكمل الاول
+
   await CashNetwork.cashInitialization(); //اول ما يفتح  التطبيق هيستدعيها علطول
   await prepareDate();
 
@@ -47,10 +48,13 @@ class MyApp extends StatelessWidget {
                   UserAuthorizationepoImplemntion(
                       apiServes: ApiServes(dio: creatdio())))),
           BlocProvider<PrepareAppCubit>(
-            create: (context) => PrepareAppCubit(
-                PreparAppImplemnt(apiServes: ApiServes(dio: creatdio())))
-              ..fetchNews()
-              ..isVoted(),
+              create: (context) => PrepareAppCubit(
+                  PreparAppImplemnt(apiServes: ApiServes(dio: creatdio())))
+                ..fetchNews()),
+          BlocProvider<EventCubit>(
+            create: (context) => EventCubit(
+                EventRepoImplemnt(apiServes: ApiServes(dio: creatdio())))
+              ..fetchEvent(),
           ),
           BlocProvider<GetCandidateCubit>(
             create: (context) => GetCandidateCubit(
@@ -77,8 +81,8 @@ class MyApp extends StatelessWidget {
               supportedLocales: S.delegate.supportedLocales,
               theme: ThemeData(scaffoldBackgroundColor: Colors.white),
               home: token != null && token != ""
-                  ? HomeScreen()
-                  : RegisterScreen(),
+                  ? const HomeScreen()
+                  : const RegisterScreen(),
             );
           },
         ),
