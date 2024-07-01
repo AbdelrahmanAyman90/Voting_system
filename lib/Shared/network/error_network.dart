@@ -40,8 +40,13 @@ class ServerFailuar extends Failure {
   }
   factory ServerFailuar.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      log("message");
-      return ServerFailuar(response["message"].toString()); //!change
+      var message = response["message"];
+      if (message is int) {
+        return ServerFailuar("Error 404!!");
+      } else {
+        return ServerFailuar(response["message"].toString());
+      }
+//!change
     } else if (statusCode == 404) {
       return ServerFailuar("Your requst not found");
     } else if (statusCode == 500) {

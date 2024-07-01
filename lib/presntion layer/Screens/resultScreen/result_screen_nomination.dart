@@ -28,18 +28,4 @@
 
 
 // */
-//   PreferredSizeWidget? _buildAppBar(BuildContext context) {
-//     return AppBar(
-//       automaticallyImplyLeading: false,
-//       backgroundColor: Colors.white,
-//       elevation: 0,
-//       toolbarHeight: 80,
-//       title: Padding(
-//           padding: const EdgeInsets.only(top: 15),
-//           child: Text(
-//             S.of(context).results,
-//             style: AppFonts.boldText(context, 24, AppColors.mainColor),
-//           )),
-//     );
-//   }
-// }
+

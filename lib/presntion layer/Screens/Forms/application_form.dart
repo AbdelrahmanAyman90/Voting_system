@@ -5,8 +5,10 @@ import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/data/repository/form_candidate/form_candidate_repo_implemnt.dart';
+import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/App_Form_Body.dart';
+import 'package:voting/presntion%20layer/view_model/check_iscandidate_viewmodel/cubit/cheack_is_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
 
 class ApplicationFormScreen extends StatefulWidget {
@@ -20,9 +22,19 @@ class ApplicationFormScreen extends StatefulWidget {
 class _FormState extends State<ApplicationFormScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FormCandidateCubit(
-          FormCandidateRepoImplemntion(apiServes: ApiServes(dio: creatdio()))),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FormCandidateCubit>(
+          create: (context) => FormCandidateCubit(
+            FormCandidateRepoImplemntion(apiServes: ApiServes(dio: creatdio())),
+          ),
+        ),
+        BlocProvider<CheackIsCandidateCubit>(
+          create: (context) => CheackIsCandidateCubit(
+            PreparAppRepoImplemnt(apiServes: ApiServes(dio: creatdio())),
+          ),
+        ),
+      ],
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.backgroundColor,

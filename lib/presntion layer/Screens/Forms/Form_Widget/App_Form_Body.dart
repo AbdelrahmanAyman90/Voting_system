@@ -13,8 +13,9 @@ import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/shard_container.dart';
+import 'package:voting/presntion%20layer/view_model/check_iscandidate_viewmodel/cubit/cheack_is_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class AppFormBody extends StatefulWidget {
   const AppFormBody({super.key});
@@ -158,7 +159,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                   height: 30,
                 ),
                 BlocListener<FormCandidateCubit, FormCandidateState>(
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is FormCandidateLoodin) {
                       context.loaderOverlay.show(
                         widgetBuilder: (progress) {
@@ -170,17 +171,21 @@ class _AppFormBodyState extends State<AppFormBody> {
                       MyAppStuts.showSnackBar(context, state.errorMassage);
                     } else {
                       //todo navigat for alert that wait for aprrov
-                      context.loaderOverlay.hide();
+                      //  await CashNetwork.InsertToCash(
+                      //     key: "user_candidate_self", value: "true");
+                      // context.loaderOverlay.hide();
 
-                      context.read<PrepareAppCubit>().isUserVoted = true;
+                      log("---------########${context.read<CheackIsCandidateCubit>().isCandidateSelf.toString()}###################");
                       showDialog(
                         barrierDismissible: false,
                         context: context,
-                        builder: (context) => SuccsesAlert(
+                        builder: (context) => const SuccsesAlert(
                           message:
                               "تم تسجيل طلبك بنجاح برجاء الانتظار حتى موعدد اعلان المرشحين",
                         ),
                       );
+                      await CashNetwork.InsertToCash(
+                          key: "user_candidate_self", value: "true");
                     }
                   },
                   child: Button(

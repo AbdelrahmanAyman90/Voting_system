@@ -9,9 +9,10 @@ import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_voteing_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/custom_candidate_widget.dart';
+import 'package:voting/presntion%20layer/view_model/cheack_isvoted_viewmodel/cubit/check_is_voted_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class VotingBody extends StatefulWidget {
@@ -25,54 +26,73 @@ class _VotingBodyState extends State<VotingBody> {
   int _selectedIndex = -1;
 
   Future<void> _checkIsUserVoted() async {
-    while (context.read<PrepareAppCubit>().isUserVoted == null) {
-      await context.read<PrepareAppCubit>().isVoted();
+    if (context.read<CheckIsVotedCubit>().isUserVoted == null &&
+        context.read<EventCubit>().eventCases("elections") == "now") {
+      await context.read<CheckIsVotedCubit>().isVoted();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    log(context.read<PrepareAppCubit>().isUserVoted.toString());
+    log("when enter to page the value of isvoted--->${context.read<CheckIsVotedCubit>().isUserVoted.toString()}");
 
     return FutureBuilder<void>(
       future: _checkIsUserVoted(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
+        if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
-          return Stack(
-            children: [
-              Container(
-                color: AppColors.backgroundColor,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 12),
-                      // Hint
-                      Text(
-                        S.of(context).hint_to_select_candidate,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+          return BlocBuilder<CheckIsVotedCubit, CheckIsVotedState>(
+            builder: (context, state) {
+              if (state is CheackIsUserVotedLooding) {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                ));
+              } else if (state is CheackIsUserVoteFail) {
+                return Center(
+                  child: Text(
+                    state.errorMassage,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
+              } else {
+                return Stack(
+                  children: [
+                    Container(
+                      color: AppColors.backgroundColor,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 18, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
+                            // Hint
+                            Text(
+                              S.of(context).hint_to_select_candidate,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            // List candidate
+                            _buildCandidates(context),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 18),
-                      // List candidate
-                      _buildCandidates(context),
-                    ],
-                  ),
-                ),
-              ),
-              context.read<EventCubit>().eventCases("elections") == "now" &&
-                      context.read<PrepareAppCubit>().isUserVoted == false
-                  ? _buildVotingButton(context)
-                  : const SizedBox()
-            ],
+                    ),
+                    context.read<EventCubit>().eventCases("elections") ==
+                                "now" &&
+                            context.read<CheckIsVotedCubit>().isUserVoted ==
+                                false
+                        ? _buildVotingButton(context)
+                        : const SizedBox()
+                  ],
+                );
+              }
+            },
           );
         }
       },

@@ -25,9 +25,6 @@ class EventRepoImplemnt extends EventRepo {
         eventList.add(Events.fromJson(i));
       }
 //cheack
-      log("7777777777777777777777777777777777777777");
-      log(eventList[0].end.toString());
-      log("7777777777777777777777777777777777777777");
 
       return right(eventList);
     } on Exception catch (e) {

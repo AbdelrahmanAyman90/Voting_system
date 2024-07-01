@@ -9,12 +9,12 @@ import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
 import 'package:voting/data/models/news_model/news_model.dart';
 
-import 'package:voting/data/repository/news/news_repo.dart';
+import 'package:voting/data/repository/preparapp/prepare_app_repo.dart';
 
 //! هي دي المسئوله عن انها تعمل الطلب للباك ايند ودي الي بستعيها في الكيوبت وهي دي الي بترجع الداتا
-class PreparAppImplemnt extends PreparApp {
+class PreparAppRepoImplemnt extends PreparAppRepo {
   final ApiServes apiServes;
-  PreparAppImplemnt({required this.apiServes});
+  PreparAppRepoImplemnt({required this.apiServes});
   @override
   Future<Either<Failure, List<NewsModel>>> fetchNews() async {
     try {

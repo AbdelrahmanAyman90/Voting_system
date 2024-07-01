@@ -10,7 +10,7 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class EventContainer extends StatefulWidget {
   final String img;
@@ -152,24 +152,20 @@ class _EventContainerState extends State<EventContainer> {
               const Spacer(),
               widget.cases == "end"
                   ? const SizedBox(height: 36)
-                  : BlocBuilder<PrepareAppCubit, PrepareAppState>(
-                      builder: (context, state) {
-                        return Button(
-                          text: S.of(context).Apply,
-                          color: widget.cases == "not start"
-                              ? Colors.white
-                              : AppColors.mainColor,
-                          fontsize: 16,
-                          width: 102,
-                          height: 32,
-                          onPressed: widget.cases == "not start"
-                              ? () => null
-                              : widget.onPressed,
-                          textcolor: widget.cases == "not start"
-                              ? AppColors.mainColor
-                              : Colors.white,
-                        );
-                      },
+                  : Button(
+                      text: S.of(context).Apply,
+                      color: widget.cases == "not start"
+                          ? Colors.white
+                          : AppColors.mainColor,
+                      fontsize: 16,
+                      width: 102,
+                      height: 32,
+                      onPressed: widget.cases == "not start"
+                          ? () => null
+                          : widget.onPressed,
+                      textcolor: widget.cases == "not start"
+                          ? AppColors.mainColor
+                          : Colors.white,
                     ),
             ],
           ),

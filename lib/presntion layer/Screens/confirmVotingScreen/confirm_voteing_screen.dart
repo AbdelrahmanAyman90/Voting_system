@@ -11,7 +11,6 @@ class ConfirmVoteScreen extends StatelessWidget {
   final int selectIndex;
   @override
   Widget build(BuildContext context) {
-    log("====");
     log(selectIndex.toString());
     return Scaffold(
       appBar: AppBar(

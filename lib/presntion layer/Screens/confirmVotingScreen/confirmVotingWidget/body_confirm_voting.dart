@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Fonts.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/network/api_service.dart';
-import 'package:voting/Shared/responsive_text.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
@@ -14,8 +12,7 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirmVotingWidget/coustom_password.dart';
 import 'package:voting/presntion%20layer/Screens/thankesVotingScreen/thanks_voting_screen.dart';
 import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/custom_candidate_widget.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
+
 import 'package:voting/presntion%20layer/view_model/user_vote_viewmodel/cubit/user_vote_cubit.dart';
 
 class ConfirmVotingBody extends StatelessWidget {
@@ -26,10 +23,17 @@ class ConfirmVotingBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserVoteCubit(
-          uservote:
-              UserVotingRepoImplemntion(apiServes: ApiServes(dio: creatdio()))),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<UserVoteCubit>(
+          create: (context) => UserVoteCubit(
+            uservote: UserVotingRepoImplemntion(
+              apiServes: ApiServes(dio: creatdio()),
+            ),
+          ),
+        ),
+        // Add other BlocProviders here as needed
+      ],
       child: ListView(
         children: [
           ShowCandidate(
@@ -92,13 +96,12 @@ wedgit fun
         if (state is UserVoteSuccsess) {
           context.loaderOverlay.hide();
 
-          context.read<PrepareAppCubit>().isUserVoted = true;
-
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => const ThankesToVoteScreen()),
           );
+          await CashNetwork.InsertToCash(key: "user_vote", value: "true");
         } else if (state is UserVoteFail) {
           context.loaderOverlay.hide();
           MyAppStuts.showSnackBar(context, state.errorMassage);
@@ -117,9 +120,13 @@ wedgit fun
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 //todo cubit succsess and isvoted true
-                await context.read<UserVoteCubit>().UserVoting(
-                    candadateId: candataeDataSelected.sId,
-                    confirmPassword: ConfirmPassword.text);
+                try {
+                  await context.read<UserVoteCubit>().UserVoting(
+                      candadateId: candataeDataSelected.sId,
+                      confirmPassword: ConfirmPassword.text);
+                } on Exception catch (e) {
+                  MyAppStuts.showSnackBar(context, "Time end");
+                }
               }
             },
             word: S.of(context).confirm_voting_button,

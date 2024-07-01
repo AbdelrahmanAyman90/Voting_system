@@ -4,14 +4,14 @@ import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Trending_news.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/news_container.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class CustomNewsList extends StatelessWidget {
   const CustomNewsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrepareAppCubit, PrepareAppState>(
+    return BlocBuilder<NewsCubit, NewsState>(
       builder: (context, state) {
         return state is NewsSuccess
             ? ListView.builder(

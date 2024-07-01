@@ -8,7 +8,7 @@ import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart';
 import 'package:voting/data/repository/event/event_repo_implemnt.dart';
-import 'package:voting/data/repository/news/news_repo_implment.dart';
+import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/data/repository/user_authorization/user_repo_implement.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
@@ -17,7 +17,7 @@ import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/prepare_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 Future<void> main() async {
@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
               create: (context) => UserAuthorizationCubit(
                   UserAuthorizationepoImplemntion(
                       apiServes: ApiServes(dio: creatdio())))),
-          BlocProvider<PrepareAppCubit>(
-              create: (context) => PrepareAppCubit(
-                  PreparAppImplemnt(apiServes: ApiServes(dio: creatdio())))
+          BlocProvider<NewsCubit>(
+              create: (context) => NewsCubit(
+                  PreparAppRepoImplemnt(apiServes: ApiServes(dio: creatdio())))
                 ..fetchNews()),
           BlocProvider<EventCubit>(
             create: (context) => EventCubit(
