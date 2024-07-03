@@ -60,6 +60,7 @@ dependencies:
   restart_app: ^1.2.1
   timezone: ^0.9.3
   shimmer: ^3.0.0
+  get_it: ^7.6.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

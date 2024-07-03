@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/shareWidget/global_widget.dart';
 
@@ -38,27 +38,6 @@ class ShowCandidate extends StatelessWidget {
         child: Row(
           children: [
             imageContainer(imagePath + image),
-            // Container(
-            //   width: 120,
-            //   height: 70,
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     image: DecorationImage(
-            //       image: CachedNetworkImageProvider(imagePath + image),
-            //       fit: BoxFit.fill,
-            //     ),
-            //   ),
-            // ),
-            //!تعديلات السويدي المتاخره
-            // CachedNetworkImage(
-            //   imageUrl: imagePath + image,
-            //   fit: BoxFit.fill,
-            //   width: 130,
-            //   height: 120,
-            //   errorWidget: (context, url, error) =>
-            //       Icon(Icons.error), // Show error icon
-            // ),
-
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

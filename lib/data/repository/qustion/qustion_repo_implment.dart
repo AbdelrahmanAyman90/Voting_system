@@ -24,8 +24,7 @@ class QustionRepoImplemntion extends QustionRepo {
         qustionList.add(QustionModel.fromJson(i));
       }
 //cheack
-      log("======");
-      log(qustionList.length.toString());
+
       return right(qustionList); //! return
     } on Exception catch (e) {
       if (e is DioException) {

@@ -3,7 +3,7 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
@@ -28,7 +28,6 @@ class PreparAppRepoImplemnt extends PreparAppRepo {
         newsList.add(NewsModel.fromJson(i));
       }
 //cheack
-      log(newsList.length.toString());
       return right(newsList);
     } on Exception catch (e) {
       if (e is DioException) {

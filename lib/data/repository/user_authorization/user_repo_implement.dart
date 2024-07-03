@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/src/platform_file.dart';
 import 'package:mime/mime.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';

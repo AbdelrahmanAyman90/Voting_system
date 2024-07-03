@@ -4,24 +4,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
 import 'package:voting/Shared/shareWidget/global_widget.dart';
+import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Candidate_profile.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
+/**
+ * 
+ * list candidate 
+ */
 class CandidateList extends StatefulWidget {
   final String img;
   final String name;
   final String bio;
   final String candidateSId;
-  final String UserCandate;
+  final String userCandate;
   final int selectCandidate;
 
   const CandidateList(
       {super.key,
       required this.selectCandidate,
-      required this.UserCandate,
+      required this.userCandate,
       required this.img,
       required this.bio,
       required this.name,
@@ -39,11 +46,15 @@ class _CandidateListState extends State<CandidateList> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => Candidates(
-              cndidateSId: widget.candidateSId,
-              candidateUserId: widget.UserCandate,
-              candidateName: widget.name,
-              selectCandidate: widget.selectCandidate,
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => GetCandidateInfoCubit(
+                  CandidateRepoImplemnt(apiServes: getIt.get<ApiServes>())),
+              child: Candidates(
+                cndidateSId: widget.candidateSId,
+                candidateUserId: widget.userCandate,
+                candidateName: widget.name,
+                selectCandidate: widget.selectCandidate,
+              ),
             ),
           ),
         );
@@ -94,6 +105,11 @@ class _CandidateListState extends State<CandidateList> {
   }
 }
 
+/**
+ * 
+ * profile page
+ * 
+ */
 //! profile here
 class PersonalInfo extends StatelessWidget {
   final String? title;
@@ -137,8 +153,6 @@ class BioAndGoals extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      // width: MediaQuery.of(context).size.width * 335 / 375,
-      // height: MediaQuery.of(context).size.height * 248 / 812,
       decoration: BoxDecoration(
           color: AppColors.backgroundColor,
           borderRadius: BorderRadius.circular(10)),

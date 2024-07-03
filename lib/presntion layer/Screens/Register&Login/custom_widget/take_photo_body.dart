@@ -9,7 +9,7 @@ import 'package:mnc_identifier_face/model/liveness_detection_result_model.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/verification_fail.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/verification_successful.dart';
 

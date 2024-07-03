@@ -7,15 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Colors.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/Form_Widget/shard_container.dart';
 import 'package:voting/presntion%20layer/view_model/check_iscandidate_viewmodel/cubit/cheack_is_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/form_candidate_viewmodel/cubit/form_candidate_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class AppFormBody extends StatefulWidget {
   const AppFormBody({super.key});

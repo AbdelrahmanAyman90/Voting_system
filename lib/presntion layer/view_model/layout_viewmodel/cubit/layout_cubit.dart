@@ -11,7 +11,6 @@ class LayoutCubit extends Cubit<LayoutState> {
   String? currentLanguage;
   void changeLanguage(String languagestate) {
     emit(LayoutLooding());
-    log(languagestate);
     if (languagestate == "initial") {
       if (CashNetwork.GetFromCash(key: "lang") == 'en') {
         currentLanguage = languagestate;

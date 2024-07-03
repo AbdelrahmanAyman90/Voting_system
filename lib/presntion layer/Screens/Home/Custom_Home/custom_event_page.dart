@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/data/models/event_model/event_model.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/application_form.dart';
@@ -21,8 +21,7 @@ class CustomEventPage extends StatefulWidget {
   State<CustomEventPage> createState() => _CustomEventPageState();
 }
 
-class _CustomEventPageState extends State<CustomEventPage>
-    with SingleTickerProviderStateMixin {
+class _CustomEventPageState extends State<CustomEventPage> {
   Future<void> _checkIsCandidateSelf() async {
     if (context.read<CheackIsCandidateCubit>().isCandidateSelf == null &&
         context.read<EventCubit>().eventCases("nomination") == "now") {
@@ -50,9 +49,10 @@ class _CustomEventPageState extends State<CustomEventPage>
                 ),
               );
             } else {
+              //varible
               final isCandidateSelf =
                   context.read<CheackIsCandidateCubit>().isCandidateSelf;
-
+//varible
               final List<SomeEventData> someEventDate = [
                 SomeEventData(
                   textButton: S.of(context).applay,
@@ -122,6 +122,7 @@ class _CustomEventPageState extends State<CustomEventPage>
   }
 }
 
+//!class to data of each event
 class SomeEventData {
   final String title;
   final VoidCallback onPressed;

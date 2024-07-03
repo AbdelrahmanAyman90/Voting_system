@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_voteing_screen.dart';
@@ -13,7 +13,6 @@ import 'package:voting/presntion%20layer/Screens/voteingScreen/voteingwidget/cus
 import 'package:voting/presntion%20layer/view_model/cheack_isvoted_viewmodel/cubit/check_is_voted_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class VotingBody extends StatefulWidget {

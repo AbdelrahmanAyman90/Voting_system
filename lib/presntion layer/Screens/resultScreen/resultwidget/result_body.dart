@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/network/api_service.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/data/models/election/election_result.dart';
 import 'package:voting/presntion%20layer/Screens/resultScreen/resultwidget/result_list.dart';
 import 'package:web_socket_channel/io.dart';
@@ -19,7 +20,7 @@ class RusltBody extends StatefulWidget {
 
 class _RusltBodyState extends State<RusltBody> {
   WebSocketChannel? channel;
-  ApiServes api = ApiServes(dio: creatdio());
+  ApiServes api = getIt.get<ApiServes>();
   @override
   void initState() {
     super.initState();
@@ -51,8 +52,6 @@ class _RusltBodyState extends State<RusltBody> {
     String endpoint = "election";
     var result = await api.get(endPoint: endpoint, headerRequst: headers);
 
-    log("1111111111");
-    log(result.toString());
     return ElectionResult.fromJson(result);
   }
 
@@ -90,9 +89,10 @@ class _RusltBodyState extends State<RusltBody> {
                 return BodyWhenDataCame(
                   results: results,
                   totalCount: data['totalCount'],
-                  end: false,
+                  endRuslt: false,
                 );
               } else {
+                //! when event end
                 return FutureBuilder<ElectionResult>(
                   future: getDataAfterEventEnd(),
                   builder: (context, snapshot) {
@@ -113,7 +113,7 @@ class _RusltBodyState extends State<RusltBody> {
                       return BodyWhenDataCame(
                         totalCount: data.data!.results!.totalCount!,
                         results: data.data!.results!.results!,
-                        end: true,
+                        endRuslt: true,
                       );
                     }
                   },

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
 import 'package:voting/data/repository/form_candidate/form_candidate_repo_implemnt.dart';
 import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
@@ -26,13 +27,12 @@ class _FormState extends State<ApplicationFormScreen> {
       providers: [
         BlocProvider<FormCandidateCubit>(
           create: (context) => FormCandidateCubit(
-            FormCandidateRepoImplemntion(apiServes: ApiServes(dio: creatdio())),
+            FormCandidateRepoImplemntion(apiServes: getIt.get<ApiServes>()),
           ),
         ),
         BlocProvider<CheackIsCandidateCubit>(
-          create: (context) => CheackIsCandidateCubit(
-            PreparAppRepoImplemnt(apiServes: ApiServes(dio: creatdio())),
-          ),
+          create: (context) =>
+              CheackIsCandidateCubit(getIt.get<PreparAppRepoImplemnt>()),
         ),
       ],
       child: SafeArea(

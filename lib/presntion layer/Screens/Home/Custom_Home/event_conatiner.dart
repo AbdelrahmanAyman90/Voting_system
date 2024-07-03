@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
@@ -47,9 +47,6 @@ class _EventContainerState extends State<EventContainer> {
   }
 
   void _updateRemainingTime() {
-    log("===============");
-    log(isEnglish().toString());
-
     // Get current time in Egypt
     tz.Location egypt = tz.getLocation('Africa/Cairo');
     tz.TZDateTime nowEgypt = tz.TZDateTime.now(egypt);
@@ -69,11 +66,11 @@ class _EventContainerState extends State<EventContainer> {
             : ' ${convertEnglishNumberToArabicNumber(remainingTime.inDays.toString())} يوم';
       } else if (remainingTime.inHours > 0) {
         formattedTime = isEnglish()
-            ? ' ${remainingTime.inDays.toString()} Hours'
+            ? ' ${remainingTime.inHours.toString()} Hours'
             : ' ${convertEnglishNumberToArabicNumber(remainingTime.inHours.toString())} ساعه';
       } else {
         formattedTime = isEnglish()
-            ? ' ${remainingTime.inDays.toString()} Minutes'
+            ? ' ${remainingTime.inMinutes.toString()} Minutes'
             : ' ${convertEnglishNumberToArabicNumber(remainingTime.inMinutes.toString())} دقيقه';
       }
     });
@@ -82,8 +79,6 @@ class _EventContainerState extends State<EventContainer> {
 
   @override
   Widget build(BuildContext context) {
-    log("1111111111111111111111");
-    log(formattedTime);
     return Column(
       children: [
         Row(
@@ -163,7 +158,7 @@ class _EventContainerState extends State<EventContainer> {
                       width: 102,
                       height: 32,
                       onPressed: widget.cases == "not start"
-                          ? () => null
+                          ? () {}
                           : widget.onPressed,
                       textcolor: widget.cases == "not start"
                           ? AppColors.mainColor

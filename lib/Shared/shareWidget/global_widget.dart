@@ -17,6 +17,7 @@ Widget imageContainer(String image) {
   );
 }
 
+//! appbar for result and vote
 PreferredSizeWidget? buildAppBar(BuildContext context, String name) {
   return AppBar(
     automaticallyImplyLeading: false,

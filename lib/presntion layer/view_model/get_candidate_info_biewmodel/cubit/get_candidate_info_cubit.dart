@@ -32,8 +32,6 @@ class GetCandidateInfoCubit extends Cubit<GetCandidateInfoState> {
     } else {
       isAddCam = false;
     }
-    log("{{{{{{{{{}}}}}}}}}");
-    log(isAddCam.toString());
   }
 
   @override

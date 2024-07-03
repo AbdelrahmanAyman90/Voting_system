@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/const/const_varible.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/Trending_news.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/news_container.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/news_viewmodel/cubit/news_cubit.dart';
 
 class CustomNewsList extends StatelessWidget {
   const CustomNewsList({super.key});

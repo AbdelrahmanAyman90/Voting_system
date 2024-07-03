@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/data/models/election/election_result.dart';
 import 'package:voting/generated/l10n.dart';
@@ -12,10 +12,10 @@ class BodyWhenDataCame extends StatelessWidget {
       {super.key,
       required this.results,
       required this.totalCount,
-      required this.end});
+      required this.endRuslt});
   final List<Results> results;
   final int totalCount;
-  final bool end;
+  final bool endRuslt;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,7 +52,7 @@ class BodyWhenDataCame extends StatelessWidget {
                   ],
                 ),
                 //voting end
-                end
+                endRuslt
                     ? Text(
                         // todo api
                         S.of(context).vot_end,
@@ -69,7 +69,6 @@ class BodyWhenDataCame extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            //all voter
 
             const SizedBox(height: 10),
             // todo list candidate
@@ -78,14 +77,14 @@ class BodyWhenDataCame extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return index == 0
-                      ? CustomResultCndidate(
+                      ? CustomResultCandidate(
                           count: results[index].count!,
                           name: results[index].candidate!.name!,
                           image: results[index].candidate!.image!,
                           color: true,
                           standing: index + 1,
                         )
-                      : CustomResultCndidate(
+                      : CustomResultCandidate(
                           count: results[index].count!,
                           name: results[index].candidate!.name!,
                           image: results[index].candidate!.image!,

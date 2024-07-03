@@ -4,7 +4,8 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/data/models/candidate/candidate_model.dart';
 import 'package:voting/data/repository/user_voting/user_vote_repo_implemnt.dart';
@@ -28,7 +29,7 @@ class ConfirmVotingBody extends StatelessWidget {
         BlocProvider<UserVoteCubit>(
           create: (context) => UserVoteCubit(
             uservote: UserVotingRepoImplemntion(
-              apiServes: ApiServes(dio: creatdio()),
+              apiServes: getIt.get<ApiServes>(),
             ),
           ),
         ),

@@ -47,7 +47,7 @@ class EventCubit extends Cubit<EventState> {
     if (events.containsKey(event)) {
       var e = events[event];
 
-      log(events[event].toString());
+      // log(events[event].toString());
       if (now.isAfter(e['start']) && now.isBefore(e['end']))
         return 'now';
       else if (now.isBefore(e['start'])) {

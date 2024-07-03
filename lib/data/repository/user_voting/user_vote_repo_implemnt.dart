@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
@@ -18,7 +18,7 @@ class UserVotingRepoImplemntion extends UserVotingRepo {
       String endpoint = EndPoints.election;
       //header
       Map<String, dynamic> headerRequest = {
-        'authorization': "bearer ${token}",
+        'authorization': "bearer $token",
       };
       //body
       Map<String, dynamic> bodyData = {

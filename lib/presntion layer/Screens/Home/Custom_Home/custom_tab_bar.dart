@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/network/api_service.dart';
-import 'package:voting/Shared/shard%20local/stuts_app.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
+import 'package:voting/Shared/shareWidget/stuts_app.dart';
+import 'package:voting/data/repository/candidate/candidate_repo_implemntion.dart';
 import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_page_in_election_period.dart';
@@ -10,6 +12,7 @@ import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candida
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_event_page.dart';
 import 'package:voting/presntion%20layer/view_model/check_iscandidate_viewmodel/cubit/cheack_is_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
+import 'package:voting/presntion%20layer/view_model/get_candidate_info_biewmodel/cubit/get_candidate_info_cubit.dart';
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key, required this.controller});
@@ -70,9 +73,8 @@ class _CustomTabBarBageState extends State<CustomTabBarBage> {
             controller: widget.controller,
             children: [
               BlocProvider(
-                create: (context) => CheackIsCandidateCubit(
-                    PreparAppRepoImplemnt(
-                        apiServes: ApiServes(dio: creatdio()))),
+                create: (context) =>
+                    CheackIsCandidateCubit(getIt.get<PreparAppRepoImplemnt>()),
                 child: CustomEventPage(
                   controller: navigateToCandidates,
                   eventDate: state.event,

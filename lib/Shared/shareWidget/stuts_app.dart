@@ -7,6 +7,7 @@ import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
 
 class MyAppStuts {
+  //!snak barr fail
   static void showSnackBar(BuildContext context, String errorMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -14,6 +15,7 @@ class MyAppStuts {
       ),
     );
   }
+  //!snak barr succses
 
   static void succsessShowSnackBar(BuildContext context, String errorMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -24,6 +26,7 @@ class MyAppStuts {
     );
   }
 
+//! looding
   static Widget myLooding() {
     return Center(
       child: Container(
@@ -40,6 +43,7 @@ class MyAppStuts {
   }
 }
 
+//! alert sucsses form
 class SuccsesAlert extends StatefulWidget {
   final String message;
 
@@ -113,7 +117,7 @@ class _SuccsesAlertState extends State<SuccsesAlert>
             Button(
               text: S.of(context).Ok,
               color: AppColors.mainColor,
-              fontsize: 16,
+              fontsize: 15,
               width: 66,
               height: 25,
               onPressed: () {
@@ -132,6 +136,7 @@ class _SuccsesAlertState extends State<SuccsesAlert>
     );
   }
 }
+//! shimmer for event
 
 Widget buildShammerWidget() {
   return Padding(
@@ -247,6 +252,7 @@ Widget buildShammerWidget() {
   );
 }
 
+//! news loodshimmer
 Widget buildNewsShammer() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -266,6 +272,7 @@ Widget buildNewsShammer() {
     ),
   );
 }
+//! shimmer vote
 
 class BuildCandidategShimmer extends StatelessWidget {
   const BuildCandidategShimmer({super.key});
@@ -290,6 +297,7 @@ class BuildCandidategShimmer extends StatelessWidget {
   }
 }
 
+//! shimmer result
 class BuildCandidategRusltShimmer extends StatelessWidget {
   const BuildCandidategRusltShimmer({super.key});
 
@@ -346,6 +354,7 @@ class BuildCandidategRusltShimmer extends StatelessWidget {
   }
 }
 
+//! widget for two event and result
 Widget buildVotingShammer(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),

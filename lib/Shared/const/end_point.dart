@@ -7,8 +7,8 @@ class EndPoints {
 
   static String candidateApproved = "candidate/approved";
 
-  static String SingleCandidateApproved = "candidate/approved";
-  static String Candidate = "candidate";
+  static String singleCandidateApproved = "candidate/approved";
+  static String candidate = "candidate";
 
   static String news = "news";
   static String question = "question";

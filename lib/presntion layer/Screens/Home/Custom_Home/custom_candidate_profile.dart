@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/upload_form.dart';
@@ -46,9 +46,9 @@ class CustomCandidatesProfile extends StatelessWidget {
                           height: 200,
                           width: double.infinity,
                           placeholder: (context, url) =>
-                              Center(child: CircularProgressIndicator()),
+                              const Center(child: CircularProgressIndicator()),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                              const Icon(Icons.error),
                         )
                       : VideoPlayer(
                           pathViedio:
@@ -88,9 +88,10 @@ class CustomCandidatesProfile extends StatelessWidget {
                                     title: S.of(context).add_link,
                                     link: state
                                         .candidateInfo.data!.campaign!.link!)
-                                : SizedBox(),
+                                : const SizedBox(),
                           ],
                         )
+                      //part of show button if same candidate is same user to add camp
                       : context.read<EventCubit>().eventCases("candidates") ==
                               "now"
                           ? buildImage(isAddCampiagn, isRealCandidate) ==
@@ -105,16 +106,16 @@ class CustomCandidatesProfile extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              AddCampaignScreen()),
+                                              const AddCampaignScreen()),
                                     );
                                   },
                                 )
                               : Center(
                                   child: Text(
                                   S.of(context).not_add_camp,
-                                  style: TextStyle(fontSize: 28),
+                                  style: const TextStyle(fontSize: 28),
                                 ))
-                          : SizedBox(),
+                          : const SizedBox(),
                 ],
               ),
             ),

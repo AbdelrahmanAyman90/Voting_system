@@ -1,9 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
 
 bool isEnglish() {
@@ -16,7 +15,6 @@ bool isEnglish() {
 
 bool isAddCampiagnValue = false;
 String convertEnglishNumberToArabicNumber(String input) {
-  log("&&&&&&&&&&&&&&&$input");
   const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const arabic = ['۰', '۱', '۲', '۳', '٤', '۵', '٦', '۷', '۸', '۹'];
 
@@ -44,9 +42,6 @@ Future<PlatformFile> convertToPlatformFile(String filePath) async {
 
   return platformFile;
 }
-// bool isCandidate(String idUser) {
-//   return idApprovCandidate.contains(idUser);
-// }
 
 Future<void> prepareDate() async {
   token = CashNetwork.GetFromCash(key: 'token');

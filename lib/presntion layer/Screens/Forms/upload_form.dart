@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
 import 'package:voting/data/repository/add_campiagn/add_campiagn_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 
@@ -23,8 +24,8 @@ class _AddCampaignScreenState extends State<AddCampaignScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddCampiagnCubit(
-          addCampiagnRepo: AddCampiagnRepoImplemntion(
-              apiServes: ApiServes(dio: creatdio()))),
+          addCampiagnRepo:
+              AddCampiagnRepoImplemntion(apiServes: getIt.get<ApiServes>())),
       child: SafeArea(
         child: Scaffold(
             backgroundColor: AppColors.backgroundColor,

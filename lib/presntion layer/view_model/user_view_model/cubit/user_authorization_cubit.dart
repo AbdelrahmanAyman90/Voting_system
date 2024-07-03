@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/shard%20local/cash_helper.dart';
 import 'package:voting/data/models/user_model/user_model.dart';
 import 'package:voting/data/repository/user_authorization/user_repo_implement.dart';

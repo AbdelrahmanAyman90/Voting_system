@@ -3,7 +3,7 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/const/end_point.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/network/error_network.dart';
@@ -22,7 +22,7 @@ class CandidateRepoImplemnt extends candidateRepo {
       String endpoint = EndPoints.candidateApproved;
 //header
       Map<String, dynamic> headerRequest = {
-        'authorization': "bearer ${token}",
+        'authorization': "bearer $token",
       };
 //do requst
       var data =
@@ -32,12 +32,9 @@ class CandidateRepoImplemnt extends candidateRepo {
       for (var i in data['data']['candidates']) {
         candidateList.add(CandidateModel.fromJson(i));
       }
-      // for (var i in candidateList) {
-      //   idApprovCandidate.add(i.user!);
-      // }
+
 //cheack
-      log("ggggggggggg");
-      log(candidateList.length.toString());
+
       return right(candidateList);
     } on Exception catch (e) {
       if (e is DioException) {
@@ -54,7 +51,7 @@ class CandidateRepoImplemnt extends candidateRepo {
   Future<Either<Failure, CandidateCampaignModel>> fetchsingelCandidate(
       String id) async {
     try {
-      String endpoint = "${EndPoints.SingleCandidateApproved}/$id";
+      String endpoint = "${EndPoints.singleCandidateApproved}/$id";
 //header
       Map<String, dynamic> headerRequest = {
         'authorization': "bearer ${token}",
@@ -67,12 +64,7 @@ class CandidateRepoImplemnt extends candidateRepo {
       CandidateCampaignModel candidateInfo =
           CandidateCampaignModel.fromJson(data);
 //cheack
-      if (candidateInfo.data?.campaign != null) {
-        log("ليست نل");
-        log(candidateInfo.data!.campaign.toString());
-      } else {
-        log("نل");
-      }
+
       return right(candidateInfo);
     } on Exception catch (e) {
       if (e is DioException) {

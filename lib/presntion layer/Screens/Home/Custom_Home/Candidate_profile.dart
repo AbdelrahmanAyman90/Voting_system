@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:voting/Shared/const/const_vrible.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/generated/l10n.dart';
@@ -37,7 +37,7 @@ class _CandidatesState extends State<Candidates> {
   @override
   void initState() {
     super.initState();
-
+//mount--->that indicates whether the state object is currently in the widget tree.
     _timer = Timer(Duration(seconds: 2), () async {
       if (!mounted) return;
       await context
@@ -74,40 +74,7 @@ class _CandidatesState extends State<Candidates> {
             size: 20,
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              widget.candidateName,
-              style: AppFonts.boldText(context, 16, AppColors.mainColor),
-            ),
-            context.read<EventCubit>().eventCases("elections") == "now"
-                ? TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppColors.mainColor,
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ConfirmVoteScreen(
-                            selectIndex: widget.selectCandidate,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      S.of(context).vote_vutton,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                : SizedBox(),
-          ],
-        ),
+        title: buildBodyAppBar(),
         centerTitle: true,
       ),
       body: _isLoading
@@ -121,6 +88,48 @@ class _CandidatesState extends State<Candidates> {
               isAddCampiagn:
                   context.read<GetCandidateInfoCubit>().isAddCam ?? false,
             ),
+    );
+  }
+
+/**
+ * 
+ * widget
+ * 
+ */
+  Widget buildBodyAppBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Text(
+          widget.candidateName,
+          style: AppFonts.boldText(context, 16, AppColors.mainColor),
+        ),
+        context.read<EventCubit>().eventCases("elections") == "now"
+            ? TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppColors.mainColor,
+                  primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConfirmVoteScreen(
+                        selectIndex: widget.selectCandidate,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  S.of(context).vote_vutton,
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            : SizedBox(),
+      ],
     );
   }
 }

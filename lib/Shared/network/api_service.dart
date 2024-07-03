@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 //response for do api fun like get put post
 class ApiServes {
   final Dio dio;
-  String _baseUrl = "https://graduation-project-yok6.onrender.com/api/";
+  final String _baseUrl = "https://graduation-project-yok6.onrender.com/api/";
 
   ApiServes({required this.dio});
 

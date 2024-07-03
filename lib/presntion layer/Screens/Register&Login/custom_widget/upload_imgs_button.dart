@@ -38,14 +38,6 @@ class UploadIdButtonState extends State<UploadImgsButton> {
     }
   }
 
-  void clearFileSelection() {
-    setState(() {
-      file = null;
-      widget.onFileSelected(null);
-      widget.onValidationChanged(false);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(

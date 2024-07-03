@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
 import 'package:voting/data/repository/qustion/qustion_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/Custom_Help_Wedgit/help_screen_body.dart';
@@ -15,7 +16,7 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          QustionCubit(QustionRepoImplemntion(ApiServes(dio: creatdio()))),
+          QustionCubit(QustionRepoImplemntion(getIt.get<ApiServes>())),
       child: Scaffold(
           backgroundColor: AppColors.backgroundColor,
           appBar: AppBar(

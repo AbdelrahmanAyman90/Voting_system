@@ -4,6 +4,7 @@ import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shard%20local/service_locator.dart';
 import 'package:voting/Shared/shareWidget/global_widget.dart';
 import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
@@ -30,8 +31,8 @@ class _VoteingMobileLayoutBodyState extends State<VoteingMobileLayoutBody> {
       body: context.read<EventCubit>().eventCases("elections") == "not start"
           ? const NotStart()
           : BlocProvider(
-              create: (context) => CheckIsVotedCubit(
-                  PreparAppRepoImplemnt(apiServes: ApiServes(dio: creatdio()))),
+              create: (context) =>
+                  CheckIsVotedCubit(getIt.get<PreparAppRepoImplemnt>()),
               child: const VotingBody(),
             ),
     );
