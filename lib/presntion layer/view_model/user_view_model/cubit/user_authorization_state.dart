@@ -22,3 +22,12 @@ final class UserAuthorizationLoginFail extends UserAuthorizationState {
   final String errorMassage;
   UserAuthorizationLoginFail(this.errorMassage);
 }
+
+final class UserChangePasswordLooding extends UserAuthorizationState {}
+
+final class UseChangePasswordSucsses extends UserAuthorizationState {}
+
+final class UserChangePasswordFail extends UserAuthorizationState {
+  final String errorMassage;
+  UserChangePasswordFail(this.errorMassage);
+}

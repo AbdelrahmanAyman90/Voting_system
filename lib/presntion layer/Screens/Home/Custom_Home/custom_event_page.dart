@@ -1,23 +1,21 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/Shared/network/api_service.dart';
+import 'package:voting/Shared/const/Colors.dart';
+
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/data/models/event_model/event_model.dart';
-import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Forms/application_form.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/bottom_navgiation_bar.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/event_body.dart';
 import 'package:voting/presntion%20layer/view_model/check_iscandidate_viewmodel/cubit/cheack_is_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class CustomEventPage extends StatefulWidget {
-  const CustomEventPage({super.key, required this.eventDate});
+  const CustomEventPage(
+      {super.key, required this.eventDate, required this.controller});
   final List<Events> eventDate;
+  final VoidCallback controller;
 
   @override
   State<CustomEventPage> createState() => _CustomEventPageState();
@@ -57,6 +55,7 @@ class _CustomEventPageState extends State<CustomEventPage>
 
               final List<SomeEventData> someEventDate = [
                 SomeEventData(
+                  textButton: S.of(context).applay,
                   title: S.of(context).NOMINATING_FOR_ELECTIONS,
                   onPressed:
                       context.read<EventCubit>().eventCases("nomination") ==
@@ -64,7 +63,7 @@ class _CustomEventPageState extends State<CustomEventPage>
                               isCandidateSelf == true
                           ? () {
                               MyAppStuts.showSnackBar(
-                                  context, "لقد رشحت نفسك من قبل");
+                                  context, S.of(context).error_candidate);
                             }
                           : () {
                               Navigator.push(
@@ -77,12 +76,11 @@ class _CustomEventPageState extends State<CustomEventPage>
                             },
                 ),
                 SomeEventData(
-                  title: S.of(context).add_Campign_Candidates,
-                  onPressed: () {
-                    // TODO: your code to navigate
-                  },
-                ),
+                    textButton: S.of(context).show,
+                    title: S.of(context).add_Campign_Candidates,
+                    onPressed: widget.controller),
                 SomeEventData(
+                  textButton: S.of(context).vote_vutton,
                   title: S.of(context).choose_Candidate,
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
@@ -96,17 +94,25 @@ class _CustomEventPageState extends State<CustomEventPage>
                 ),
               ];
 
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return EventBody(
-                    caseEventName: widget.eventDate[index].type!,
-                    endDataTime: widget.eventDate[index].end!,
-                    image: 'assets/images/Ellipse 36.png',
-                    onPressed: someEventDate[index].onPressed,
-                    tittel: someEventDate[index].title,
-                  );
+              return RefreshIndicator(
+                color: Colors.white,
+                backgroundColor: AppColors.mainColor,
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return EventBody(
+                      textButton: someEventDate[index].textButton,
+                      caseEventName: widget.eventDate[index].type!,
+                      endDataTime: widget.eventDate[index].end!,
+                      image: 'assets/images/Ellipse 36.png',
+                      onPressed: someEventDate[index].onPressed,
+                      tittel: someEventDate[index].title,
+                    );
+                  },
+                  itemCount: widget.eventDate.length,
+                ),
+                onRefresh: () {
+                  return context.read<EventCubit>().fetchEvent();
                 },
-                itemCount: widget.eventDate.length,
               );
             }
           });
@@ -119,9 +125,7 @@ class _CustomEventPageState extends State<CustomEventPage>
 class SomeEventData {
   final String title;
   final VoidCallback onPressed;
-
-  SomeEventData({
-    required this.title,
-    required this.onPressed,
-  });
+  final String textButton;
+  SomeEventData(
+      {required this.title, required this.onPressed, required this.textButton});
 }

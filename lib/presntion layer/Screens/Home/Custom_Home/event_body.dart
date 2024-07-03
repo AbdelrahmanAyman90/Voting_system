@@ -10,11 +10,13 @@ class EventBody extends StatelessWidget {
       required this.endDataTime,
       required this.image,
       required this.onPressed,
+      required this.textButton,
       required this.tittel});
   final String image;
   final String tittel;
   final String caseEventName;
   final String endDataTime;
+  final String textButton;
   final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class EventBody extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: EventContainer(
                 img: image,
+                textButton: textButton,
                 title: tittel,
                 cases: context.read<EventCubit>().eventCases(caseEventName)!,
                 endTime: DateTime.parse(endDataTime),

@@ -57,6 +57,10 @@ class CustomTabBarBage extends StatefulWidget {
 }
 
 class _CustomTabBarBageState extends State<CustomTabBarBage> {
+  void navigateToCandidates() {
+    widget.controller.animateTo(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EventCubit, EventState>(
@@ -70,6 +74,7 @@ class _CustomTabBarBageState extends State<CustomTabBarBage> {
                     PreparAppRepoImplemnt(
                         apiServes: ApiServes(dio: creatdio()))),
                 child: CustomEventPage(
+                  controller: navigateToCandidates,
                   eventDate: state.event,
                 ),
               ),

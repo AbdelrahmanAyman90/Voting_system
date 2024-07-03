@@ -49,18 +49,20 @@ class LoginForm extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
-                hintText: "National ID", controller: nationalId),
+              hintText: S.of(context).National_ID,
+              controller: nationalId,
+            ),
             const SizedBox(
               height: 10,
             ),
             CustomPassowrdText(
-              hintText: "password",
+              hintText: S.of(context).password,
               controller: password,
               validator: (value) {
                 if (password.text.isEmpty) {
                   return S.of(context).passord_error;
                 } else if (value!.length < 8) {
-                  return 'Password must be at least 8 characters or numbers';
+                  return S.of(context).error_length_password;
                 } else {
                   return null;
                 }
@@ -71,14 +73,16 @@ class LoginForm extends StatelessWidget {
               height: 20,
             ),
             Button(
-              text: 'Log in',
+              text: S.of(context).login,
               color: AppColors.mainColor,
               fontsize: 18,
               width: 310,
               height: 45,
               onPressed: () {
-                context.read<UserAuthorizationCubit>().userLogin(
-                    nationalId: nationalId.text, password: password.text);
+                if (keyform.currentState!.validate()) {
+                  context.read<UserAuthorizationCubit>().userLogin(
+                      nationalId: nationalId.text, password: password.text);
+                }
               },
               textcolor: Colors.white,
             )

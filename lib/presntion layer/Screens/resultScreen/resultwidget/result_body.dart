@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/network/api_service.dart';
+import 'package:voting/Shared/shard%20local/stuts_app.dart';
 import 'package:voting/data/models/election/election_result.dart';
 import 'package:voting/presntion%20layer/Screens/resultScreen/resultwidget/result_list.dart';
 import 'package:web_socket_channel/io.dart';
@@ -66,10 +66,11 @@ class _RusltBodyState extends State<RusltBody> {
   @override
   Widget build(BuildContext context) {
     return channel == null
-        ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.black,
+        ? const Padding(
+            padding: EdgeInsets.only(
+              top: 12,
             ),
+            child: BuildCandidategRusltShimmer(),
           )
         : StreamBuilder(
             stream: channel!.stream,
@@ -79,11 +80,7 @@ class _RusltBodyState extends State<RusltBody> {
                   child: Center(child: Text('Error: ${snapshot.error}')),
                 );
               } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.mainColor,
-                  ),
-                );
+                return const BuildCandidategRusltShimmer();
               } else if (snapshot.hasData) {
                 var data = jsonDecode(snapshot.data as String);
                 List<Results> results = (data['results'] as List)
@@ -100,17 +97,16 @@ class _RusltBodyState extends State<RusltBody> {
                   future: getDataAfterEventEnd(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.mainColor,
-                        ),
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 12, left: 12, right: 12),
+                        child: BuildCandidategRusltShimmer(),
                       );
                     } else if (snapshot.hasError) {
                       return Center(
                           child:
                               Center(child: Text('Error: ${snapshot.error}')));
                     } else if (!snapshot.hasData) {
-                      return Center(
+                      return const Center(
                           child: Center(child: Text('No data available')));
                     } else {
                       ElectionResult data = snapshot.data!;

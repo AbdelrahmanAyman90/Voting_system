@@ -14,4 +14,8 @@ abstract class UserAuthorizationRepo {
     required String nationalId,
     required String password,
   });
+  Future<Either<Failure, String>> changePassword({
+    required String oldPassword,
+    required String newPassword,
+  });
 }

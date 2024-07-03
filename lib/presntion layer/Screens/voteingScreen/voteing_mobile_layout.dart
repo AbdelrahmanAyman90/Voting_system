@@ -4,6 +4,7 @@ import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/network/api_service.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
+import 'package:voting/Shared/shareWidget/global_widget.dart';
 import 'package:voting/data/repository/preparapp/prepar_app_repo_implment.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/not_start_screen/not_start_screen.dart';
@@ -35,26 +36,4 @@ class _VoteingMobileLayoutBodyState extends State<VoteingMobileLayoutBody> {
             ),
     );
   }
-}
-
-PreferredSizeWidget? buildAppBar(BuildContext context, String name) {
-  return AppBar(
-    automaticallyImplyLeading: false,
-    backgroundColor: Colors.white,
-    elevation: 0,
-    toolbarHeight: 60,
-    title: Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: Text("$name",
-          style: AppFonts.boldText(context, 24, AppColors.mainColor)),
-      // Text(
-      //   S.of(context).elesctions,
-      //   style: TextStyle(
-      //     fontSize: 28,
-      //     color: AppColors.mainColor,
-      //     fontWeight: FontWeight.w600,
-      //   ),
-      // ),
-    ),
-  );
 }

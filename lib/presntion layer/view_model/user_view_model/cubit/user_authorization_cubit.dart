@@ -42,7 +42,6 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
   setUserData(UserModel r, password) async {
     CashNetwork.InsertToCash(key: 'token', value: r.data!.token);
     CashNetwork.InsertToCash(key: 'idUser', value: r.data!.user!.sId!);
-    CashNetwork.InsertToCash(key: 'password', value: password);
     CashNetwork.InsertToCash(key: 'name', value: r.data!.user!.name!);
     CashNetwork.InsertToCash(
         key: 'national_id', value: r.data!.user!.nationalId!);
@@ -76,6 +75,23 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
 
   logout() {
     CashNetwork.clearData();
+  }
+
+  userChangePassword(
+      {required String newpassword, required String oldpassword}) async {
+    emit(UserChangePasswordLooding());
+
+    try {
+      var result = await userRepoRegister.changePassword(
+          newPassword: newpassword, oldPassword: oldpassword);
+      result.fold((l) {
+        emit(UserChangePasswordFail(l.errorMassage));
+      }, (r) async {
+        emit(UseChangePasswordSucsses());
+      });
+    } on Exception catch (e) {
+      emit(UserChangePasswordFail(e.toString()));
+    }
   }
 
   @override

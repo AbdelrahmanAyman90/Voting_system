@@ -640,30 +640,30 @@ class S {
     );
   }
 
-  /// `NOMINATING FOR ELECTIONS`
+  /// `Nonating For Election`
   String get NOMINATING_FOR_ELECTIONS {
     return Intl.message(
-      'NOMINATING FOR ELECTIONS',
+      'Nonating For Election',
       name: 'NOMINATING_FOR_ELECTIONS',
       desc: '',
       args: [],
     );
   }
 
-  /// `Add the election campaign`
+  /// `Add The Election Campaign`
   String get add_Campign_Candidates {
     return Intl.message(
-      'Add the election campaign',
+      'Add The Election Campaign',
       name: 'add_Campign_Candidates',
       desc: '',
       args: [],
     );
   }
 
-  /// `Selection of candidates`
+  /// `Selection Of Candidates`
   String get choose_Candidate {
     return Intl.message(
-      'Selection of candidates',
+      'Selection Of Candidates',
       name: 'choose_Candidate',
       desc: '',
       args: [],
@@ -1200,11 +1200,581 @@ class S {
     );
   }
 
-  /// `lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum`
-  String get ans_ques1_in_help {
+  /// `Register`
+  String get register_word {
     return Intl.message(
-      'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum',
-      name: 'ans_ques1_in_help',
+      'Register',
+      name: 'register_word',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `create your new account`
+  String get crate_account_register {
+    return Intl.message(
+      'create your new account',
+      name: 'crate_account_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `already having an account ?`
+  String get Already_having_an_account {
+    return Intl.message(
+      'already having an account ?',
+      name: 'Already_having_an_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload National ID`
+  String get Upload_ID {
+    return Intl.message(
+      'Upload National ID',
+      name: 'Upload_ID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID`
+  String get National_ID {
+    return Intl.message(
+      'National ID',
+      name: 'National_ID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters or numbers long`
+  String get error_length_password {
+    return Intl.message(
+      'Password must be at least 8 characters or numbers long',
+      name: 'error_length_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get Confirm_password {
+    return Intl.message(
+      'Confirm Password',
+      name: 'Confirm_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get error_not_match {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'error_not_match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a real-time photo`
+  String get Take_Realtime_photo {
+    return Intl.message(
+      'Take a real-time photo',
+      name: 'Take_Realtime_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get Confirm_password_is_required {
+    return Intl.message(
+      'This field is required',
+      name: 'Confirm_password_is_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `upload all image`
+  String get upload_all_image {
+    return Intl.message(
+      'upload all image',
+      name: 'upload_all_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome Back !`
+  String get welcome_back {
+    return Intl.message(
+      'Welcome Back !',
+      name: 'welcome_back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to your account`
+  String get enter_your_account {
+    return Intl.message(
+      'Log in to your account',
+      name: 'enter_your_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Acount`
+  String get login_button {
+    return Intl.message(
+      'Create Acount',
+      name: 'login_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Fail`
+  String get verfication_fail {
+    return Intl.message(
+      'Verification Fail',
+      name: 'verfication_fail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get try_agin {
+    return Intl.message(
+      'Try Again',
+      name: 'try_agin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification Successful`
+  String get varfication_succses {
+    return Intl.message(
+      'Verification Successful',
+      name: 'varfication_succses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to iDemocracy`
+  String get welcome_in_id {
+    return Intl.message(
+      'Welcome to iDemocracy',
+      name: 'welcome_in_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go To Home`
+  String get go_home {
+    return Intl.message(
+      'Go To Home',
+      name: 'go_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get login {
+    return Intl.message(
+      'Log in',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If You Forgot your password please go to your governorate’s admin !! `
+  String get forget_password {
+    return Intl.message(
+      'If You Forgot your password please go to your governorate’s admin !! ',
+      name: 'forget_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget Password ?`
+  String get forget {
+    return Intl.message(
+      'Forget Password ?',
+      name: 'forget',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Account`
+  String get creat_new_account {
+    return Intl.message(
+      'Create Account',
+      name: 'creat_new_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter National ID`
+  String get error_should_enter_id {
+    return Intl.message(
+      'Please Enter National ID',
+      name: 'error_should_enter_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter 14 numbers `
+  String get error_lenght_id {
+    return Intl.message(
+      'Please Enter 14 numbers ',
+      name: 'error_lenght_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hello `
+  String get hello {
+    return Intl.message(
+      'hello ',
+      name: 'hello',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Applay`
+  String get applay {
+    return Intl.message(
+      'Applay',
+      name: 'applay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show`
+  String get show {
+    return Intl.message(
+      'Show',
+      name: 'show',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vote`
+  String get vote_vutton {
+    return Intl.message(
+      'Vote',
+      name: 'vote_vutton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are already registered as a candidate`
+  String get error_candidate {
+    return Intl.message(
+      'You are already registered as a candidate',
+      name: 'error_candidate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Period Ended`
+  String get end_period {
+    return Intl.message(
+      'Period Ended',
+      name: 'end_period',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Haven't started yet`
+  String get not_start_period {
+    return Intl.message(
+      'Haven\'t started yet',
+      name: 'not_start_period',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Day`
+  String get day {
+    return Intl.message(
+      'Day',
+      name: 'day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hour`
+  String get hour {
+    return Intl.message(
+      'Hour',
+      name: 'hour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minute`
+  String get mint {
+    return Intl.message(
+      'Minute',
+      name: 'mint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Elections Have Ended`
+  String get vot_end {
+    return Intl.message(
+      'Elections Have Ended',
+      name: 'vot_end',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Elections Ended After`
+  String get vote_end_after {
+    return Intl.message(
+      'Elections Ended After',
+      name: 'vote_end_after',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get chang_password {
+    return Intl.message(
+      'Change Password',
+      name: 'chang_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If You Forgot your old password please go to your governorate’s admin`
+  String get hint_change {
+    return Intl.message(
+      'If You Forgot your old password please go to your governorate’s admin',
+      name: 'hint_change',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old Password`
+  String get old_pas {
+    return Intl.message(
+      'Old Password',
+      name: 'old_pas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get new_pas {
+    return Intl.message(
+      'New Password',
+      name: 'new_pas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get conf_pass {
+    return Intl.message(
+      'Confirm Password',
+      name: 'conf_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `submit`
+  String get sumb {
+    return Intl.message(
+      'submit',
+      name: 'sumb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is Change Successfully`
+  String get change_sucsses {
+    return Intl.message(
+      'Password is Change Successfully',
+      name: 'change_sucsses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out? You will lose all your information`
+  String get hint_logout {
+    return Intl.message(
+      'Are you sure you want to log out? You will lose all your information',
+      name: 'hint_logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message(
+      'Exit',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your name`
+  String get enter_name {
+    return Intl.message(
+      'Enter your name',
+      name: 'enter_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your job`
+  String get enter_job {
+    return Intl.message(
+      'Enter your job',
+      name: 'enter_job',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your educational level`
+  String get enter_educ {
+    return Intl.message(
+      'Enter your educational level',
+      name: 'enter_educ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please upload all files`
+  String get shoulad_upload_all {
+    return Intl.message(
+      'Please upload all files',
+      name: 'shoulad_upload_all',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your request has been successfully registered. Please wait until the announcement of the candidates.`
+  String get hint_form {
+    return Intl.message(
+      'Your request has been successfully registered. Please wait until the announcement of the candidates.',
+      name: 'hint_form',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add links`
+  String get add_link {
+    return Intl.message(
+      'Add links',
+      name: 'add_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add campaign`
+  String get add_camp {
+    return Intl.message(
+      'Add campaign',
+      name: 'add_camp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Campaign not added`
+  String get not_add_camp {
+    return Intl.message(
+      'Campaign not added',
+      name: 'not_add_camp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Campaign added successfully`
+  String get add_camp_succsfly {
+    return Intl.message(
+      'Campaign added successfully',
+      name: 'add_camp_succsfly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video must be uploaded`
+  String get upload_vide {
+    return Intl.message(
+      'Video must be uploaded',
+      name: 'upload_vide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End After`
+  String get wnded_after {
+    return Intl.message(
+      'End After',
+      name: 'wnded_after',
       desc: '',
       args: [],
     );

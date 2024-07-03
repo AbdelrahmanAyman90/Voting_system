@@ -1,16 +1,13 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:async';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/Shared/shareWidget/button.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:voting/presntion%20layer/view_model/prepare_app_viewmodel/cubit/news_cubit.dart';
 
 class EventContainer extends StatefulWidget {
   final String img;
@@ -18,15 +15,15 @@ class EventContainer extends StatefulWidget {
   final DateTime endTime;
   final String cases;
   final void Function() onPressed;
-
-  const EventContainer({
-    super.key,
-    required this.onPressed,
-    required this.img,
-    required this.title,
-    required this.endTime,
-    required this.cases,
-  });
+  final String textButton;
+  const EventContainer(
+      {super.key,
+      required this.onPressed,
+      required this.img,
+      required this.title,
+      required this.endTime,
+      required this.cases,
+      required this.textButton});
 
   @override
   State<EventContainer> createState() => _EventContainerState();
@@ -34,19 +31,26 @@ class EventContainer extends StatefulWidget {
 
 class _EventContainerState extends State<EventContainer> {
   late Duration remainingTime;
-  late String formattedTime;
-  Timer? timer;
+  late String formattedTime = "";
 
   @override
   void initState() {
     super.initState();
+    tz.initializeTimeZones();
+  }
+
+// didChangeDependencies is called just a few moments after the state loads its dependencies and context is available at this moment so here you can use context.
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _updateRemainingTime();
   }
 
   void _updateRemainingTime() {
-    // Get current time in Egypt
-    tz.initializeTimeZones();
+    log("===============");
+    log(isEnglish().toString());
 
+    // Get current time in Egypt
     tz.Location egypt = tz.getLocation('Africa/Cairo');
     tz.TZDateTime nowEgypt = tz.TZDateTime.now(egypt);
 
@@ -56,32 +60,30 @@ class _EventContainerState extends State<EventContainer> {
     // Calculate the remaining time
     Duration remainingTime = endTimeEgypt.difference(nowEgypt);
 
-    // Calculate the remaining time
-
     setState(() {
       if (remainingTime.isNegative) {
         formattedTime = "انتهت الفتره";
       } else if (remainingTime.inDays > 0) {
-        formattedTime =
-            ' ${convertEnglishNumberToArabicNumber(remainingTime.inDays.toString())} يوم';
+        formattedTime = isEnglish()
+            ? ' ${remainingTime.inDays.toString()} Day '
+            : ' ${convertEnglishNumberToArabicNumber(remainingTime.inDays.toString())} يوم';
       } else if (remainingTime.inHours > 0) {
-        formattedTime =
-            '${convertEnglishNumberToArabicNumber(remainingTime.inHours.toString())} ساعه';
+        formattedTime = isEnglish()
+            ? ' ${remainingTime.inDays.toString()} Hours'
+            : ' ${convertEnglishNumberToArabicNumber(remainingTime.inHours.toString())} ساعه';
       } else {
-        formattedTime =
-            '${convertEnglishNumberToArabicNumber(remainingTime.inMinutes.toString())} دقيقه';
+        formattedTime = isEnglish()
+            ? ' ${remainingTime.inDays.toString()} Minutes'
+            : ' ${convertEnglishNumberToArabicNumber(remainingTime.inMinutes.toString())} دقيقه';
       }
     });
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
+    endtimeElection = formattedTime;
   }
 
   @override
   Widget build(BuildContext context) {
+    log("1111111111111111111111");
+    log(formattedTime);
     return Column(
       children: [
         Row(
@@ -99,7 +101,7 @@ class _EventContainerState extends State<EventContainer> {
               children: [
                 Text(
                   widget.title,
-                  style: AppFonts.semiBoldText(context, 18, Colors.black),
+                  style: AppFonts.semiBoldText(context, 16, Colors.black),
                 ),
                 const SizedBox(
                   height: 4,
@@ -112,7 +114,7 @@ class _EventContainerState extends State<EventContainer> {
           height: 5,
         ),
         Padding(
-          padding: const EdgeInsets.only(right: 18),
+          padding: EdgeInsets.only(right: isEnglish() ? 3 : 0),
           child: Row(
             children: [
               Row(
@@ -128,21 +130,21 @@ class _EventContainerState extends State<EventContainer> {
                   widget.cases == "end"
                       ? Center(
                           child: Text(
-                            "انتهت الفتره",
+                            S.of(context).end_period,
                             style:
-                                AppFonts.regularText(context, 18, Colors.red),
+                                AppFonts.regularText(context, 16, Colors.red),
                           ),
                         )
                       : widget.cases == "not start"
                           ? Text(
-                              "لم تبدا بعد",
+                              S.of(context).not_start_period,
                               style: AppFonts.regularText(
-                                  context, 18, Colors.amber),
+                                  context, 16, Colors.amber),
                             )
                           : Text(
-                              "ستنتهي بعد $formattedTime",
+                              "${S.of(context).wnded_after}$formattedTime",
                               style: AppFonts.regularText(
-                                  context, 18, AppColors.secondaryTextColor),
+                                  context, 16, AppColors.secondaryTextColor),
                             )
                 ],
               ),
@@ -153,7 +155,7 @@ class _EventContainerState extends State<EventContainer> {
               widget.cases == "end"
                   ? const SizedBox(height: 36)
                   : Button(
-                      text: S.of(context).Apply,
+                      text: widget.textButton,
                       color: widget.cases == "not start"
                           ? Colors.white
                           : AppColors.mainColor,

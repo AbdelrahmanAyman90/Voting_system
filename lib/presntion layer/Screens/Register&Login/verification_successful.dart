@@ -3,6 +3,7 @@ import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
 
 import 'package:voting/Shared/shareWidget/button.dart';
+import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/home_screen.dart';
 
 class VerificationSuccessful extends StatelessWidget {
@@ -21,20 +22,20 @@ class VerificationSuccessful extends StatelessWidget {
               height: 40,
             ),
             Text(
-              'Verification Successful',
+              S.of(context).varfication_succses,
               style: AppFonts.boldText(context, 28, Colors.black),
             ),
             const SizedBox(
               height: 8,
             ),
             Text(
-              "Welcome to iDemocracy",
+              S.of(context).welcome_in_id,
               style: AppFonts.regularText(
                   context, 16, AppColors.secondaryTextColor),
             ),
             const Spacer(),
             Button(
-              text: 'Go To Home',
+              text: S.of(context).go_home,
               color: AppColors.mainColor,
               fontsize: 16,
               width: 310,

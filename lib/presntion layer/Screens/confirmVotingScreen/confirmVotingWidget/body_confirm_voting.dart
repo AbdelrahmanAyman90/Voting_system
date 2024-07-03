@@ -74,7 +74,7 @@ wedgit fun
           key: _formKey,
           child: CustomPassowrdText(
             controller: ConfirmPassword,
-            hintText: 'ادخل كلمه المرور',
+            hintText: S.of(context).password,
             validator: (value) {
               if (ConfirmPassword.text.isEmpty) {
                 return S.of(context).passord_error;

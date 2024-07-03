@@ -49,16 +49,11 @@ Future<PlatformFile> convertToPlatformFile(String filePath) async {
 // }
 
 Future<void> prepareDate() async {
-  token = await CashNetwork.GetFromCash(key: 'token');
-  idUser = await CashNetwork.GetFromCash(key: 'idUser');
-  userName = await CashNetwork.GetFromCash(key: 'name');
+  token = CashNetwork.GetFromCash(key: 'token');
+  idUser = CashNetwork.GetFromCash(key: 'idUser');
+  userName = CashNetwork.GetFromCash(key: 'name');
 
-  userNationalId = await CashNetwork.GetFromCash(key: 'national_id');
+  userNationalId = CashNetwork.GetFromCash(key: 'national_id');
 
-  userAddress = await CashNetwork.GetFromCash(key: 'address');
-
-  // isCandidateSelf =
-  //     await CashNetwork.GetFromCash(key: 'isCandidatSelf') == "true"
-  //         ? true
-  //         : false;
+  userAddress = CashNetwork.GetFromCash(key: 'address');
 }

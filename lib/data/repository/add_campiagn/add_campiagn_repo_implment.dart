@@ -43,9 +43,13 @@ class AddCampiagnRepoImplemntion extends AddCampiagnRepo {
 
       formData.fields.add(MapEntry('bio', bio));
       formData.fields.add(MapEntry('goals', goals));
-      link != null ? formData.fields.add(MapEntry('link', link)) : null;
+      link != "" ? formData.fields.add(MapEntry('link', link!)) : null;
 
 //do requst
+      log("0000000000000");
+      formData.fields.forEach((field) {
+        log('${field.key}: ${field.value}');
+      });
       var data = await apiServes.post(
           endpoint: endpoint, data: formData, headerRequst: headerRequest);
 

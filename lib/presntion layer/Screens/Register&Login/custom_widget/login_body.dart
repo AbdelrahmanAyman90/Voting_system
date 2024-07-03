@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/custom_widget/login_form.dart';
 
 class LoginBody extends StatelessWidget {
@@ -14,14 +15,14 @@ class LoginBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'welcome Back!',
+            S.of(context).welcome_back,
             style: AppFonts.boldText(context, 28, AppColors.mainColor),
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            "Log in to your account",
+            S.of(context).enter_your_account,
             style:
                 AppFonts.regularText(context, 16, AppColors.secondaryTextColor),
           ),
@@ -50,7 +51,7 @@ class LoginBody extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'Create Acount',
+                  S.of(context).creat_new_account,
                   style: AppFonts.regularText(context, 16, AppColors.mainColor),
                 ),
               )

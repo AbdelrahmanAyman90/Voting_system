@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:voting/Shared/const/const_vrible.dart';
-import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
-import 'package:voting/Shared/shareWidget/button.dart';
+import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Custom_Home/custom_candidate_profile.dart';
 import 'package:voting/presntion%20layer/Screens/confirmVotingScreen/confirm_voteing_screen.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
@@ -103,7 +101,7 @@ class _CandidatesState extends State<Candidates> {
                       );
                     },
                     child: Text(
-                      'انتخب',
+                      S.of(context).vote_vutton,
                       style: TextStyle(color: Colors.white),
                     ),
                   )

@@ -44,7 +44,7 @@ class PersonalInfoInCandidateProfile extends StatelessWidget {
             ),
             PersonalInfo(
                 title: S.of(context).age_title,
-                desc: S.of(context).age_desc,
+                desc: candidateData!.age.toString(),
                 width: 53),
             const SizedBox(
               height: 16,

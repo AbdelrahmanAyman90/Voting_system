@@ -25,7 +25,7 @@ class CheckIsVotedCubit extends Cubit<CheckIsVotedState> {
             emit(CheackIsUserVoteFail(l.errorMassage));
           },
           (r) async {
-            log("iscandidate from api---> $r");
+            log("isvote from api---> $r");
 
             await CashNetwork.InsertToCash(
                 key: "user_vote", value: r.toString());

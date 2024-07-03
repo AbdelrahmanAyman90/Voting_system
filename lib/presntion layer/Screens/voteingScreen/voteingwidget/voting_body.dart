@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/Shared/shard%20local/stuts_app.dart';
@@ -45,15 +46,12 @@ class _VotingBodyState extends State<VotingBody> {
           return BlocBuilder<CheckIsVotedCubit, CheckIsVotedState>(
             builder: (context, state) {
               if (state is CheackIsUserVotedLooding) {
-                return Center(
-                    child: CircularProgressIndicator(
-                  color: AppColors.mainColor,
-                ));
+                return const BuildCandidategShimmer();
               } else if (state is CheackIsUserVoteFail) {
                 return Center(
                   child: Text(
                     state.errorMassage,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 );
               } else {
@@ -124,11 +122,7 @@ class _VotingBodyState extends State<VotingBody> {
         } else if (state is GetCandidateFail) {
           return Center(child: Text(state.errorMassage));
         } else {
-          return Center(
-            child: CircularProgressIndicator(
-              color: AppColors.mainColor,
-            ),
-          );
+          return const BuildCandidategShimmer();
         }
       },
     );

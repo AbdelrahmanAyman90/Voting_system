@@ -15,6 +15,15 @@ class MyAppStuts {
     );
   }
 
+  static void succsessShowSnackBar(BuildContext context, String errorMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(errorMessage),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
   static Widget myLooding() {
     return Center(
       child: Container(
@@ -252,6 +261,149 @@ Widget buildNewsShammer() {
             height: 200.0,
             color: Colors.grey, // Optional: add a color to avoid default black
           ),
+        ),
+      ),
+    ),
+  );
+}
+
+class BuildCandidategShimmer extends StatelessWidget {
+  const BuildCandidategShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.backgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return buildVotingShammer(context);
+            },
+            itemCount: 3,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BuildCandidategRusltShimmer extends StatelessWidget {
+  const BuildCandidategRusltShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppColors.backgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //total voting
+              Shimmer.fromColors(
+                baseColor: Colors.grey[200]!,
+                highlightColor: Colors.grey[100]!,
+                child: const Column(
+                  children: [
+                    Text(
+                      "number vote",
+                    ),
+                    Text(
+                      // todo api
+                      "4",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Text(
+                  // todo api
+                  "voting end after",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return buildVotingShammer(context);
+              },
+              itemCount: 3,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget buildVotingShammer(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+        child: Row(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey[300], // Placeholder color for shimmer
+                ),
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Text(
+                      "name candidate",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Text(
+                      "job",
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     ),

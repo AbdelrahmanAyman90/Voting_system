@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_vrible.dart';
 import 'package:voting/Shared/shard%20local/function_helper.dart';
 import 'package:voting/data/models/election/election_result.dart';
 import 'package:voting/generated/l10n.dart';
@@ -54,12 +55,12 @@ class BodyWhenDataCame extends StatelessWidget {
                 end
                     ? Text(
                         // todo api
-                        "انتهت الانتخابات",
+                        S.of(context).vot_end,
                         style: AppFonts.regularText(context, 14, Colors.red),
                       )
                     : Text(
                         // todo api
-                        S.of(context).voting_end,
+                        "${S.of(context).vote_end_after}${endtimeElection!}",
                         style: AppFonts.regularText(
                             context, 14, AppColors.secondaryTextColor),
                       )

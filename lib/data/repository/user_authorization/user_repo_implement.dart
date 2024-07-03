@@ -98,4 +98,33 @@ class UserAuthorizationepoImplemntion extends UserAuthorizationRepo {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, String>> changePassword(
+      {required String oldPassword, required String newPassword}) async {
+    try {
+      String endpoint = EndPoints.changePassword;
+      Map<String, dynamic> headerRequst = {
+        "authorization": "bearer ${token}",
+      };
+      Map<String, dynamic> bodyRequst = {
+        "password": oldPassword,
+        "newPassword": newPassword,
+      };
+
+      var data = await apiServes.patch(
+          endpoint: endpoint,
+          bodyRequst: bodyRequst,
+          headerRequst: headerRequst);
+      return right("good");
+    } on Exception catch (e) {
+      if (e is DioException) {
+        // log(e.toString());
+        return left(ServerFailuar.fromDioError(e)); //! return
+      } else {
+        // log(e.toString());
+        return left(ServerFailuar(e.toString())); //! return
+      }
+    }
+  }
 }

@@ -45,24 +45,6 @@ class _AddCampaignWidgetState extends State<AddCampaignWidget> {
     });
   }
 
-  // void submitForm() {
-  //   if (_isFormValid) {
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute<void>(
-  //         builder: (BuildContext context) =>
-  //             const SubmittedSuccessfullyScreen(),
-  //       ),
-  //     );
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Please upload your vedio.'),
-  //       ),
-  //     );
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -143,7 +125,7 @@ class _AddCampaignWidgetState extends State<AddCampaignWidget> {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => SuccsesAlert(
-                            message: "تمت اضافه الحمله بنجاح",
+                            message: S.of(context).add_camp_succsfly,
                           ),
                         );
                       }
@@ -163,8 +145,8 @@ class _AddCampaignWidgetState extends State<AddCampaignWidget> {
                               link: inputLinkController?.text);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please upload your vedio.'),
+                            SnackBar(
+                              content: Text(S.of(context).upload_vide),
                             ),
                           );
                         }

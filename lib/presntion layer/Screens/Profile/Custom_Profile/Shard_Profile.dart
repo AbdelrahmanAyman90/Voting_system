@@ -7,7 +7,10 @@ import 'package:share_plus/share_plus.dart';
 // import 'package:share_plus/share_plus.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/help_screen.dart';
+import 'package:voting/presntion%20layer/Screens/changePasswordScreen/change_pssword_screen.dart';
+import 'package:voting/presntion%20layer/Screens/changePasswordScreen/custom_widget/change_password_form.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
 
 class ProfileInfo extends StatelessWidget {
@@ -120,17 +123,29 @@ class ProfileInfoButton extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(child: RowInProfile(icon: icon2, text: text2)),
+            GestureDetector(
+              child: RowInProfile(icon: icon2, text: text2),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) =>
+                        const ChangePasswordScreen(),
+                  ),
+                );
+              },
+            ),
             const SizedBox(
               height: 16,
             ),
             GestureDetector(
-                onTap: () {
-                  String sharedText =
-                      r' "Make your mark, cast your vote." Share via iDemocracy application';
-                  Share.share(sharedText);
-                },
-                child: RowInProfile(icon: icon3, text: text3)),
+              onTap: () {
+                String sharedText =
+                    r' "Make your mark, cast your vote." Share via iDemocracy application';
+                Share.share(sharedText);
+              },
+              child: RowInProfile(icon: icon3, text: text3),
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -183,17 +198,45 @@ void _showLogoutDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('تسجيل الخروج '),
-        content: Text('هل انت متاكد من تسجيل الخروج سوف تفقد كل معلوماتك ؟'),
+        backgroundColor: Colors.white,
+        //title: const Text('تسجيل الخروج '),
+        content: IntrinsicHeight(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.logout,
+                  color: Color(0xFF008753),
+                  size: 50,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(S.of(context).hint_logout),
+              ],
+            ),
+          ),
+        ),
         actions: <Widget>[
           TextButton(
-            child: Text('الغاء'),
+            style: TextButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 214, 214, 214),
+            ),
+            child: Text(
+              S.of(context).cancel,
+              style: TextStyle(color: Color(0xFF008753)),
+            ),
             onPressed: () {
               Navigator.of(context).pop(); // Dismiss the dialog
             },
           ),
           TextButton(
-            child: Text('خروج'),
+            style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFF008753),
+                textStyle: const TextStyle(color: Colors.white)),
+            child: Text(S.of(context).log_out,
+                style: TextStyle(color: Colors.white)),
             onPressed: () async {
               await context.read<UserAuthorizationCubit>().logout();
               Restart.restartApp();

@@ -27,8 +27,6 @@ class CustomCandidatesProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetCandidateInfoCubit, GetCandidateInfoState>(
       builder: (context, state) {
-        log("----------");
-        log(isAddCampiagn.toString());
         if (state is GetSingleCandidateSuccess) {
           return SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -87,7 +85,7 @@ class CustomCandidatesProfile extends StatelessWidget {
                             ),
                             state.candidateInfo.data!.campaign!.link != null
                                 ? AdditinalLink(
-                                    title: "روابط ايضافيه",
+                                    title: S.of(context).add_link,
                                     link: state
                                         .candidateInfo.data!.campaign!.link!)
                                 : SizedBox(),
@@ -98,7 +96,7 @@ class CustomCandidatesProfile extends StatelessWidget {
                           ? buildImage(isAddCampiagn, isRealCandidate) ==
                                   "show data"
                               ? ButtonWidget(
-                                  word: "اضف الحمله",
+                                  word: S.of(context).add_camp,
                                   color: AppColors.mainColor,
                                   textcolor: Colors.white,
                                   //!Add campiagn
@@ -111,9 +109,9 @@ class CustomCandidatesProfile extends StatelessWidget {
                                     );
                                   },
                                 )
-                              : const Center(
+                              : Center(
                                   child: Text(
-                                  "لم يضف الحمله حتى الان",
+                                  S.of(context).not_add_camp,
                                   style: TextStyle(fontSize: 28),
                                 ))
                           : SizedBox(),

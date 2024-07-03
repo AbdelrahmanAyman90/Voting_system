@@ -54,29 +54,6 @@ class _CandidateListState extends State<CandidateList> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: imageContainer(widget.img),
-            // Container(
-            //   width: 120,
-            //   height: 70,
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     image: DecorationImage(
-            //       image: CachedNetworkImageProvider(widget.img),
-            //       fit: BoxFit.fill,
-            //     ),
-            //   ),
-            // ),
-            //!تعديلات السويدي
-            // child: ClipRRect(
-            //   borderRadius: BorderRadius.circular(8),
-            //   child: CachedNetworkImage(
-            //     imageUrl: widget.img,
-            //     fit: BoxFit.fill,
-            //     width: 130,
-            //     height: 120,
-            //     errorWidget: (context, url, error) =>
-            //         Icon(Icons.error), // Show error icon
-            //   ),
-            // ),
           ),
           Expanded(
             //! name and job
@@ -103,9 +80,11 @@ class _CandidateListState extends State<CandidateList> {
             ),
           ),
 //!arrow
-          const Icon(
+          Icon(
             //todo english here
-            Icons.keyboard_arrow_left,
+            isEnglish()
+                ? Icons.keyboard_arrow_right
+                : Icons.keyboard_arrow_left,
             size: 30,
             color: Color(0xFF008753),
           ),

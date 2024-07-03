@@ -63,7 +63,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                       children: [
                         TextArea(
                             controller: textAreaControllername,
-                            text: "ادخل اسمك "),
+                            text: S.of(context).enter_name),
                         const SizedBox(
                           height: 10,
                         ),
@@ -72,7 +72,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                         ),
                         TextArea(
                             controller: textAreaControllerjob,
-                            text: "ادخل الوظيفه"),
+                            text: S.of(context).enter_job),
                         const SizedBox(
                           height: 10,
                         ),
@@ -81,7 +81,7 @@ class _AppFormBodyState extends State<AppFormBody> {
                         ),
                         TextArea(
                             controller: textAreaControllereducation,
-                            text: "ادخل المستوى التعليمي"),
+                            text: S.of(context).enter_educ),
                       ],
                     ),
                   ),
@@ -171,18 +171,12 @@ class _AppFormBodyState extends State<AppFormBody> {
                       MyAppStuts.showSnackBar(context, state.errorMassage);
                     } else {
                       //todo navigat for alert that wait for aprrov
-                      //  await CashNetwork.InsertToCash(
-                      //     key: "user_candidate_self", value: "true");
-                      // context.loaderOverlay.hide();
-
-                      log("---------########${context.read<CheackIsCandidateCubit>().isCandidateSelf.toString()}###################");
+                      context.loaderOverlay.hide();
                       showDialog(
                         barrierDismissible: false,
                         context: context,
-                        builder: (context) => const SuccsesAlert(
-                          message:
-                              "تم تسجيل طلبك بنجاح برجاء الانتظار حتى موعدد اعلان المرشحين",
-                        ),
+                        builder: (context) =>
+                            SuccsesAlert(message: S.of(context).hint_form),
                       );
                       await CashNetwork.InsertToCash(
                           key: "user_candidate_self", value: "true");
@@ -276,33 +270,8 @@ class _AppFormBodyState extends State<AppFormBody> {
             job: textAreaControllerjob.text,
             education: textAreaControllereducation.text,
           );
-      // showDialog(
-      //   barrierDismissible: false,
-      //   context: context,
-      //   builder: (context) => SuccsesAlert(
-      //     message:
-      //         "تم تسجيل طلبك بنجاح برجاء الانتظار حتى موعدد اعلان المرشحين",
-      //   ),
-      // );
-      // List<MultipartFile> c = await uploadImageToApi(
-      //     [_selectedFile1!, _selectedFile2!, _selectedFile3!]);
-      // print("===========");
-      // print(c[1].filename);
-      // print("===========");
-
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute<void>(
-      //     builder: (BuildContext context) => const HomeScreen(),
-      //   ),
-      // );
     } else {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(
-      //     content: Text('Please upload all files!'),
-      //   ),
-      // );
-      MyAppStuts.showSnackBar(context, 'Please upload all files!');
+      MyAppStuts.showSnackBar(context, S.of(context).shoulad_upload_all);
     }
   }
 }

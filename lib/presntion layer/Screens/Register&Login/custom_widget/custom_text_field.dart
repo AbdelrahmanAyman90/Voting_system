@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/generated/l10n.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hintText;
@@ -13,10 +14,10 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please Enter National ID';
+          return S.of(context).error_should_enter_id;
         }
         if (value.length < 14) {
-          return "Please Enter 14 numbers ";
+          return S.of(context).error_lenght_id;
         }
         return null;
       },
