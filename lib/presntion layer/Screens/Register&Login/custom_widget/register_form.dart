@@ -65,9 +65,6 @@ class _RegisterFormState extends State<RegisterForm> {
             const SizedBox(
               height: 10,
             ),
-            const SizedBox(
-              height: 10,
-            ),
             CustomPassowrdText(
               hintText: S.of(context).password,
               controller: password,

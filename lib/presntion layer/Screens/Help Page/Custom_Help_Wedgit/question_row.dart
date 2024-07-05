@@ -15,7 +15,7 @@ class QuestionRow extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          isEnglish() ? Icons.play_arrow_rounded : Icons.arrow_right_rounded,
+          Icons.arrow_right_rounded,
           size: isEnglish() ? null : 50,
           color: AppColors.mainColor,
         ),

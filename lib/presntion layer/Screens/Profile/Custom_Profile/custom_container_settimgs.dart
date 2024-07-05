@@ -26,10 +26,10 @@ class CustomContainerSettings extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            row2_in_profile_dark_mode(
-              icon: Icons.dark_mode_outlined,
-              text: S.of(context).dark_mode,
-            ),
+            // row2_in_profile_dark_mode(
+            //   icon: Icons.dark_mode_outlined,
+            //   text: S.of(context).dark_mode,
+            // ),
             Row2InProfile(
               icon: Icons.language,
               text: S.of(context).english,

@@ -7,8 +7,13 @@ import 'package:share_plus/share_plus.dart';
 // import 'package:share_plus/share_plus.dart';
 import 'package:voting/Shared/const/Colors.dart';
 import 'package:voting/Shared/const/Fonts.dart';
+import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Help%20Page/help_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
+import 'package:voting/presntion%20layer/Screens/Onboarding/Onboarding.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/login_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
 import 'package:voting/presntion%20layer/Screens/changePasswordScreen/change_pssword_screen.dart';
 import 'package:voting/presntion%20layer/Screens/changePasswordScreen/custom_widget/change_password_form.dart';
 import 'package:voting/presntion%20layer/view_model/user_view_model/cubit/user_authorization_cubit.dart';
@@ -225,7 +230,7 @@ void _showLogoutDialog(BuildContext context) {
             ),
             child: Text(
               S.of(context).cancel,
-              style: TextStyle(color: Color(0xFF008753)),
+              style: const TextStyle(color: Color(0xFF008753)),
             ),
             onPressed: () {
               Navigator.of(context).pop(); // Dismiss the dialog
@@ -236,10 +241,16 @@ void _showLogoutDialog(BuildContext context) {
                 backgroundColor: const Color(0xFF008753),
                 textStyle: const TextStyle(color: Colors.white)),
             child: Text(S.of(context).log_out,
-                style: TextStyle(color: Colors.white)),
+                style: const TextStyle(color: Colors.white)),
             onPressed: () async {
               await context.read<UserAuthorizationCubit>().logout();
-              Restart.restartApp();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const LoginScreen(),
+                ),
+              );
+              //Restart.restartApp();
             },
           ),
         ],

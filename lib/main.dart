@@ -14,6 +14,8 @@ import 'package:voting/data/repository/user_authorization/user_repo_implement.da
 import 'package:voting/generated/l10n.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
 import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Splash/splash_screen.dart';
+import 'package:voting/presntion%20layer/Screens/test.dart';
 import 'package:voting/presntion%20layer/view_model/event_viewmodel/cubit/event_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/get_candidate_viewmodel/cubit/get_candidate_cubit.dart';
 import 'package:voting/presntion%20layer/view_model/layout_viewmodel/cubit/layout_cubit.dart';
@@ -63,20 +65,17 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<LayoutCubit, LayoutState>(
           builder: (context, state) {
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              locale: Locale(isEnglish() ? 'en' : 'ar'),
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-              home: token != null && token != ""
-                  ? const HomeScreen()
-                  : const RegisterScreen(),
-            );
+                debugShowCheckedModeBanner: false,
+                locale: Locale(isEnglish() ? 'en' : 'ar'),
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+                home: const SplashScreen());
           },
         ),
       ),

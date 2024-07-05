@@ -61,21 +61,31 @@ class _CandidatesState extends State<Candidates> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.mainColor,
-            size: 20,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.mainColor,
+                size: 20,
+              ),
+            ),
+            title: Text(
+              widget.candidateName,
+              style: AppFonts.boldText(context, 18, AppColors.mainColor),
+            ),
+            centerTitle: true,
+            actions: [buildBodyAppBar()],
           ),
         ),
-        title: buildBodyAppBar(),
-        centerTitle: true,
       ),
       body: _isLoading
           ? Center(
@@ -96,40 +106,72 @@ class _CandidatesState extends State<Candidates> {
  * widget
  * 
  */
+//   Widget buildBodyAppBar() {
+//     return Row(
+//       //mainAxisAlignment: MainAxisAlignment.spaceAround,
+//       children: [
+//         Text(
+//           widget.candidateName,
+//           style: AppFonts.boldText(context, 18, AppColors.mainColor),
+//         ),
+//         const Spacer(),
+//         context.read<EventCubit>().eventCases("elections") == "now"
+//             ? TextButton(
+//                 style: TextButton.styleFrom(
+//                   backgroundColor: AppColors.mainColor,
+//                   // primary: Colors.white,
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                 ),
+//                 onPressed: () {
+//                   Navigator.push(
+//                     context,
+//                     MaterialPageRoute(
+//                       builder: (context) => ConfirmVoteScreen(
+//                         selectIndex: widget.selectCandidate,
+//                       ),
+//                     ),
+//                   );
+//                 },
+//                 child: Text(
+//                   S.of(context).vote_vutton,
+//                   style: const TextStyle(color: Colors.white),
+//                 ),
+//               )
+//             : const SizedBox(),
+//       ],
+//     );
+//   }
+// }
   Widget buildBodyAppBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(
-          widget.candidateName,
-          style: AppFonts.boldText(context, 16, AppColors.mainColor),
-        ),
-        context.read<EventCubit>().eventCases("elections") == "now"
-            ? TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.mainColor,
-                  primary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+    return context.read<EventCubit>().eventCases("elections") == "now"
+        ? SizedBox(
+            height: 35,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: AppColors.mainColor,
+                // primary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ConfirmVoteScreen(
-                        selectIndex: widget.selectCandidate,
-                      ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmVoteScreen(
+                      selectIndex: widget.selectCandidate,
                     ),
-                  );
-                },
-                child: Text(
-                  S.of(context).vote_vutton,
-                  style: TextStyle(color: Colors.white),
-                ),
-              )
-            : SizedBox(),
-      ],
-    );
+                  ),
+                );
+              },
+              child: Text(
+                S.of(context).vote_vutton,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        : const SizedBox();
   }
 }

@@ -1,3 +1,109 @@
+// import 'package:flutter/material.dart';
+// import 'package:scroll_to_hide/scroll_to_hide.dart';
+// import 'package:voting/Shared/const/Colors.dart';
+// import 'package:voting/Shared/const/Fonts.dart';
+// import 'package:voting/Shared/shareWidget/button.dart';
+// import 'package:voting/generated/l10n.dart';
+
+// class test extends StatefulWidget {
+//   const test({super.key});
+
+//   @override
+//   State<test> createState() => _testState();
+// }
+
+// class _testState extends State<test> {
+//   ScrollController controller = ScrollController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+//       appBar: PreferredSize(
+//         preferredSize: const Size.fromHeight(kToolbarHeight),
+//         child: Padding(
+//           padding: const EdgeInsets.only(right: 20),
+//           child: AppBar(
+//             backgroundColor: Colors.white,
+//             elevation: 0,
+//             leading: IconButton(
+//               onPressed: () {
+//                 Navigator.pop(context);
+//               },
+//               icon: Icon(
+//                 Icons.arrow_back_ios,
+//                 color: AppColors.mainColor,
+//                 size: 20,
+//               ),
+//             ),
+//             title: Text(
+//               'candidat',
+//               style: AppFonts.boldText(context, 18, AppColors.mainColor),
+//             ),
+//             centerTitle: true,
+//             actions: [buildBodyAppBar()],
+//           ),
+//         ),
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: ListView.builder(
+//               controller: controller,
+//               itemCount: 100,
+//               itemBuilder: (context, index) {
+//                 return ListTile(title: Text('Item #$index'));
+//               },
+//             ),
+//           ),
+//           _buildVotingButton(context),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildVotingButton(BuildContext context) {
+//     return Positioned(
+//       bottom: 50,
+//       left: 0,
+//       right: 0,
+//       child: Center(
+//         child: ScrollToHide(
+//           hideDirection: Axis.vertical,
+//           scrollController: controller,
+//           child: ButtonWidget(
+//             onPressed: () {},
+//             color: AppColors.mainColor,
+//             textcolor: Colors.white,
+//             word: S.of(context).voting_button,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget buildBodyAppBar() {
+//     return SizedBox(
+//       height: 35,
+//       child: TextButton(
+//         style: TextButton.styleFrom(
+//           backgroundColor: AppColors.mainColor,
+//           // primary: Colors.white,
+
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(10),
+//           ),
+//         ),
+//         onPressed: () {},
+//         child: Text(
+//           S.of(context).vote_vutton,
+//           style: const TextStyle(color: Colors.white),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -82,12 +188,10 @@ class _VotingBodyState extends State<VotingBody> {
                         ),
                       ),
                     ),
-                    context.read<EventCubit>().eventCases("elections") ==
-                                "now" &&
-                            context.read<CheckIsVotedCubit>().isUserVoted ==
-                                false
-                        ? _buildVotingButton(context)
-                        : const SizedBox()
+                    if (context.read<EventCubit>().eventCases("elections") ==
+                            "now" &&
+                        context.read<CheckIsVotedCubit>().isUserVoted == false)
+                      _buildVotingButton(context),
                   ],
                 );
               }
@@ -103,21 +207,12 @@ class _VotingBodyState extends State<VotingBody> {
       builder: (context, state) {
         if (state is GetCandidateSuccess) {
           return Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
+            child: ListView.builder(
+              controller: controller,
+              itemCount: 100,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => _selectCandidate(index),
-                  child: ShowCandidate(
-                    isSelected: _selectedIndex == index,
-                    bio: state.allCandidate[index].job!,
-                    name: state.allCandidate[index].name!,
-                    image: state.allCandidate[index].image!,
-                  ),
-                );
+                return ListTile(title: Text('Item #$index'));
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemCount: state.allCandidate.length,
             ),
           );
         } else if (state is GetCandidateFail) {
@@ -141,8 +236,9 @@ class _VotingBodyState extends State<VotingBody> {
       child: ScrollToHide(
         hideDirection: Axis.vertical,
         scrollController: controller,
+        duration: Duration(milliseconds: 300),
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.all(16.0),
           child: ButtonWidget(
             onPressed: () {
               _selectedIndex == -1

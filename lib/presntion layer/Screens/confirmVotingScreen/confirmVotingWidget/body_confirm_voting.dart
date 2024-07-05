@@ -60,33 +60,36 @@ wedgit fun
 
 */
   Widget _buildPasswordSection(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          S.of(context).enter_password,
-          style: AppFonts.semiBoldText(context, 18, Colors.black),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          S.of(context).hint_password,
-        ),
-        const SizedBox(height: 18),
-        Form(
-          key: _formKey,
-          child: CustomPassowrdText(
-            controller: ConfirmPassword,
-            hintText: S.of(context).password,
-            validator: (value) {
-              if (ConfirmPassword.text.isEmpty) {
-                return S.of(context).passord_error;
-              }
-              //  else if (ConfirmPassword.text != currentPassword) {
-              //   return "كلمه السر غير صحيحه";
-              // }
-            },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        children: [
+          Text(
+            S.of(context).enter_password,
+            style: AppFonts.semiBoldText(context, 18, Colors.black),
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          Text(
+            S.of(context).hint_password,
+          ),
+          const SizedBox(height: 18),
+          Form(
+            key: _formKey,
+            child: CustomPassowrdText(
+              controller: ConfirmPassword,
+              hintText: S.of(context).password,
+              validator: (value) {
+                if (ConfirmPassword.text.isEmpty) {
+                  return S.of(context).passord_error;
+                }
+                //  else if (ConfirmPassword.text != currentPassword) {
+                //   return "كلمه السر غير صحيحه";
+                // }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -116,7 +119,7 @@ wedgit fun
       },
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: ButtonWidget(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
@@ -141,7 +144,7 @@ wedgit fun
 
   Widget _buildCancelButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: ButtonWidget(
         onPressed: () {
           Navigator.pop(context);
