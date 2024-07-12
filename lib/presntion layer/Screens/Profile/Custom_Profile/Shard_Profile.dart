@@ -244,13 +244,8 @@ void _showLogoutDialog(BuildContext context) {
                 style: const TextStyle(color: Colors.white)),
             onPressed: () async {
               await context.read<UserAuthorizationCubit>().logout();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const LoginScreen(),
-                ),
-              );
-              //Restart.restartApp();
+
+              Restart.restartApp();
             },
           ),
         ],

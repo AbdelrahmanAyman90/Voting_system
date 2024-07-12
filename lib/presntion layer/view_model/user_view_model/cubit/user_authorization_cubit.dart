@@ -46,6 +46,8 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
     CashNetwork.InsertToCash(
         key: 'national_id', value: r.data!.user!.nationalId!);
     CashNetwork.InsertToCash(key: 'address', value: r.data!.user!.address!);
+    CashNetwork.InsertToCash(key: 'isFirstTimeinstall', value: "true");
+
     token = r.data!.token;
     idUser = r.data!.user!.sId;
     userName = r.data!.user!.name!;
@@ -73,8 +75,22 @@ class UserAuthorizationCubit extends Cubit<UserAuthorizationState> {
     }
   }
 
-  logout() {
-    CashNetwork.clearData();
+  logout() async {
+    await CashNetwork.DeletFromCach(
+      key: "token",
+    );
+    await CashNetwork.DeletFromCach(
+      key: "idUser",
+    );
+    await CashNetwork.DeletFromCach(
+      key: "name",
+    );
+    await CashNetwork.DeletFromCach(
+      key: "national_id",
+    );
+    await CashNetwork.DeletFromCach(
+      key: "address",
+    );
   }
 
   userChangePassword(

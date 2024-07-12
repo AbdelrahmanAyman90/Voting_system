@@ -51,4 +51,5 @@ Future<void> prepareDate() async {
   userNationalId = CashNetwork.GetFromCash(key: 'national_id');
 
   userAddress = CashNetwork.GetFromCash(key: 'address');
+  isFirstTimeinstall = CashNetwork.GetFromCash(key: 'isFirstTimeinstall');
 }

@@ -50,6 +50,8 @@ import 'package:voting/Shared/const/Fonts.dart';
 import 'package:voting/Shared/const/const_varible.dart';
 import 'package:voting/presntion%20layer/Screens/Home/Home_Screen.dart';
 import 'package:voting/presntion%20layer/Screens/Onboarding/Onboarding.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/login_screen.dart';
+import 'package:voting/presntion%20layer/Screens/Register&Login/register_screen.dart';
 
 class CustomSplashBody extends StatefulWidget {
   const CustomSplashBody({super.key});
@@ -62,16 +64,23 @@ class _CustomSplashBodyState extends State<CustomSplashBody> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
-      token != null && token != ""
+    Future.delayed(const Duration(seconds: 3), () {
+      token != null && token != "" && isFirstTimeinstall != ""
           ? Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const HomeScreen()),
             )
-          : Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const OnboardingScreen()),
-            );
+          : isFirstTimeinstall != ""
+              ? Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterScreen()),
+                )
+              : Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const OnboardingScreen()),
+                );
     });
   }
 

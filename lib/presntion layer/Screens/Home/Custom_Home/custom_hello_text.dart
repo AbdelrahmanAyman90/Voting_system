@@ -14,12 +14,14 @@ class CustomHelloText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("${S.of(context).hello} ${userName} !",
-            style: AppFonts.semiBoldText(
-              context,
-              24,
-              AppColors.mainColor,
-            )),
+        Text(
+          "${S.of(context).hello} ${userName?.split(' ').first}!",
+          style: AppFonts.semiBoldText(
+            context,
+            24,
+            AppColors.mainColor,
+          ),
+        ),
       ],
     );
   }

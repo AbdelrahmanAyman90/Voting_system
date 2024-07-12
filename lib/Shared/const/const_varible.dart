@@ -6,3 +6,4 @@ String? userNationalId;
 String? idUser;
 String? endtimeElection;
 String linkWebSocket = 'wss://graduation-project-yok6.onrender.com';
+String? isFirstTimeinstall;
