@@ -14,7 +14,6 @@ class CheckIsVotedCubit extends Cubit<CheckIsVotedState> {
 
   isVoted() async {
     String votedCase = CashNetwork.GetFromCash(key: 'user_vote');
-    log("voter from cash--->$votedCase");
 
     if (votedCase == "") {
       emit(CheackIsUserVotedLooding());
@@ -25,12 +24,9 @@ class CheckIsVotedCubit extends Cubit<CheckIsVotedState> {
             emit(CheackIsUserVoteFail(l.errorMassage));
           },
           (r) async {
-            log("isvote from api---> $r");
-
             await CashNetwork.InsertToCash(
                 key: "user_vote", value: r.toString());
             isUserVoted = r;
-            log("valu is_candidate if after enter to api --->$isUserVoted");
             emit(CheackIsUserVoteSucsess());
           },
         );
@@ -38,12 +34,9 @@ class CheckIsVotedCubit extends Cubit<CheckIsVotedState> {
         emit(CheackIsUserVoteFail(e.toString()));
       }
     } else {
-      log("enter!!");
-
       isUserVoted = await CashNetwork.GetFromCash(key: 'user_vote') == "true"
           ? true
           : false;
-      log("valu is_candidate  from cashe set --->$isUserVoted");
       emit(CheackIsUserVoteSucsess());
     }
   }
