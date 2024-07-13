@@ -148,27 +148,30 @@ class _CandidatesState extends State<Candidates> {
     return context.read<EventCubit>().eventCases("elections") == "now"
         ? SizedBox(
             height: 35,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: AppColors.mainColor,
-                // primary: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConfirmVoteScreen(
-                      selectIndex: widget.selectCandidate,
-                    ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppColors.mainColor,
+                  // primary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                );
-              },
-              child: Text(
-                S.of(context).vote_vutton,
-                style: const TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConfirmVoteScreen(
+                        selectIndex: widget.selectCandidate,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  S.of(context).vote_vutton,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           )
